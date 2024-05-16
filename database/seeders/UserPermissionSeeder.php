@@ -31,16 +31,19 @@ class UserPermissionSeeder extends Seeder
         $admin = \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
+            'phone' => '0019000000',
         ]);
 
         $shop = \App\Models\User::factory()->create([
             'name' => 'Shop',
             'email' => 'shop@gmail.com',
+            'phone' => '0019000001',
         ]);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'User',
             'email' => 'user@gmail.com',
+            'phone' => '0019000002',
         ]);
 
         // assign roles to users
