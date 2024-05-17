@@ -353,7 +353,7 @@ export default function Dashboard({overviews}) {
                                 />
                                 <div>
                                   <p className="whitespace-nowrap text-sm font-medium">Apple Watch 2023</p>
-                                  <p className="whitespace-nowrap text-xs text-slate-400">Electronics > Accessories</p>
+                                  <p className="whitespace-nowrap text-xs text-slate-400">Electronics Accessories</p>
                                 </div>
                               </div>
                             </td>
@@ -373,7 +373,7 @@ export default function Dashboard({overviews}) {
                                 />
                                 <div>
                                   <p className="whitespace-nowrap text-sm font-medium">Nike Sports Shoe</p>
-                                  <p className="whitespace-nowrap text-xs text-slate-400">Fashion > Shoes</p>
+                                  <p className="whitespace-nowrap text-xs text-slate-400">Fashion  Shoes</p>
                                 </div>
                               </div>
                             </td>
@@ -393,7 +393,7 @@ export default function Dashboard({overviews}) {
                                 />
                                 <div>
                                   <p className="whitespace-nowrap text-sm font-medium">Headphone</p>
-                                  <p className="whitespace-nowrap text-xs text-slate-400">Electronics > Gadget</p>
+                                  <p className="whitespace-nowrap text-xs text-slate-400">Electronics Gadget</p>
                                 </div>
                               </div>
                             </td>
@@ -413,7 +413,7 @@ export default function Dashboard({overviews}) {
                                 />
                                 <div>
                                   <p className="whitespace-nowrap text-sm font-medium">Macbook Pro</p>
-                                  <p className="whitespace-nowrap text-xs text-slate-400">Electronics > Laptop</p>
+                                  <p className="whitespace-nowrap text-xs text-slate-400">Electronics Laptop</p>
                                 </div>
                               </div>
                             </td>
@@ -433,7 +433,7 @@ export default function Dashboard({overviews}) {
                                 />
                                 <div>
                                   <p className="whitespace-nowrap text-sm font-medium">Iphone 13 Pro</p>
-                                  <p className="whitespace-nowrap text-xs text-slate-400">Electronics > Mobile</p>
+                                  <p className="whitespace-nowrap text-xs text-slate-400">Electronics Mobile</p>
                                 </div>
                               </div>
                             </td>
