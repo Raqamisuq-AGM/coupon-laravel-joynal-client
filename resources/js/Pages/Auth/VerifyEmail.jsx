@@ -1,5 +1,4 @@
 import GuestLayout from '@/Layouts/GuestLayout';
-import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function VerifyEmail({ status }) {
@@ -26,7 +25,7 @@ export default function VerifyEmail({ status }) {
                 </div>
             )}
 
-            <form onSubmit={submit}>
+            {/* <form onSubmit={submit}>
                 <div className="mt-4 flex items-center justify-between">
                     <PrimaryButton disabled={processing}>Resend Verification Email</PrimaryButton>
 
@@ -39,7 +38,7 @@ export default function VerifyEmail({ status }) {
                         Log Out
                     </Link>
                 </div>
-            </form>
+            </form> */}
         </GuestLayout>
     );
 }
