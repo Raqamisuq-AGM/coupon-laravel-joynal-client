@@ -21,7 +21,6 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/custom/css/toastr.css') }}" media="all">
     <!-- Scripts -->
     @routes
     @viteReactRefresh

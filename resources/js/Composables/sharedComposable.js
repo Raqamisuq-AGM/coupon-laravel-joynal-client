@@ -1,6 +1,6 @@
-import modal from "@/Plugins/template/components/modal";
 import { usePage, router } from "@inertiajs/react";
-
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 export default () => {
     const textExcerpt = (text, length = 30) => {
         if (text) {
@@ -40,16 +40,22 @@ export default () => {
         return num;
     };
 
-    const deleteRow = (actionUrl) => {
-        modal.init(actionUrl, {
-            method: "delete",
-            options: {
-                message: trans("You would not be revert it back!"),
-                confirm_text: trans("Are you sure?"),
-                accept_btn_text: trans("Yes, Delete"),
-                reject_btn_text: trans("No, Cancel"),
-            },
-        });
+    const deleteRow = (actionUrl, message) => {
+        withReactContent(Swal)
+            .fire({
+                title: "Are you sure?",
+                text: message,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    router.delete(actionUrl);
+                }
+            });
     };
     const formatCurrency = (amount = 0, iconType = "name") => {
         let formattedCurrency = "";
@@ -96,25 +102,6 @@ export default () => {
 
         return result;
     };
-
-    const getQueryParams = () => {
-        const obj = {};
-        const para = new URLSearchParams(window.location.search);
-
-        for (const [key, value] of para) {
-            if (obj.hasOwnProperty(key)) {
-                if (Array.isArray(obj[key])) {
-                    obj[key].push(value);
-                } else {
-                    obj[key] = [obj[key], value];
-                }
-            } else {
-                obj[key] = value;
-            }
-        }
-
-        return obj;
-    };
     //copy text
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text);
@@ -124,19 +111,6 @@ export default () => {
         return text.replace(/[_-]/g, " ");
     }
 
-    function socialShare(media, url = null) {
-        let shareableLinks = {
-            fb: "https://www.facebook.com/sharer/sharer.php?u=",
-            tw: "https://twitter.com/intent/tweet?url=",
-            pn: "https://pinterest.com/pin/create/button/?url=",
-            li: "https://www.linkedin.com/sharing/share-offsite/?url=",
-            ins: "https://www.instagram.com/?url=",
-        };
-        if (shareableLinks.hasOwnProperty(media)) {
-            return shareableLinks[media] + (url ?? window.location.href);
-        }
-        return "invalidMediaError";
-    }
     function uiAvatar(name = null, avatar = null) {
         return avatar
             ? avatar
@@ -151,9 +125,7 @@ export default () => {
         formatCurrency,
         pickBy,
         formatNumber,
-        getQueryParams,
         copyToClipboard,
-        socialShare,
         trim,
         uiAvatar,
     };

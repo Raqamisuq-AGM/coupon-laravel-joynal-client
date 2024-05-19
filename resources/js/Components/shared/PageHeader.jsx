@@ -2,20 +2,23 @@ import { Head, usePage } from "@inertiajs/react";
 import React, { useMemo } from "react";
 import PrimaryButton from "@/Components/shared/PrimaryButton";
 import { BreadCrumb } from "@/Components/shared/BreadCrumb";
-export const PageHeader = ({ title, buttons = [], segments = [] }) => {
-
+import { Icon } from "@iconify-icon/react";
+export const PageHeader = ({ title, buttons, segments }) => {
     const pageHeader = usePage().props.pageHeader ?? {};
 
-    const props = useMemo(() => ({
-        title: title || pageHeader?.title || '',
-        buttons: buttons || pageHeader?.buttons || [],
-        segments: segments || pageHeader?.segments || [],
-    }), [pageHeader, title, buttons, segments]);
+    const props = useMemo(
+        () => ({
+            title: title || pageHeader?.title || "",
+            buttons: buttons || pageHeader?.buttons || [],
+            segments: segments || pageHeader?.segments || [],
+        }),
+        [pageHeader, title, buttons, segments]
+    );
 
     return (
         <React.Fragment>
             <Head title={props.title} />
-            <div className="mb-6 flex flex-col justify-between gap-y-1 sm:flex-row sm:gap-y-0">
+            <div className="flex flex-col justify-between gap-y-1 sm:flex-row sm:gap-y-0">
                 <h5>{props.title}</h5>
                 <div className="flex flex-row gap-4">
                     {props.buttons.length ? (
@@ -30,8 +33,17 @@ export const PageHeader = ({ title, buttons = [], segments = [] }) => {
 };
 
 const setButtons = (buttons) => {
-    function createMarkup(content) {
-        return { __html: content };
+    function setTitle(button) {
+        if (button.icon) {
+            return (
+                <div className="flex items-center gap-2">
+                    <Icon className="h-4 w-4 text-white" icon={button.icon} />
+                    <span>{button.title || button.name}</span>
+                </div>
+            );
+        }
+
+        return button.title || button.name;
     }
     return buttons.map((button, index) =>
         button?.target ? (
@@ -40,18 +52,13 @@ const setButtons = (buttons) => {
                 url="#"
                 data-toggle="drawer"
                 data-target={button?.target}
-                dangerouslySetInnerHTML={createMarkup(
-                    button.name || button.title
-                )}
-            ></PrimaryButton>
+            >
+                {setTitle(button)}
+            </PrimaryButton>
         ) : (
-            <PrimaryButton
-                key={index}
-                url={button?.url && button.url}
-                dangerouslySetInnerHTML={createMarkup(
-                    button.name || button.title
-                )}
-            ></PrimaryButton>
+            <PrimaryButton key={index} url={button?.url}>
+                {setTitle(button)}
+            </PrimaryButton>
         )
     );
 };

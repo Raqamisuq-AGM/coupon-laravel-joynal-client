@@ -26,9 +26,8 @@ class StoreCouponRequest extends FormRequest
             'code' => ['required', 'string', 'max:255', 'unique:coupons,code'],
             'discount' => ['required', 'numeric'],
             'usage_limit' => ['required', 'numeric'],
-            'used' => ['required', 'numeric'],
-            'valid_from' => ['required', 'datetime'],
-            'valid_to' => ['required', 'datetime'],
+            'valid_from' => ['required', 'date'],
+            'valid_to' => ['required', 'date'],
             'status' => ['required', 'boolean'],
         ];
     }
@@ -37,8 +36,8 @@ class StoreCouponRequest extends FormRequest
     {
         $data = parent::validated();
         // create timestamp value
-        $data['valid_from'] = Carbon::parse($data['valid_from'])->timestamp;
-        $data['valid_to'] = Carbon::parse($data['valid_to'])->timestamp;
+        $data['valid_from'] = Carbon::parse($data['valid_from']);
+        $data['valid_to'] = Carbon::parse($data['valid_to']);
         return $data;
     }
 }
