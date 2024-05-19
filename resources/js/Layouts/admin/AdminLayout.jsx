@@ -3,7 +3,6 @@ import Header from "@/Layouts/admin/Header/index.jsx";
 import SidebarComponent from "@/Layouts/admin/Sidebar/index.jsx";
 import { init } from "@/Plugins/template/app.js";
 import Footer from "./Footer";
-import { Toaster } from "react-hot-toast";
 import { ToastContainer } from "@/Components/shared/Toast/ToastContainer";
 export default function AdminLayout({ user, children }) {
     useEffect(() => {
@@ -11,7 +10,7 @@ export default function AdminLayout({ user, children }) {
     }, []);
     return (
         <div>
-            <ToastContainer/>
+            <ToastContainer />
             {/* sidebar */}
             <SidebarComponent />
             {/* content wrapper */}
