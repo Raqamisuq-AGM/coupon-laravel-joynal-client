@@ -26,12 +26,16 @@ const Table = ({ columns, tableData, containerClass, tableClass }) => {
             </TableContainer>
 
             {/* pagination here */}
-            <Pagination
-                total={tableData?.total}
-                pageSize={tableData?.per_page}
-                pageNumber={tableData?.current_page}
-                handlePageChange={handlePageChange}
-            />
+            {tableData?.data?.length ? (
+                <Pagination
+                    total={tableData?.total}
+                    pageSize={tableData?.per_page}
+                    pageNumber={tableData?.current_page}
+                    handlePageChange={handlePageChange}
+                />
+            ) : (
+                ""
+            )}
         </React.Fragment>
     );
 };

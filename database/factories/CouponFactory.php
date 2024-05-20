@@ -17,8 +17,13 @@ class CouponFactory extends Factory
     public function definition(): array
     {
         return [
+            'title' => fake()->sentence(),
+            'description' => fake()->sentence(),
             'code' => fake()->unique()->word(),
+            'discount_type' => fake()->randomElement(['fixed', 'percentage']),
             'discount' => fake()->numberBetween(1, 10),
+            'daily_limit' => fake()->numberBetween(1, 10),
+            'price' => fake()->numberBetween(1, 10),
             'usage_limit' => fake()->numberBetween(1, 10),
             'used' => fake()->numberBetween(1, 10),
             'valid_from' => now(),

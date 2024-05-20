@@ -1,32 +1,12 @@
 export const __USER_MENU_ITEMS = [
     {
+        icon: "material-symbols:dashboard-customize-outline",
         title: "Dashboard",
-        icon: "streamline:dashboard-circle",
-        url: "/user/dashboard",
+        url: route("user.dashboard"),
     },
     {
-        head: "Application",
-        menus: [
-            {
-                icon: "material-symbols:photo-library-outline-rounded",
-                title: "Assets",
-                url: route("user.assets.index"),
-            },
-            {
-                icon: "ion:wallet-outline",
-                title: "Subscription",
-                url: route("user.subscription.index"),
-            },
-            {
-                icon: "iconoir:headset-help",
-                title: "Supports",
-                url: route("user.supports.index"),
-            },
-            {
-                icon: "fe:gear",
-                title: "Account Settings",
-                url: route("user.account-settings"),
-            },
-        ],
+        icon: "heroicons:rectangle-stack",
+        title: "My Coupon",
+        url: route("user.coupons.index"),
     },
 ];

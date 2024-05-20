@@ -21,7 +21,7 @@ export const OverViewCard = ({
     value = "$20.00",
 }) => {
     return (
-        <div>
+        <div className="h-full w-full">
             <div className="card">
                 <div className="card-body flex items-center gap-4">
                     <div

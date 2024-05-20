@@ -3,6 +3,8 @@ import { InputGroup } from "@/Components/shared/InputGroup";
 import { PageHeader } from "@/Components/shared/PageHeader";
 import PrimaryButton from "@/Components/shared/PrimaryButton";
 import { SelectGroup } from "@/Components/shared/SelectGroup";
+import SwitchBox from "@/Components/shared/SwitchBox";
+import { TextAreaGroup } from "@/Components/shared/TextAreaGroup";
 import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import moment from "moment";
@@ -42,6 +44,16 @@ export default function Edit({ coupon }) {
                     <div className="card-body">
                         <form onSubmit={editCoupon}>
                             <div className="grid grid-cols-2 gap-4">
+                                <div className="md:col-span-2">
+                                    <InputGroup
+                                        label="Coupon Title"
+                                        placeholder="Pizza coupon"
+                                        name="title"
+                                        formObject={data}
+                                        setFormObject={setData}
+                                        validationError={errors}
+                                    />
+                                </div>
                                 <InputGroup
                                     label="Coupon Code"
                                     placeholder="000001"
@@ -50,7 +62,22 @@ export default function Edit({ coupon }) {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-
+                                <InputGroup
+                                    label="Price"
+                                    name="price"
+                                    placeholder="50"
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <SwitchBox
+                                    label="Discount Type"
+                                    name="discount_type"
+                                    texts={["percentage", "fixed"]}
+                                    selectedValue={data.discount_type}
+                                    setValue={setData}
+                                    validationError={errors}
+                                />
                                 <InputGroup
                                     label="Discount"
                                     name="discount"
@@ -59,16 +86,22 @@ export default function Edit({ coupon }) {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-
                                 <InputGroup
-                                    label="User limit (per user)"
+                                    label="Daily Limit (Per Phone Number can buy)"
+                                    name="daily_limit"
+                                    placeholder="5"
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <InputGroup
+                                    label="Usage Limit (Claims Per Coupon)"
                                     name="usage_limit"
                                     placeholder="100"
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-
                                 <InputGroup
                                     label="Valid From"
                                     name="valid_from"
@@ -86,6 +119,7 @@ export default function Edit({ coupon }) {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
+
                                 <SelectGroup
                                     label="Select Status"
                                     name="status"
@@ -94,6 +128,15 @@ export default function Edit({ coupon }) {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
+                                <div className="md:col-span-2">
+                                    <TextAreaGroup
+                                        label="Description"
+                                        name="description"
+                                        formObject={data}
+                                        setFormObject={setData}
+                                        validationError={errors}
+                                    />
+                                </div>
                             </div>
                             <div className="mt-4 flex justify-end">
                                 <PrimaryButton
