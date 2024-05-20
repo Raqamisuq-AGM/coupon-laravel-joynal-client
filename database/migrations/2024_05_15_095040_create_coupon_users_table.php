@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Coupon::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedInteger('used')->default(0); // how many times this coupon has been used
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

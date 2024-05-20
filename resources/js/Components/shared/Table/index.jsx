@@ -3,9 +3,14 @@ import TableHeads from "./TableHeads";
 import TableBody from "./TableBody";
 import { Pagination } from "../Pagination";
 import { DataNotFound } from "../DataNotFound";
+import { router } from "@inertiajs/react";
 
 const Table = ({ columns, tableData, containerClass, tableClass }) => {
-    console.log(tableData);
+    const handlePageChange = (pageNumber) => {
+        let url = tableData?.path;
+        url = url + "?page=" + pageNumber;
+        router.visit(url);
+    };
     return (
         <React.Fragment>
             <TableContainer
@@ -21,7 +26,16 @@ const Table = ({ columns, tableData, containerClass, tableClass }) => {
             </TableContainer>
 
             {/* pagination here */}
-            <Pagination links={tableData?.links} />
+            {tableData?.data?.length ? (
+                <Pagination
+                    total={tableData?.total}
+                    pageSize={tableData?.per_page}
+                    pageNumber={tableData?.current_page}
+                    handlePageChange={handlePageChange}
+                />
+            ) : (
+                ""
+            )}
         </React.Fragment>
     );
 };

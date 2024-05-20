@@ -7,8 +7,12 @@ export const __ADMIN_MENU_ITEMS = [
     {
         icon: "material-symbols:dashboard-customize-outline",
         title: "Dashboard",
-        url: route("dashboard"),
-        component: "Dashboard",
+        url: route("admin.dashboard"),
+    },
+    {
+        icon: "heroicons:rectangle-stack",
+        title: "Coupon",
+        url: route("admin.coupons.index"),
     },
 
     // {
@@ -104,5 +108,4 @@ export const __ADMIN_MENU_ITEMS = [
     //         },
     //     ],
     // },
-
 ];

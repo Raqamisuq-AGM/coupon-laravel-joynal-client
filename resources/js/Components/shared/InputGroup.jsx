@@ -11,6 +11,7 @@ export const InputGroup = ({
     validationError,
     className = "",
     type = "text",
+    ...props
 }) => {
     return (
         <div className="mt-2 w-full">
@@ -30,6 +31,7 @@ export const InputGroup = ({
                         type === "file" ? e.target.files[0] : e.target.value
                     )
                 }
+                {...props}
             />
             <InputError message={validationError[name]} />
         </div>

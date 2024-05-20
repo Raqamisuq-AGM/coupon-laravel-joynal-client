@@ -1,6 +1,5 @@
 import React from "react";
 import InputLabel from "./InputLabel";
-import { TextEditor } from "./TextEditor";
 import InputError from "./InputError";
 import { SelectOption } from "./SelectOption";
 
@@ -16,7 +15,7 @@ export const SelectGroup = ({
 }) => {
     return (
         <div className="mt-2 w-full">
-            <InputLabel htmlFor={name} value={trans(label)} />
+            <InputLabel htmlFor={name} value={label} />
             <SelectOption
                 isMultiple={isMultiple}
                 className={className}

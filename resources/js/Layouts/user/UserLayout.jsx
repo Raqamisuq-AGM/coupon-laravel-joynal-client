@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import Header from "@/Layouts/admin/Header/index.jsx";
-import SidebarComponent from "@/Layouts/admin/Sidebar/index.jsx";
+import Header from "@/Layouts/user/Header/index.jsx";
+import SidebarComponent from "@/Layouts/user/Sidebar/index.jsx";
 import { init } from "@/Plugins/template/app.js";
 import Footer from "./Footer";
+import { ToastContainer } from "@/Components/shared/Toast/ToastContainer";
 
 export default function UserLayout({ user, children }) {
     useEffect(() => {
@@ -10,6 +11,7 @@ export default function UserLayout({ user, children }) {
     }, []);
     return (
         <div>
+            <ToastContainer />
             {/* sidebar */}
             <SidebarComponent />
             {/* content wrapper */}

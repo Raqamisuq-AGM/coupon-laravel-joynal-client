@@ -1,4 +1,3 @@
-import trans from "@/Composables/transComposable";
 import React from "react";
 
 const TableHeads = ({ columns }) => {
@@ -13,7 +12,7 @@ const TableHeads = ({ columns }) => {
                             column.thClass
                         }
                     >
-                        {trans(column.header)}
+                        {column.header}
                     </th>
                 ))}
             </tr>

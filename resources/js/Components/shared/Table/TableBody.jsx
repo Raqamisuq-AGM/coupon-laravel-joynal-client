@@ -34,7 +34,7 @@ const TableBody = ({ data, columns }) => {
                             className={
                                 (index == columns.length - 1
                                     ? "flex justify-end "
-                                    : "") + column.tdClass
+                                    : "") + column?.tdClass || ''
                             }
                         >
                             {placeCellData(item, column)}

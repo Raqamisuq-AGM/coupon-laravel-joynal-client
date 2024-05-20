@@ -2,7 +2,7 @@ import React from "react";
 import InputLabel from "./InputLabel";
 import InputError from "./InputError";
 
-export const TextareaGroup = ({
+export const TextAreaGroup = ({
     label,
     name,
     formObject,

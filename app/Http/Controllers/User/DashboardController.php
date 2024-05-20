@@ -44,7 +44,7 @@ class DashboardController extends Controller
 
         PageHeader::set()->title('User Dashboard');;
 
-        return Inertia::render('User/Dashboard', [
+        return Inertia::render('User/Dashboard/Index', [
             'overviews' => $overviews,
         ]);
     }
