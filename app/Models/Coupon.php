@@ -25,12 +25,14 @@ class Coupon extends Model
     ];
 
     protected $casts = [
+        'valid_from' => 'datetime',
+        'valid_to' => 'datetime',
         'status' => 'boolean',
     ];
 
     public function scopeActive($builder)
     {
-        return $builder->where('status', false);
+        return $builder->where('status', true);
     }
 
     public function scopeInactive($builder)
