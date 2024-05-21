@@ -1,7 +1,9 @@
 import React from "react";
 import avatar from "@/Assets/images/avatar1.png";
 import Dropdown from "@/Components/shared/Dropdown";
+import sharedComposable from "@/Composables/sharedComposable";
 export default function index() {
+    const { logout } = sharedComposable();
     return (
         <header className="header">
             <div className="container-fluid flex items-center justify-between">
@@ -44,7 +46,7 @@ export default function index() {
                     <button
                         type="button"
                         data-trigger="search-modal"
-                        className="group hidden h-10 w-72 items-center overflow-hidden rounded-primary bg-slate-100 px-3 shadow-sm sm:flex dark:border-transparent dark:bg-slate-700"
+                        className="group hidden h-10 w-72 items-center overflow-hidden rounded-primary bg-slate-100 px-3 shadow-sm dark:border-transparent dark:bg-slate-700 sm:flex"
                     >
                         <i
                             className="text-slate-400"
@@ -222,7 +224,7 @@ export default function index() {
                             </button>
                         </div>
 
-                        <div className="dropdown-content mt-3 w-[17.5rem] divide-y sm:w-80 dark:divide-slate-700">
+                        <div className="dropdown-content mt-3 w-[17.5rem] divide-y dark:divide-slate-700 sm:w-80">
                             <div className="flex items-center justify-between px-4 py-4">
                                 <h6 className="text-slate-800 dark:text-slate-300">
                                     Notifications
@@ -411,24 +413,21 @@ export default function index() {
                                     admin@example.com
                                 </p>
                             </div>
+                            <div className="py-1"></div>
                             <div className="py-1">
-
-                            </div>
-                            <div className="py-1">
-                                <form method="POST" action="#">
-                                    <button
-                                        type="submit"
-                                        className="dropdown-btn"
-                                    >
-                                        <i
-                                            width="18"
-                                            height="18"
-                                            data-feather="log-out"
-                                            className="text-slate-500"
-                                        ></i>
-                                        <span>Sign out</span>
-                                    </button>
-                                </form>
+                                <button
+                                    type="button"
+                                    onClick={logout}
+                                    className="dropdown-btn"
+                                >
+                                    <i
+                                        width="18"
+                                        height="18"
+                                        data-feather="log-out"
+                                        className="text-slate-500"
+                                    ></i>
+                                    <span>Sign out</span>
+                                </button>
                             </div>
                         </Dropdown.Content>
                     </Dropdown>

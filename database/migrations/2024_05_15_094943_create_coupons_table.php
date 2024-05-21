@@ -23,8 +23,7 @@ return new class extends Migration
             $table->unsignedInteger('daily_limit')->default(0);
             $table->float('price')->default(0);
             $table->unsignedInteger('usage_limit')->default(0);
-            $table->unsignedInteger('used')->default(0);
-            
+
             $table->timestamp('valid_from')->nullable();
             $table->timestamp('valid_to')->nullable();
             $table->boolean('status')->default(true);

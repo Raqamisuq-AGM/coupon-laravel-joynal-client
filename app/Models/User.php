@@ -45,7 +45,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function couponUser(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function couponUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(CouponUser::class);
     }

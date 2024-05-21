@@ -1,7 +1,27 @@
 import { ToastContainer } from "@/Components/shared/Toast/ToastContainer";
-import { Link } from "@inertiajs/react";
-import React from "react";
-export default function UserGuestLayout({ user, children }) {
+import { Link, usePage } from "@inertiajs/react";
+import React, { useEffect, useState } from "react";
+export default function UserGuestLayout({ children }) {
+    const auth = usePage().props?.auth;
+    const [dashboard, setDashboard] = useState(route("login"));
+    useEffect(() => {
+        if (auth.user && auth.role) {
+            switch (auth.role) {
+                case "admin":
+                    setDashboard(route("admin.dashboard"));
+                    break;
+                case "shop":
+                    setDashboard(route("shop.dashboard"));
+                    break;
+                case "user":
+                    setDashboard(route("user.dashboard"));
+                    break;
+                default:
+                    setDashboard(route("login"));
+                    break;
+            }
+        }
+    }, [auth]);
     return (
         <div className="bg-gray-100">
             <ToastContainer />
@@ -36,11 +56,12 @@ export default function UserGuestLayout({ user, children }) {
                         >
                             Contact
                         </a>
+
                         <Link
-                            href="/login"
+                            href={dashboard}
                             className="text-gray-700 hover:text-gray-900"
                         >
-                            Login
+                            {auth.user ? "Dashboard" : "Login"}
                         </Link>
                     </nav>
                 </div>
