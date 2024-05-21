@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Header } from "./Header";
 import { MainMenu } from "./MainMenu";
 import SimpleBar from "simplebar";
-import { __ADMIN_MENU_ITEMS } from "@/Routes/__ADMIN_MENU_ITEMS";
+import { __SHOP_MENU_ITEMS } from "@/Routes/__SHOP_MENU_ITEMS";
 export default function index() {
     useEffect(() => {
         const sidebar = {
@@ -167,7 +167,7 @@ export default function index() {
             <aside className="sidebar">
                 <Header />
                 <ul className="sidebar-content">
-                    {__ADMIN_MENU_ITEMS.map((item, index) =>
+                    {__SHOP_MENU_ITEMS.map((item, index) =>
                         /** check item object has head @type {string, array} */
                         item?.head && item.menus.length ? (
                             <React.Fragment key={index}>

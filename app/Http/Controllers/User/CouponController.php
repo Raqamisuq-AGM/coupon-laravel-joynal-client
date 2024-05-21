@@ -15,7 +15,7 @@ class CouponController extends Controller
     {
         $user = \request()->user();
 
-        $query = $user->couponUser();
+        $query = $user->couponUsers();
         $overviews = [
             [
                 'title' => 'Total Active Coupons',
@@ -36,7 +36,7 @@ class CouponController extends Controller
                 'icon' => 'heroicons:squares-2x2-solid',
                 'iconBgColor' => 'bg-success-500 bg-opacity-20 text-success-100',
                 'textColor' => 'text-slate-500',
-                'value' =>  $user->couponUser()->sum('used'),
+                'value' =>  $user->couponUsers()->sum('used'),
             ],
         ];
 
@@ -50,7 +50,7 @@ class CouponController extends Controller
 
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
-        $coupons = $user->couponUser()->with('coupon')->paginate();
+        $coupons = $user->couponUsers()->with('coupon')->paginate();
 
         return inertia('User/Dashboard/Coupon/Index', compact('coupons', 'overviews'));
     }
@@ -64,10 +64,6 @@ class CouponController extends Controller
     {
         $request->validate([
             'coupon_code' => ['required', 'string'],
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email'],
-            'phone' => ['required', 'string'],
-            'password' => ['required', 'string', 'min:8'],
         ]);
 
         $coupon = Coupon::active()->where('code', $request->coupon_code)->first();
@@ -78,15 +74,9 @@ class CouponController extends Controller
                 throw new \Exception('Coupon not found');
             }
 
-            $user = User::firstOrCreate([
-                'phone' => $request->phone,
-            ], [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-            ]);
+            $user = auth()->user();
 
-            $phone_number_usage_count = $user->couponUser()->where('created_at', '>=', now()->subDay())->count();
+            $phone_number_usage_count = $user->couponUsers()->where('created_at', '>=', now()->subDay())->count();
 
             if ($phone_number_usage_count >= $coupon->daily_limit) {
                 throw new \Exception('Daily limit exceeded');

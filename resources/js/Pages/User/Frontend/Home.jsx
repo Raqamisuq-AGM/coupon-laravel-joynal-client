@@ -104,7 +104,10 @@ export default function Dashboard({ coupons }) {
                                         ${coupon.price}
                                     </p>
                                     <Link
-                                        href={`/coupons/buy/${coupon.code}`}
+                                        href={route(
+                                            "user.coupons.checkout.page",
+                                            coupon.code
+                                        )}
                                         className="rounded-full bg-blue-600 px-4 py-2 text-lg font-semibold text-white hover:bg-blue-700"
                                     >
                                         Buy Now

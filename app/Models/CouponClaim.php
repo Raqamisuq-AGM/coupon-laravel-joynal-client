@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CouponUser extends Model
+class CouponClaim extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'coupon_id',
-        'user_id',
-        'used',
-        'status',
+    public $timestamps = false;
+
+    protected $casts = [
+        'claimed_at' => 'datetime',
     ];
 
-    public function coupon(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    protected $guarded = [];
+
+    public function couponUser(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Coupon::class);
+        return $this->belongsTo(CouponUser::class);
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

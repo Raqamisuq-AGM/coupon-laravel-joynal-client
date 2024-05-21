@@ -12,7 +12,7 @@ class DashboardRedirectPath
 
         $redirectPath = match ($role) {
             'admin' => route('admin.dashboard'),
-            'user' => route('user.dashboard'),
+            'user' => route('home'),
             'shop' => route('shop.dashboard'),
         };
         return $redirectPath;
