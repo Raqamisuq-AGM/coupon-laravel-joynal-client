@@ -25,7 +25,6 @@ class CouponFactory extends Factory
             'daily_limit' => fake()->numberBetween(1, 10),
             'price' => fake()->numberBetween(1, 10),
             'usage_limit' => fake()->numberBetween(1, 10),
-            'used' => fake()->numberBetween(1, 10),
             'valid_from' => now(),
             'valid_to' => now()->addDays(30),
             'status' => fake()->boolean(),
