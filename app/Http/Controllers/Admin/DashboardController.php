@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function __invoke(Request $request)
     {
-         $overviews = [
+        $overviews = [
             [
                 'title' => 'Total Users',
                 'icon' => 'heroicons:user-group',
@@ -42,7 +42,7 @@ class DashboardController extends Controller
             ],
         ];
 
-        PageHeader::set()->title('Admin Dashboard');;
+        PageHeader::set()->title('Admin Dashboard');
 
         return Inertia::render('Admin/Dashboard', [
             'overviews' => $overviews,

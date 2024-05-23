@@ -16,13 +16,13 @@ class VerifyUser
     public function handle(Request $request, Closure $next): Response
     {
 
-        // check user role and redirect to dashboard accordingly 
+        // check user role and redirect to dashboard accordingly
         $role = $request->user()->getRoleNames()->first();
 
-        if ($role !== "user") {
+        if ($role !== 'user') {
             throw new \Exception('Unauthorized');
         }
-        
+
         return $next($request);
     }
 }

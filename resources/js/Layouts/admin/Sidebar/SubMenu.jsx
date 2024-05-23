@@ -3,15 +3,21 @@ import { Link } from "@inertiajs/react";
 import { FiChevronRight } from "react-icons/fi";
 import { Icon } from "@iconify/react";
 export const SubMenu = ({ item }) => {
+    const isChildActive = () => {
+        if (item.child) {
+            return item.child.some((menu) => {
+                return window.location.href == menu.url;
+            });
+        }
+        return false;
+    };
     return (
         <>
             <li>
                 <a
                     href="#"
                     className={`sidebar-menu ${
-                        window.location.href.startsWith(item.url)
-                            ? "active"
-                            : ""
+                        isChildActive() ? "active" : ""
                     }`}
                 >
                     <span className="sidebar-menu-icon">

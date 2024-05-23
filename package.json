@@ -50,7 +50,7 @@
         "zustand": "^4.5.0"
     },
     "devDependencies": {
-        "@headlessui/react": "^1.4.2",
+        "@headlessui/react": "^1.7.19",
         "@iconify-icon/react": "^2.1.0",
         "@iconify/react": "^4.1.1",
         "@inertiajs/react": "^1.0.0",

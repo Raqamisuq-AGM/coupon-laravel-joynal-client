@@ -10,7 +10,7 @@ import { Link } from "@inertiajs/react";
 import moment from "moment";
 import React from "react";
 
-export default function Index({ coupons, overViews }) {
+export default function Index({ coupons, overviews }) {
     const { deleteRow } = sharedComposable();
 
     const columns = [
@@ -25,10 +25,6 @@ export default function Index({ coupons, overViews }) {
         {
             header: "Usage Limit",
             accessor: "usage_limit",
-        },
-        {
-            header: "used",
-            accessor: "used",
         },
         {
             header: "Valid From",
@@ -69,6 +65,21 @@ export default function Index({ coupons, overViews }) {
                                 <li className="dropdown-list-item">
                                     <Link
                                         href={route(
+                                            "admin.coupons.show",
+                                            original.id
+                                        )}
+                                        className="dropdown-link"
+                                    >
+                                        <Icon
+                                            className="h-6 text-slate-400"
+                                            icon="material-symbols:visibility-outline"
+                                        />
+                                        <span>View</span>
+                                    </Link>
+                                </li>
+                                <li className="dropdown-list-item">
+                                    <Link
+                                        href={route(
                                             "admin.coupons.edit",
                                             original.id
                                         )}
@@ -85,13 +96,15 @@ export default function Index({ coupons, overViews }) {
                                 <li className="dropdown-list-item">
                                     <button
                                         className="dropdown-link"
-                                        onClick={() => deleteRow(
-                                            route(
-                                                "admin.coupons.destroy",
-                                                original.id
-                                            ),
-                                            "Coupon has been deleted successfully"
-                                        )}
+                                        onClick={() =>
+                                            deleteRow(
+                                                route(
+                                                    "admin.coupons.destroy",
+                                                    original.id
+                                                ),
+                                                "Coupon has been deleted successfully"
+                                            )
+                                        }
                                     >
                                         <Icon
                                             className="h-6"
@@ -112,7 +125,7 @@ export default function Index({ coupons, overViews }) {
         <AdminLayout>
             <Container>
                 <PageHeader />
-                <OverviewGrid items={overViews} />
+                <OverviewGrid items={overviews} />
                 <Filter />
                 <Table tableData={coupons} columns={columns} />
             </Container>
