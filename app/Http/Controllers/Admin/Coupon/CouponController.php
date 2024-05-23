@@ -15,35 +15,35 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $query = Coupon::query();
+
         $overviews = [
             [
                 'title' => 'Total Active Coupons',
                 'icon' => 'heroicons:check',
                 'iconBgColor' => 'bg-primary-500 bg-opacity-20 text-green-500',
                 'textColor' => 'text-slate-500',
-                'value' => $query->active()->count(),
+                'value' => Coupon::query()->active()->count(),
             ],
             [
                 'title' => 'Total Inactive Coupons',
                 'icon' => 'heroicons:exclamation-circle',
                 'iconBgColor' => 'bg-info-500 bg-opacity-20 text-info-500',
                 'textColor' => 'text-slate-500',
-                'value' => $query->inactive()->count(),
+                'value' => Coupon::query()->inactive()->count(),
             ],
             [
                 'title' => 'Total Expired Coupons',
                 'icon' => 'heroicons:squares-2x2-solid',
                 'iconBgColor' => 'bg-danger-500 bg-opacity-20 text-gray-100',
                 'textColor' => 'text-slate-500',
-                'value' => $query->expired()->count(),
+                'value' => Coupon::query()->expired()->count(),
             ],
             [
                 'title' => 'Total Used Coupons',
                 'icon' => 'heroicons:user-group',
                 'iconBgColor' => 'bg-success-500 bg-opacity-20 text-success-500',
                 'textColor' => 'text-slate-500',
-                'value' => $query->sum('used'),
+                'value' => Coupon::query()->sum('used'),
             ],
         ];
 
@@ -52,17 +52,14 @@ class CouponController extends Controller
                 'title' => 'Create Coupon',
                 'url' => route('admin.coupons.create'),
                 'icon' => 'heroicons:plus',
-            ]
-            ];
+            ],
+        ];
 
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
         $coupons = Coupon::paginate();
-        
-        return Inertia::render('Admin/Coupon/Index', [
-            'overViews' => $overviews,
-            'coupons' => $coupons,
-        ]);
+
+        return Inertia::render('Admin/Coupon/Index', compact('coupons', 'overviews'));
     }
 
     /**
@@ -75,8 +72,9 @@ class CouponController extends Controller
                 'title' => 'Back',
                 'url' => route('admin.coupons.index'),
                 'icon' => 'heroicons:arrow-left',
-            ]
+            ],
         ]);
+
         return Inertia::render('Admin/Coupon/Create');
     }
 
@@ -95,7 +93,15 @@ class CouponController extends Controller
      */
     public function show(Coupon $coupon)
     {
-        //
+        PageHeader::set()->title('Coupons')->buttons([
+            [
+                'title' => 'Back',
+                'url' => route('admin.coupons.index'),
+                'icon' => 'heroicons:arrow-left',
+            ],
+        ]);
+
+        return Inertia::render('Admin/Coupon/View', compact('coupon'));
     }
 
     /**
@@ -108,8 +114,9 @@ class CouponController extends Controller
                 'title' => 'Back',
                 'url' => route('admin.coupons.index'),
                 'icon' => 'heroicons:arrow-left',
-            ]
+            ],
         ]);
+
         return Inertia::render('Admin/Coupon/Edit', [
             'coupon' => $coupon,
         ]);

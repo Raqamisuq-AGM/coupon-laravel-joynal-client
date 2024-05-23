@@ -25,4 +25,9 @@ class CouponUser extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function claims(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CouponClaim::class, 'coupon_user_id');
+    }
 }

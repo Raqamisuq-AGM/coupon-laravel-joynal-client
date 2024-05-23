@@ -13,7 +13,6 @@ class HandleInertiaRequests extends Middleware
     /**
      * The root template that is loaded on the first page visit.
      */
-
     public function rootView(Request $request): string
     {
         $role = $request->user() ? $request->user()->getRoleNames()->first() : null;
@@ -24,7 +23,7 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      */
-    public function version(Request $request): string|null
+    public function version(Request $request): ?string
     {
         return parent::version($request);
     }

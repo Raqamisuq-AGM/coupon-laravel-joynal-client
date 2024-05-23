@@ -13,6 +13,19 @@ export const __ADMIN_MENU_ITEMS = [
         icon: "heroicons:rectangle-stack",
         title: "Coupon",
         url: route("admin.coupons.index"),
+        componentGroup: "Coupon",
+        child: [
+            {
+                title: "List",
+                componentGroup: "Coupon/Index",
+                url: route("admin.coupons.index"),
+            },
+            {
+                title: "User",
+                componentGroup: "Coupon/User/Index",
+                url: route("admin.coupon-users.index"),
+            },
+        ],
     },
 
     // {

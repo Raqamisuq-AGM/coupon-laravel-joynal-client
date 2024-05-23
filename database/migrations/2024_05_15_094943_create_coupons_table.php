@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('code')->unique();
 
-            $table->enum('discount_type',['fixed', 'percentage'])->default('fixed');
+            $table->enum('discount_type', ['fixed', 'percentage'])->default('fixed');
             $table->float('discount')->default(0);
 
             $table->unsignedInteger('daily_limit')->default(0);
