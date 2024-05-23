@@ -6,6 +6,7 @@ use App\Helpers\PageHeader;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Coupon as CP;
 use App\Models\Coupon;
+use App\Models\CouponUser;
 use Inertia\Inertia;
 
 class CouponController extends Controller
@@ -43,7 +44,7 @@ class CouponController extends Controller
                 'icon' => 'heroicons:user-group',
                 'iconBgColor' => 'bg-success-500 bg-opacity-20 text-success-500',
                 'textColor' => 'text-slate-500',
-                'value' => Coupon::query()->sum('used'),
+                'value' => CouponUser::query()->count(),
             ],
         ];
 
