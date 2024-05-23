@@ -21,7 +21,6 @@ class Coupon extends Model
         'valid_from',
         'valid_to',
         'status',
-        'used',
     ];
 
     protected $casts = [
@@ -49,6 +48,4 @@ class Coupon extends Model
     {
         return $this->belongsToMany(User::class, CouponUser::class);
     }
-
-
 }

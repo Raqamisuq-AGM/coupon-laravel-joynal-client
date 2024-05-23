@@ -42,11 +42,12 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         $email_attempt = Auth::attempt(['email' => $this->get('username'), 'password' => $this->get('password')], $this->boolean('remember'));
-        
+
         $phon_attempt = Auth::attempt(['phone' => $this->get('username'), 'password' => $this->get('password')], $this->boolean('remember'));
-        
+
         if ($email_attempt || $phon_attempt) {
             RateLimiter::clear($this->throttleKey());
+
             return true;
         }
 

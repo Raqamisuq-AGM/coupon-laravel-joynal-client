@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Helpers;
-use App\Models\User;
-use App\Providers\RouteServiceProvider;
 
 class DashboardRedirectPath
 {
-    public static function get($request): string{
+    public static function get($request): string
+    {
 
         $role = $request->user()->getRoleNames()->first();
 
@@ -15,6 +14,7 @@ class DashboardRedirectPath
             'user' => route('home'),
             'shop' => route('shop.dashboard'),
         };
+
         return $redirectPath;
     }
 }

@@ -16,4 +16,3 @@ Route::group(['middleware' => ['auth', VerifyUser::class], 'prefix' => 'user', '
     Route::get('/coupons/buy/{code}', [CouponController::class, 'show'])->name('coupons.checkout.page');
     Route::post('/coupons/buy', [CouponController::class, 'store'])->name('coupons.buy');
 });
-

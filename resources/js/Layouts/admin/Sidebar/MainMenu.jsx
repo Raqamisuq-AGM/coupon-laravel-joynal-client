@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/react";
 import { SubMenu } from "./SubMenu";
 import { Icon } from "@iconify/react";
 export const MainMenu = ({ item }) => {
-
+    
     return (
         <>
             {item.child ? (
