@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Requests\Coupon;
+
 use Carbon\Carbon;
+
 class UpdateCouponRequest extends StoreCouponRequest
 {
     /**
@@ -21,7 +23,7 @@ class UpdateCouponRequest extends StoreCouponRequest
     {
         $rules = parent::rules();
 
-        $rules['code'] = ['required', 'string', 'max:255', 'unique:coupons,code,'. $this->coupon->id];
+        $rules['code'] = ['required', 'string', 'max:255', 'unique:coupons,code,'.$this->coupon->id];
 
         return array_merge($rules, [
 
@@ -34,6 +36,7 @@ class UpdateCouponRequest extends StoreCouponRequest
         // create timestamp value
         $data['valid_from'] = Carbon::parse($data['valid_from']);
         $data['valid_to'] = Carbon::parse($data['valid_to']);
+
         return $data;
     }
 }

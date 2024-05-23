@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CouponClaim\StoreCouponClaimRequest;
 use App\Models\Coupon;
 use App\Models\CouponClaim;
-use App\Models\CouponUser;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -23,9 +22,10 @@ class CouponClaimController extends Controller
             [
                 'title' => 'New Coupon Claim',
                 'url' => route('shop.coupon-claims.create'),
-                'icon' => 'heroicons:plus'
-            ]
+                'icon' => 'heroicons:plus',
+            ],
         ]);
+
         return inertia('Shop/CouponClaim/Index', compact('coupon_claims'));
     }
 
@@ -35,6 +35,7 @@ class CouponClaimController extends Controller
     public function create()
     {
         PageHeader::set()->title('New Coupon Claim');
+
         return inertia('Shop/CouponClaim/create');
     }
 
@@ -47,7 +48,7 @@ class CouponClaimController extends Controller
 
         $coupon = Coupon::where('status', true)->where('code', $params['coupon_code'])->first();
 
-        if (!$coupon) {
+        if (! $coupon) {
             return back()->with('error', 'Coupon not found');
         }
         // Check if coupon is expired
@@ -59,7 +60,7 @@ class CouponClaimController extends Controller
 
         $coupon_user = $user->couponUsers()->where('coupon_id', $coupon->id)->first();
 
-        if (!$coupon_user) {
+        if (! $coupon_user) {
             return back()->with('error', 'Coupon is not valid for this user');
         }
 
@@ -79,13 +80,13 @@ class CouponClaimController extends Controller
             ]);
 
             $coupon_user->update([
-                'used' => $coupon_user->used + 1
+                'used' => $coupon_user->used + 1,
             ]);
-
 
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+
             return back()->with('error', $th->getMessage());
         }
 

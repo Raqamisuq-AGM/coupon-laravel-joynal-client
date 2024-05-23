@@ -43,6 +43,7 @@ class StoreCouponRequest extends FormRequest
         // create timestamp value
         $data['valid_from'] = Carbon::parse($data['valid_from']);
         $data['valid_to'] = Carbon::parse($data['valid_to']);
+
         return $data;
     }
 }

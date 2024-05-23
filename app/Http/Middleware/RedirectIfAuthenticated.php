@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Helpers\DashboardRedirectPath;
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

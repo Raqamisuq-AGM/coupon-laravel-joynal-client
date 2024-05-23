@@ -29,14 +29,14 @@ class CouponController extends Controller
                 'icon' => 'heroicons:exclamation-circle',
                 'iconBgColor' => 'bg-info-500 bg-opacity-20 text-info-500',
                 'textColor' => 'text-slate-500',
-                'value' =>$query->where('status', false)->count(),
+                'value' => $query->where('status', false)->count(),
             ],
             [
                 'title' => 'Total Used Coupons',
                 'icon' => 'heroicons:squares-2x2-solid',
                 'iconBgColor' => 'bg-success-500 bg-opacity-20 text-success-100',
                 'textColor' => 'text-slate-500',
-                'value' =>  $user->couponUsers()->sum('used'),
+                'value' => $user->couponUsers()->sum('used'),
             ],
         ];
 
@@ -45,8 +45,8 @@ class CouponController extends Controller
                 'title' => 'Buy Coupon',
                 'url' => '/#coupons',
                 'icon' => 'heroicons:plus',
-            ]
-            ];
+            ],
+        ];
 
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
@@ -54,9 +54,11 @@ class CouponController extends Controller
 
         return inertia('User/Dashboard/Coupon/Index', compact('coupons', 'overviews'));
     }
+
     public function show($code)
     {
         $coupon = Coupon::active()->where('code', $code)->firstOrFail();
+
         return inertia('User/Frontend/Checkout', compact('coupon'));
     }
 
@@ -70,7 +72,7 @@ class CouponController extends Controller
 
         try {
             DB::beginTransaction();
-            if (!$coupon) {
+            if (! $coupon) {
                 throw new \Exception('Coupon not found');
             }
 
@@ -83,7 +85,7 @@ class CouponController extends Controller
             }
 
             // check if user not has role as user than assign role as user
-            if (!$user->hasRole('user')) {
+            if (! $user->hasRole('user')) {
                 $user->assignRole('user');
             }
 
@@ -94,6 +96,7 @@ class CouponController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+
             return back()->with('error', $th->getMessage());
         }
 

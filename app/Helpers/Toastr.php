@@ -28,14 +28,14 @@ class Toastr
 
     public static function setToast(string $key, string $message)
     {
-        if (!in_array($key, self::KEYS)) {
+        if (! in_array($key, self::KEYS)) {
             return;
         }
 
         if (session()->has($key)) {
             $oldValue = session()->get($key);
 
-            if (!is_array($oldValue)) {
+            if (! is_array($oldValue)) {
                 $oldValue = [$oldValue];
             }
             array_push($oldValue, $message);
@@ -45,14 +45,13 @@ class Toastr
         }
     }
 
-
-
     public static function Toast()
     {
         return array_reduce(self::KEYS, function ($array, $key) {
             if (request()->session()->has($key)) {
                 $array[$key] = request()->session()->get($key);
             }
+
             return $array;
         }, []);
     }
