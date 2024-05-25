@@ -82,7 +82,6 @@ export default function Index({ coupons, overViews }) {
     ];
     const [coupon, setCoupon] = React.useState(false);
     const openUserModal = (coupon) => {
-        console.log(coupon);
         setCoupon(true);
     };
 

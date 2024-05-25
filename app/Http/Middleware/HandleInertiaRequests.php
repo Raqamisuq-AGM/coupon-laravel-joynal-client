@@ -35,12 +35,23 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $permissions = [];
+
+        $user = $request->user();
+
+        $role = $user ? $user->getRoleNames()->first() : null;
+        // only get the permissions if the user is an admin and shop
+        if ($user && $role !== 'user') {
+            $permissions = $user->getAllPermissions()->pluck('name');
+        }
+
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user() ? $request->user()->only('id', 'name', 'email') : null,
-                'role' => $request->user() ? $request->user()->getRoleNames()->first() : null,
+                'user' => $user ? $user->only('name', 'email', 'phone') : null,
+                'role' => $role,
             ],
+            'permissions' => $permissions,
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

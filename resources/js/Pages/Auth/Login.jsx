@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import GuestLayout from "@/Layouts/GuestLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import { InputGroup } from "@/Components/shared/InputGroup";
 import PrimaryButton from "@/Components/shared/PrimaryButton";
 import logo from "@/Assets/images/logo-small.svg";
@@ -50,6 +50,7 @@ export default function Login({ status, canResetPassword }) {
                         <InputGroup
                             label="Password"
                             name="password"
+                            type="password"
                             formObject={data}
                             setFormObject={setData}
                             validationError={errors}
@@ -127,12 +128,12 @@ export default function Login({ status, canResetPassword }) {
                     <div className="mt-4 flex justify-center">
                         <p className="text-sm text-slate-600 dark:text-slate-300">
                             Don't Have an Account?
-                            <a
-                                href="#"
+                            <Link
+                                href={route("register")}
                                 className="text-sm text-primary-500 hover:underline"
                             >
                                 Sign up
-                            </a>
+                            </Link>
                         </p>
                     </div>
                 </form>
