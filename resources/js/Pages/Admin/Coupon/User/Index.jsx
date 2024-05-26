@@ -80,15 +80,22 @@ export default function Index({ coupons, overViews }) {
             ),
         },
     ];
-    const [coupon, setCoupon] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [coupon, setCoupon] = React.useState({});
+
     const openUserModal = (coupon) => {
-        setCoupon(true);
+        setCoupon(coupon);
+        setIsOpen(true);
     };
 
     return (
         <React.Fragment>
             <AdminLayout>
-                <UserViewModal isOpen={coupon} setIsOpen={setCoupon} />
+                <UserViewModal
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                    couponUser={coupon}
+                />
                 <Container>
                     <PageHeader />
                     <OverviewGrid items={overViews} />

@@ -8,6 +8,8 @@ Route::group(['middleware' => ['auth', VerifyAdmin::class], 'prefix' => 'admin',
 
     Route::get('/dashboard', Admin\DashboardController::class)->name('dashboard');
     Route::resource('coupons', Admin\Coupon\CouponController::class);
+    Route::resource('users', Admin\User\UserController::class);
 
-    Route::resource('coupon-users', Admin\Coupon\CouponUserController::class)->only('index');
+    Route::get('coupons/{coupon}/users', [Admin\Coupon\CouponUserController::class, 'couponUsers'])->name('coupon-users');
+    Route::get('coupons/{coupon}/users/{couponUser}/claims', [Admin\Coupon\CouponUserController::class, 'userClaims'])->name('coupon-user-claims');
 });

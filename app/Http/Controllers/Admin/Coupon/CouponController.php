@@ -58,7 +58,7 @@ class CouponController extends Controller
 
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
-        $coupons = Coupon::paginate();
+        $coupons = Coupon::withCount('couponUsers as used')->paginate();
 
         return Inertia::render('Admin/Coupon/Index', compact('coupons', 'overviews'));
     }

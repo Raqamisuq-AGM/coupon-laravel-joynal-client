@@ -44,6 +44,11 @@ class Coupon extends Model
         return $builder->whereDate('valid_to', '<', now());
     }
 
+    public function couponUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CouponUser::class, 'coupon_id');
+    }
+
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, CouponUser::class);

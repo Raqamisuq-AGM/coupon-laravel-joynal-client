@@ -3,6 +3,7 @@ import { Link } from "@inertiajs/react";
 import moment from "moment";
 import React from "react";
 export default function Dashboard({ coupons }) {
+
     return (
         <UserGuestLayout>
             {/* Hero Section */}
