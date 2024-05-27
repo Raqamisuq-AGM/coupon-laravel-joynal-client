@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth as Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,14 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('guest')->group(function () {
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    Route::get('register', [Auth\RegisteredUserController::class, 'create'])
+            ->name('register');
+    Route::post('register', [Auth\RegisteredUserController::class, 'store']);
+    
+    Route::get('login', [Auth\AuthenticatedSessionController::class, 'create'])
         ->name('login');
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
-
+    Route::post('login', [Auth\AuthenticatedSessionController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    Route::post('logout', [Auth\AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });

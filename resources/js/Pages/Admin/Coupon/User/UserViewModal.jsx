@@ -1,49 +1,55 @@
-import React, { useEffect, useRef } from "react";
+import { Modal } from "@/Components/shared/Modal";
+import axios from "axios";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
 
-export const UserViewModal = ({ isOpen, setIsOpen }) => {
-    // modal Close when click outside
-    const modalRef = useRef();
+export const UserViewModal = ({ isOpen, setIsOpen, couponUser }) => {
+    const [claims, setClaims] = useState([]);
+    const getUserCouponClaims = async () => {
+        const response = await axios.get(
+            route("admin.coupon-user-claims", {
+                coupon: couponUser.coupon_id,
+                couponUser: couponUser.id,
+            })
+        );
+
+        setClaims(response.data?.data);
+    };
 
     useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
+        if (couponUser && couponUser?.id) {
+            getUserCouponClaims();
+        }
+    }, [couponUser]);
 
-        document.addEventListener("mousedown", handleOutsideClick);
-        return () => {
-            document.removeEventListener("mousedown", handleOutsideClick);
-        };
-    }, [setIsOpen]);
-    return isOpen ? (
-        <div className="modal show flex">
-            <div className="modal-dialog">
-                <div className="modal-content" ref={modalRef}>
-                    <div className="modal-header px-4 sm:px-6">
-                        <div className="group flex items-center">
-                            <i
-                                data-feather="search"
-                                className="text-slate-500 group-focus-within:text-slate-600 dark:text-slate-400 dark:group-focus-within:text-slate-300"
-                            ></i>
-                            <input
-                                type="text"
-                                className="w-full border-none bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400 focus:ring-0 dark:text-slate-200"
-                                placeholder="Search"
-                            />
-                            <button
-                                className="rounded-primary bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                ESC
-                            </button>
-                        </div>
-                    </div>
-                    <div className="modal-body max-h-[600px] px-4 py-6 sm:px-6"></div>
-                </div>
+    return (
+        <Modal title="View Users" isOpen={isOpen} setIsOpen={setIsOpen}>
+            <div className="p-6">
+                <ul>
+                    {claims.map((claim, index) => (
+                        <li
+                            key={claim.id}
+                            className="border-b border-gray-200 py-2 last:border-0"
+                        >
+                            <div className="flex flex-row gap-4 ">
+                                <div>Sr. {index + 1}</div>
+                                <p className="text-gray-500">
+                                    <span className="text-gray-800 dark:text-white">
+                                        Code:{" "}
+                                    </span>{" "}
+                                    {claim.code}
+                                </p>
+                                <p className="text-gray-500">
+                                    <span className="text-gray-800 dark:text-white">
+                                        Claimed At:{" "}
+                                    </span>
+                                    {moment(claim.claimed_at).toNow(true)} ago
+                                </p>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
             </div>
-        </div>
-    ) : (
-        ""
+        </Modal>
     );
 };

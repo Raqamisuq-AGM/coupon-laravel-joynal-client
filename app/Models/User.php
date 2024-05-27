@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'status',
     ];
 
     /**
@@ -43,7 +44,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'status' => 'boolean',
     ];
+
+    public function scopeActive($builder)
+    {
+        return $builder->where('status', true);
+    }
+
+    public function scopeInactive($builder)
+    {
+        return $builder->where('status', false);
+    }
+
+    public function scopeAdmin($builder)
+    {
+        return $builder->whereRelation('roles', 'name', 'admin');
+    }
 
     public function couponUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

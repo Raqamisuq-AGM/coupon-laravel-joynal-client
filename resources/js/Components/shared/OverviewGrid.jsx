@@ -1,10 +1,20 @@
 import { Icon } from "@iconify-icon/react";
-import React from "react";
+import React, { useMemo } from "react";
 
-export const OverviewGrid = ({ className = "", items = [] }) => {
+export const OverviewGrid = ({  items = [] }) => {
+    // check item length
+    const gridStyle = useMemo(() => {
+        if (items.length == 2) {
+            return "sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2";
+        } else if (items.length == 3) {
+            return "sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3";
+        } else if (items.length >= 4) {
+            return "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
+        }
+    },[items]);
     return (
         <section
-            className={`grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 ${className}`}
+            className={`grid grid-cols-1 gap-6 ${gridStyle}`}
         >
             {items.map((item, index) => (
                 <OverViewCard key={index} {...item} />

@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useTransition } from "react";
+import React, { useEffect, useRef } from "react";
 
-export const UserViewModal = ({ isOpen, setIsOpen }) => {
+export const Modal = ({ children, title, isOpen, setIsOpen }) => {
     // modal Close when click outside
     const modalRef = useRef();
-    const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -17,17 +16,13 @@ export const UserViewModal = ({ isOpen, setIsOpen }) => {
             document.removeEventListener("mousedown", handleOutsideClick);
         };
     }, [setIsOpen]);
-    
-    startTransition(() => {
-        setIsOpen(isOpen);
-    });
-
-    return isOpen ? (
-        <div className="modal show flex">
+    return (
+        <div className={`modal ${isOpen ? "show flex" : ""} `}>
             <div className="modal-dialog">
                 <div className="modal-content" ref={modalRef}>
                     <div className="modal-header px-4 sm:px-6">
-                        <div className="group flex items-center">
+                        <div className="group flex justify-between items-center">
+                            <p>{title}</p>
                             <button
                                 className="rounded-primary bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600"
                                 onClick={() => setIsOpen(false)}
@@ -36,11 +31,11 @@ export const UserViewModal = ({ isOpen, setIsOpen }) => {
                             </button>
                         </div>
                     </div>
-                    <div className="modal-body max-h-[600px] px-4 py-6 sm:px-6"></div>
+                    <div className="modal-body max-h-[600px] px-4 py-6 sm:px-6">
+                        {children}
+                    </div>
                 </div>
             </div>
         </div>
-    ) : (
-        ""
     );
 };

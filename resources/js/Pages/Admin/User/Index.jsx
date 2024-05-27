@@ -7,38 +7,27 @@ import sharedComposable from "@/Composables/sharedComposable";
 import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { Icon } from "@iconify/react";
 import { Link } from "@inertiajs/react";
-import moment from "moment";
 import React from "react";
 
-export default function Index({ coupons, overviews }) {
+export default function Index({ users, overviews }) {
     const { deleteRow } = sharedComposable();
 
     const columns = [
         {
-            header: "Code",
-            accessor: "code",
+            header: "ID",
+            accessor: "id",
         },
         {
-            header: "Discount",
-            accessor: "discount",
+            header: "Name",
+            accessor: "name",
         },
         {
-            header: "Usage Limit",
-            accessor: "usage_limit",
+            header: "Phone",
+            accessor: "phone",
         },
         {
-            header: "Valid From",
-            accessor: "valid_from",
-            call: ({ value }) => moment(value).format("DD-MM-YYYY"),
-        },
-        {
-            header: "Valid Till",
-            accessor: "valid_to",
-            call: ({ value }) => moment(value).format("DD-MM-YYYY"),
-        },
-        {
-            header: "Purchased",
-            accessor: "used",
+            header: "Email",
+            accessor: "email",
         },
         {
             header: "Status",
@@ -69,37 +58,7 @@ export default function Index({ coupons, overviews }) {
                                 <li className="dropdown-list-item">
                                     <Link
                                         href={route(
-                                            "admin.coupon-users",
-                                            original.id
-                                        )}
-                                        className="dropdown-link"
-                                    >
-                                        <Icon
-                                            className="h-6 text-slate-400"
-                                            icon="heroicons:users"
-                                        />
-                                        <span>Users</span>
-                                    </Link>
-                                </li>
-                                <li className="dropdown-list-item">
-                                    <Link
-                                        href={route(
-                                            "admin.coupons.show",
-                                            original.id
-                                        )}
-                                        className="dropdown-link"
-                                    >
-                                        <Icon
-                                            className="h-6 text-slate-400"
-                                            icon="material-symbols:visibility-outline"
-                                        />
-                                        <span>View</span>
-                                    </Link>
-                                </li>
-                                <li className="dropdown-list-item">
-                                    <Link
-                                        href={route(
-                                            "admin.coupons.edit",
+                                            "admin.users.edit",
                                             original.id
                                         )}
                                         className="dropdown-link"
@@ -118,7 +77,7 @@ export default function Index({ coupons, overviews }) {
                                         onClick={() =>
                                             deleteRow(
                                                 route(
-                                                    "admin.coupons.destroy",
+                                                    "admin.users.destroy",
                                                     original.id
                                                 ),
                                                 "Coupon has been deleted successfully"
@@ -144,9 +103,9 @@ export default function Index({ coupons, overviews }) {
         <AdminLayout>
             <Container>
                 <PageHeader />
-                <OverviewGrid items={overviews} />
+                <OverviewGrid items={overviews} cla />
                 <Filter />
-                <Table tableData={coupons} columns={columns} />
+                <Table tableData={users} columns={columns} />
             </Container>
         </AdminLayout>
     );
