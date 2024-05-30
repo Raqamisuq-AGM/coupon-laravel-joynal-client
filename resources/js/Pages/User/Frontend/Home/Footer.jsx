@@ -53,7 +53,7 @@ export default function Footer() {
                         />
                     ))}
                 </div>
-                <nev className="flex flex-row items-center justify-center gap-6">
+                <nav className="flex flex-row items-center justify-center gap-6">
                     {urls.map((url) => (
                         <a
                             href="#"
@@ -63,7 +63,7 @@ export default function Footer() {
                             {url.name}
                         </a>
                     ))}
-                </nev>
+                </nav>
             </div>
         </section>
     );

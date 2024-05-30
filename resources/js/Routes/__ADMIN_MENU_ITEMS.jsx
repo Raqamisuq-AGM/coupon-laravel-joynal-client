@@ -19,6 +19,11 @@ export const __ADMIN_MENU_ITEMS = [
         title: "User",
         url: route("admin.users.index"),
     },
+    {
+        icon: "heroicons:shopping-cart",
+        title: "Shop",
+        url: route("admin.shops.index"),
+    },
     // {
     //     head: "APPEARANCE",
     //     menus: [
