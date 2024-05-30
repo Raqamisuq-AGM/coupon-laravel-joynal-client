@@ -62,6 +62,11 @@ class User extends Authenticatable
         return $builder->whereRelation('roles', 'name', 'admin');
     }
 
+    public function scopeShop($builder)
+    {
+        return $builder->whereRelation('roles', 'name', 'shop');
+    }
+
     public function couponUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(CouponUser::class);

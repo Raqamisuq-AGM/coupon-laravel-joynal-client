@@ -77,13 +77,13 @@ export default function Header() {
                     ) : (
                         <React.Fragment>
                             <Link
-                                to={route("register")}
+                                href={route("register")}
                                 className="flex h-12 w-32 items-center justify-center rounded-full bg-[#725b36] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
                             >
                                 Register
                             </Link>
                             <Link
-                                to={dashboard}
+                                href={dashboard}
                                 className="flex h-12 w-32 items-center justify-center rounded-full bg-[#526d6e] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
                             >
                                 Login
