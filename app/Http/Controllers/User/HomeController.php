@@ -11,6 +11,6 @@ class HomeController extends Controller
     {
         $coupons = Coupon::active()->limit(6)->latest()->get();
 
-        return inertia('User/Frontend/Home', compact('coupons'));
+        return inertia('User/Frontend/Home/Index', compact('coupons'));
     }
 }

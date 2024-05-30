@@ -1,6 +1,5 @@
-import { InputGroup } from "@/Components/shared/InputGroup";
 import PrimaryButton from "@/Components/shared/PrimaryButton";
-import UserGuestLayout from "@/Layouts/user/UserGuestLayout";
+import UserGuestLayout from "@/Layouts/user/Guest/UserGuestLayout";
 import { useForm } from "@inertiajs/react";
 import React from "react";
 export default function Checkout({ coupon }) {
