@@ -1,4 +1,4 @@
-import UserGuestLayout from "@/Layouts/user/UserGuestLayout";
+import UserGuestLayout from "@/Layouts/user/Guest/UserGuestLayout";
 import { Link } from "@inertiajs/react";
 import React from "react";
 export default function Success({ coupon }) {
