@@ -60,7 +60,7 @@ export default function Header() {
         <header className="relative flex flex-col items-center gap-2 bg-black font-['Poetsen_One'] opacity-80 md:gap-1 lg:h-36 lg:flex-row">
             <div className="container mx-auto flex flex-col items-center justify-between px-6 py-4 md:flex-row">
                 <div className="flex items-center text-white">
-                    <a href="#">Balash</a>
+                    <a href="/">Balash</a>
                 </div>
                 <nav className="flex flex-wrap items-center justify-center space-x-4 md:justify-start">
                     {urls.map((url, index) => (
