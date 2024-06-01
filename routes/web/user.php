@@ -3,11 +3,13 @@
 
 use App\Http\Controllers\User\CouponController;
 use App\Http\Controllers\User\DashboardController;
-use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\Frontend\HomeController;
+use App\Http\Controllers\User\Frontend\ShopController;
 use App\Http\Middleware\Dashboard\VerifyUser;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('shops', [ShopController::class, 'index'])->name('shops.index');
 
 Route::group(['middleware' => ['auth', VerifyUser::class], 'prefix' => 'user', 'as' => 'user.'], function () {
 

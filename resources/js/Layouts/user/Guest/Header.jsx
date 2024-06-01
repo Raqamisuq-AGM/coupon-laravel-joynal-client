@@ -26,15 +26,19 @@ export default function Header() {
     const urls = [
         {
             name: "Shops",
+            url: route("shops.index"),
         },
         {
             name: "About",
+            url: "#",
         },
         {
             name: "Contact",
+            url: "#",
         },
         {
             name: "Admin",
+            url: dashboard,
         },
     ];
 
@@ -53,27 +57,31 @@ export default function Header() {
         },
     ];
     return (
-        <header className="flex flex-col items-center gap-2 bg-black font-['Poetsen_One'] opacity-80 md:gap-1 lg:h-36 lg:flex-row">
+        <header className="relative flex flex-col items-center gap-2 bg-black font-['Poetsen_One'] opacity-80 md:gap-1 lg:h-36 lg:flex-row">
             <div className="container mx-auto flex flex-col items-center justify-between px-6 py-4 md:flex-row">
                 <div className="flex items-center text-white">
                     <a href="#">Balash</a>
                 </div>
                 <nav className="flex flex-wrap items-center justify-center space-x-4 md:justify-start">
                     {urls.map((url, index) => (
-                        <a
+                        <Link
                             key={index}
-                            href="#"
+                            href={url.url}
                             className="text-center text-2xl font-normal uppercase tracking-tight text-white md:text-3xl"
                         >
                             {url.name}
-                        </a>
+                        </Link>
                     ))}
                 </nav>
                 <div className="mt-4 flex flex-col items-center gap-3 md:mt-0 md:flex-row">
                     {auth?.user ? (
-                        <Link to={dashboard} className="text-white">
-                            Dashboard
-                        </Link>
+                        <button
+                            type="button"
+                            onClick={() => route("logout")}
+                            className="flex h-12 w-32 items-center justify-center rounded-full bg-[#725b36] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
+                        >
+                            Logout
+                        </button>
                     ) : (
                         <React.Fragment>
                             <Link
