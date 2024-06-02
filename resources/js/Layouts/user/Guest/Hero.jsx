@@ -1,7 +1,7 @@
 import React from "react";
 export default function Hero() {
     return (
-        <section className="lg:h-[calc(1080px-144px)] px-2 font-['Poetsen_One'] text-white lg:px-10 ">
+        <section className="h-[400px] lg:h-[calc(1080px-144px)] px-2 font-['Poetsen_One'] text-white lg:px-10 ">
             <div className=" mx-auto flex h-full items-center justify-center lg:justify-end">
                 <div className="text-right">
                     <h1

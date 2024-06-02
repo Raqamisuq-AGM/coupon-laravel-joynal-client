@@ -17,7 +17,7 @@ export const TopShop = () => {
             <div className="absolute inset-0 bg-[#12161c] bg-opacity-60 backdrop-blur-sm"></div>
             <div className="relative  h-full w-52 border-[3px] border-[#ffffff] lg:w-64 ">
                 <div className="flex h-24 w-full items-center justify-center lg:h-[270px]">
-                    <p className="text-center text-3xl font-[400]  uppercase tracking-[-2px] text-[#ffffff] lg:text-[61px]">
+                    <p className="text-center text-3xl font-[400]  uppercase tracking-[-2px] lg:leading-[60px] text-[#ffffff] lg:text-[61px]">
                         {shop.name}
                     </p>
                 </div>
@@ -31,7 +31,7 @@ export const TopShop = () => {
                 </div>
             </div>
             <div className="relative flex flex-col gap-2 text-left lg:gap-6">
-                <h1 className="text-2xl font-[400] tracking-[-2px] text-[#ffffff] lg:text-6xl">
+                <h1 className="text-4xl font-[400] tracking-[-2px] text-[#ffffff] lg:text-6xl">
                     Keith Cofee Voucher Codes {shop.voucher_code}
                 </h1>
                 <p className="text-lg font-[400] tracking-[-1px] text-[#e0e0e0] lg:text-[39px]">

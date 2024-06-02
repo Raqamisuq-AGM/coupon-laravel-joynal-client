@@ -30,6 +30,16 @@ export default function Edit({ user }) {
         },
     ];
 
+    const roles = [
+        {
+            label: "Admin",
+            value: "admin",
+        },
+        {
+            label: "Shop",
+            value: "shop",
+        },
+    ];
     return (
         <AdminLayout>
             <Container>
@@ -74,6 +84,14 @@ export default function Edit({ user }) {
                                     validationError={errors}
                                 />
 
+                                <SelectGroup
+                                    label="Select Role"
+                                    name="role"
+                                    options={roles}
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
                                 <SelectGroup
                                     label="Select Status"
                                     name="status"

@@ -32,23 +32,8 @@ class UserUpdateRequest extends UserStoreRequest
 
         $rules['password'] = ['nullable', 'string', 'min:8', 'max:30'];
 
+        $rules['role'] = ['nullable', 'in:admin,shop'];
+
         return $rules;
-    }
-
-    public function messages(): array
-    {
-        return [
-            'email.required' => 'Email is required',
-            'phone.required' => 'Phone is required',
-            'phone.min' => 'Phone must be at least 10 characters',
-            'phone.regex' => 'Phone must be a valid phone number',
-        ];
-    }
-
-    public function validated($key = null, $default = null)
-    {
-        $data = parent::validated();
-        $data['password'] = Hash::make($data['password']);
-        return $data;
     }
 }
