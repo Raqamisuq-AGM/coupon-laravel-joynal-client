@@ -1,29 +1,35 @@
-import UserGuestLayout from "@/Layouts/user/Guest/UserGuestLayout";
-import { Link } from "@inertiajs/react";
-import moment from "moment";
+import UserGuestLayout from "@/Layouts/user/Guest/HomLayout";
 import React from "react";
 import Shops from "./Shops";
 import Cards from "./Cards";
 import Footer from "./Footer";
+import club1 from "@/images/frontend/club1.png";
+import club2 from "@/images/frontend/club2.png";
+import club3 from "@/images/frontend/club3.png";
+
+import cafe1 from "@/images/frontend/cafe1.jpg";
+import cafe2 from "@/images/frontend/cafe2.jpg";
+import cafe3 from "@/images/frontend/cafe3.jpg";
+
 export default function Dashboard({ coupons }) {
     const clubs = [
         {
             id: 1,
             name: "Ladies Night",
             sort_description: "Non Stop Music With DJ Style",
-            image: "https://via.placeholder.com/150",
+            image: club1,
         },
         {
             id: 2,
             name: "Ladies Night",
             sort_description: "Non Stop Music With DJ Style",
-            image: "https://via.placeholder.com/150",
+            image: club2,
         },
         {
             id: 3,
             name: "Ladies Night",
             sort_description: "Non Stop Music With DJ Style",
-            image: "https://via.placeholder.com/150",
+            image: club3,
         },
     ];
 
@@ -32,45 +38,24 @@ export default function Dashboard({ coupons }) {
             id: 1,
             name: "Keith Coffee",
             sort_description: "Make Your Day Great with Our Coffee!",
-            image: "https://via.placeholder.com/150",
+            image: cafe1,
         },
         {
             id: 2,
             name: "Keith Coffee",
             sort_description: "Make Your Day Great with Our Coffee!",
-            image: "https://via.placeholder.com/150",
+            image: cafe2,
         },
         {
             id: 3,
             name: "Keith Coffee",
             sort_description: "Make Your Day Great with Our Coffee!",
-            image: "https://via.placeholder.com/150",
+            image: cafe3,
         },
     ];
 
     return (
         <UserGuestLayout>
-            {/* Hero Section */}
-            <section className="h-[500px] bg-blue-600  px-2 font-['Poetsen_One'] text-white lg:px-10 ">
-                <div className=" mx-auto flex h-full items-center justify-center lg:justify-end">
-                    <div className="text-right">
-                        <h1
-                            style={{ filter: "drop-shadow(0 0 12px #000000)" }}
-                            className="text-[80px] font-[400] tracking-[-3px] text-white lg:text-[102px]"
-                        >
-                            Balash Coupons
-                        </h1>
-                        <p
-                            style={{ filter: "drop-shadow(0 0 12px #000000)" }}
-                            className="text-[30px] font-[400] leading-[72px]  tracking-[4px] text-[#ffeac7] lg:text-[50px]"
-                        >
-                            Hey Erbil, still paying full price? <br />{" "}
-                            <span>... free coupons, for everything!</span>
-                        </p>
-                    </div>
-                </div>
-            </section>
-
             {/* Shops Section */}
             <Shops />
 
@@ -80,8 +65,9 @@ export default function Dashboard({ coupons }) {
             {/* Cafes Section */}
             <Cards title={"Cafes"} lists={cafes} />
 
-            {/* Footer Buttons Section */}
+            {/* Footer Section */}
             <Footer />
+            {/* Footer Buttons Section */}
         </UserGuestLayout>
     );
 }

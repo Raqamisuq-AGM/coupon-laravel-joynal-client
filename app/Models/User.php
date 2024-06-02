@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'shop_id',
         'status',
     ];
 
@@ -75,5 +76,10 @@ class User extends Authenticatable
     public function coupons(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Coupon::class, CouponUser::class);
+    }
+
+    public function shop(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Shop::class);
     }
 }

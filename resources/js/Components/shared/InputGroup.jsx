@@ -21,7 +21,7 @@ export const InputGroup = ({
                 type={type}
                 value={
                     type == "file" && formObject[name]
-                        ? null
+                        ? undefined
                         : formObject[name] || ""
                 }
                 id={name}

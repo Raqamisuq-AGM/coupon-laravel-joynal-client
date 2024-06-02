@@ -3,32 +3,21 @@ import { InputGroup } from "@/Components/shared/InputGroup";
 import { PageHeader } from "@/Components/shared/PageHeader";
 import PrimaryButton from "@/Components/shared/PrimaryButton";
 import { SelectGroup } from "@/Components/shared/SelectGroup";
-import SwitchBox from "@/Components/shared/SwitchBox";
 import { TextAreaGroup } from "@/Components/shared/TextAreaGroup";
 import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { useForm } from "@inertiajs/react";
-import moment from "moment";
-import React, { useEffect } from "react";
-export default function Edit({ user }) {
+import React from "react";
+import { shopStatus, shopTypes } from "./constant";
+export default function Edit({ shop }) {
     const { data, setData, put, processing, errors } = useForm({
-        ...user,
+        ...shop,
+        image: undefined,
     });
 
-    const editUser = (e) => {
+    const editShop = (e) => {
         e.preventDefault();
-        put(route("admin.users.update", user.id));
+        put(route("admin.shops.update", shop.id));
     };
-
-    const status = [
-        {
-            label: "Active",
-            value: true,
-        },
-        {
-            label: "Inactive",
-            value: false,
-        },
-    ];
 
     return (
         <AdminLayout>
@@ -36,52 +25,70 @@ export default function Edit({ user }) {
                 <PageHeader />
                 <div className="card mx-auto max-w-[800px]">
                     <div className="card-body">
-                        <form onSubmit={editUser}>
+                        <form onSubmit={editShop}>
                             <div className="grid grid-cols-2 gap-4">
                                 <InputGroup
-                                    label="Name"
-                                    placeholder="Jhone Doe"
+                                    label="Shop Name"
+                                    placeholder="Enter Shop Name"
                                     name="name"
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-                                <InputGroup
-                                    label="Email"
-                                    name="email"
-                                    type="email"
-                                    placeholder="jDqJi@example.com"
-                                    formObject={data}
-                                    setFormObject={setData}
-                                    validationError={errors}
-                                />
 
                                 <InputGroup
-                                    label="Phone Number"
-                                    name="phone"
-                                    placeholder="1234567890"
+                                    label="Short Description"
+                                    name="short_description"
+                                    type="text"
+                                    placeholder="Enter Short Description"
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <SelectGroup
+                                    label="Select Type"
+                                    name="type"
+                                    options={shopTypes}
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
                                 <InputGroup
-                                    label="Password"
-                                    name="password"
-                                    type="password"
-                                    placeholder="********"
+                                    label="Image"
+                                    name="image"
+                                    type="file"
+                                    except="image/*"
+                                    placeholder="Enter Short Description"
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-
+                                <InputGroup
+                                    label="Site Link (optional)"
+                                    name="site_url"
+                                    type="string"
+                                    placeholder="https://example.com"
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
                                 <SelectGroup
                                     label="Select Status"
                                     name="status"
-                                    options={status}
+                                    options={shopStatus}
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
+                                <div className="col-span-2">
+                                    <TextAreaGroup
+                                        label="Description (optional)"
+                                        name="description"
+                                        formObject={data}
+                                        setFormObject={setData}
+                                        validationError={errors}
+                                    />
+                                </div>
                             </div>
                             <div className="mt-4 flex justify-end">
                                 <PrimaryButton

@@ -24,21 +24,21 @@ class UserController extends Controller
                 'icon' => 'heroicons:user-group',
                 'iconBgColor' => 'bg-primary-500 bg-opacity-20 text-primary-500',
                 'textColor' => 'text-slate-500',
-                'value' => User::admin()->count(),
+                'value' => User::whereRelation('roles', 'name', '!=', 'user')->count(),
             ],
             [
                 'title' => 'Total Active Users',
                 'icon' => 'heroicons:check',
                 'iconBgColor' => 'bg-success-500 bg-opacity-20 text-success-500',
                 'textColor' => 'text-slate-500',
-                'value' => User::admin()->active()->count(),
+                'value' => User::whereRelation('roles', 'name', '!=', 'user')->active()->count(),
             ],
             [
                 'title' => 'Total InActive Users',
                 'icon' => 'heroicons:exclamation-circle',
                 'iconBgColor' => 'bg-danger-500 bg-opacity-20 text-danger-500',
                 'textColor' => 'text-slate-500',
-                'value' => User::admin()->inactive()->count(),
+                'value' => User::whereRelation('roles', 'name', '!=', 'user')->inactive()->count(),
             ],
         ];
 
@@ -52,7 +52,7 @@ class UserController extends Controller
 
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
-        $users = User::admin()->paginate();
+        $users = User::whereRelation('roles', 'name', '!=', 'user')->paginate();
 
         return Inertia::render('Admin/User/Index', compact('users', 'overviews'));
     }
@@ -82,7 +82,7 @@ class UserController extends Controller
         try {
             $user = User::create($request->validated());
             // role as admin
-            $user->assignRole('admin');
+            $user->assignRole($request->role);
 
             DB::commit();
         } catch (\Throwable $th) {
@@ -115,6 +115,10 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         $user->update($request->validated());
+        // assign role
+        if ($request->role) {
+            $user->assignRole($request->role);
+        }
 
         return to_route('admin.users.index')->with('success', 'User updated successfully');
     }

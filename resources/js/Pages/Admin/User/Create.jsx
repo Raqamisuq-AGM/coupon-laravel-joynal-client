@@ -21,14 +21,14 @@ export default function Create() {
         post(route("admin.users.store"));
     };
 
-    const status = [
+    const roles = [
         {
-            label: "Active",
-            value: true,
+            label: "Admin",
+            value: "admin",
         },
         {
-            label: "Inactive",
-            value: false,
+            label: "Shop",
+            value: "shop",
         },
     ];
 
@@ -57,7 +57,6 @@ export default function Create() {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-
                                 <InputGroup
                                     label="Phone Number"
                                     name="phone"
@@ -71,6 +70,14 @@ export default function Create() {
                                     name="password"
                                     type="password"
                                     placeholder="********"
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <SelectGroup
+                                    label="Select Role"
+                                    name="role"
+                                    options={roles}
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}

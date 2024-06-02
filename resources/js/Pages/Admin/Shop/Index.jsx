@@ -9,26 +9,33 @@ import { Icon } from "@iconify/react";
 import { Link } from "@inertiajs/react";
 import React from "react";
 
-export default function Index({ users, overviews }) {
+export default function Index({ shops, overviews }) {
     const { deleteRow } = sharedComposable();
 
     const columns = [
         {
-            header: "ID",
-            accessor: "id",
+            header: "Image",
+            accessor: "image",
+            call: ({ value }) => (
+                <img
+                    src={value}
+                    className="w-20 h-12 object-cover"
+                />
+            ),
         },
         {
             header: "Name",
             accessor: "name",
         },
         {
-            header: "Phone",
-            accessor: "phone",
+            header: "Short Description",
+            accessor: "short_description",
         },
         {
-            header: "Email",
-            accessor: "email",
+            header: "Type",
+            accessor: "type",
         },
+
         {
             header: "Status",
             accessor: "status",
@@ -58,7 +65,7 @@ export default function Index({ users, overviews }) {
                                 <li className="dropdown-list-item">
                                     <Link
                                         href={route(
-                                            "admin.users.edit",
+                                            "admin.shops.edit",
                                             original.id
                                         )}
                                         className="dropdown-link"
@@ -77,7 +84,7 @@ export default function Index({ users, overviews }) {
                                         onClick={() =>
                                             deleteRow(
                                                 route(
-                                                    "admin.users.destroy",
+                                                    "admin.shops.destroy",
                                                     original.id
                                                 ),
                                                 "Coupon has been deleted successfully"
@@ -105,7 +112,7 @@ export default function Index({ users, overviews }) {
                 <PageHeader />
                 <OverviewGrid items={overviews} cla />
                 <Filter />
-                <Table tableData={users} columns={columns} />
+                <Table tableData={shops} columns={columns} />
             </Container>
         </AdminLayout>
     );

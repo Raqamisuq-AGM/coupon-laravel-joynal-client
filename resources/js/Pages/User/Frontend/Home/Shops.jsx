@@ -12,7 +12,7 @@ export default function Shops() {
         return lists;
     };
     return (
-        <section className="bg-gray-500 px-2 py-6 font-['Poetsen_One'] lg:px-10">
+        <section className="px-2 font-['Poetsen_One'] lg:px-10">
             <div className="container mx-auto">
                 <div className="my-4 flex items-start justify-center">
                     <h2 className="w-[200px] border-b-4 border-white text-center text-[63px] font-[400] tracking-[-2px] text-[#ffffff]">

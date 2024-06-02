@@ -1,7 +1,7 @@
 import React from "react";
 export default function Cards({ lists, title, total = 24 }) {
     return (
-        <section className="relative bg-gray-500 px-2 py-6 font-['Poetsen_One'] lg:px-10">
+        <section className="relative  px-2 font-['Poetsen_One'] lg:px-10">
             <div className="container mx-auto">
                 <div className="my-4 flex items-start justify-center">
                     <h2 className="w-[200px] border-b-4 border-white text-center text-[63px] font-[400] tracking-[-2px] text-[#ffffff]">
@@ -32,9 +32,11 @@ export default function Cards({ lists, title, total = 24 }) {
                     ))}
                 </div>
             </div>
-            <div className="absolute right-10 top-20 ">
-                <a href="#" className="flex flex-row gap-2 items-center">
-                    <p className="text-[#ffffff] text-[30px] tracking-[-1px]">View All {total}</p>
+            <div className="absolute right-2 lg:right-10 top-14 ">
+                <a href="#" className="flex flex-row items-center gap-2">
+                    <p className="text-sm lg:text-[30px] tracking-[-1px] text-[#ffffff]">
+                        View All {total}
+                    </p>
                     <img
                         src="https://img.icons8.com/ios-filled/50/ffffff/chevron-right.png"
                         alt="View All"

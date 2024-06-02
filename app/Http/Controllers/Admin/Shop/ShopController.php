@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Admin\Shop;
 
 use App\Helpers\PageHeader;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Shop\ShopStoreRequest;
-use App\Http\Requests\Shop\ShopUpdateRequest;
+use App\Http\Requests\Shop\StoreShopRequest;
+use App\Http\Requests\Shop\UpdateShopRequest;
+use App\Models\Shop;
 use App\Models\User;
+use App\Traits\Uploader;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class ShopController extends Controller
 {
+    use Uploader;
     /**
      * Display a listing of the resource.
      */
@@ -19,25 +22,25 @@ class ShopController extends Controller
     {
         $overviews = [
             [
-                'title' => 'Total Shops',
+                'title' => 'Total Shops ',
                 'icon' => 'heroicons:user-group',
                 'iconBgColor' => 'bg-primary-500 bg-opacity-20 text-primary-500',
                 'textColor' => 'text-slate-500',
-                'value' => User::shop()->count(),
+                'value' => Shop::count(),
             ],
             [
                 'title' => 'Total Active Shops',
                 'icon' => 'heroicons:check',
                 'iconBgColor' => 'bg-success-500 bg-opacity-20 text-success-500',
                 'textColor' => 'text-slate-500',
-                'value' => User::shop()->active()->count(),
+                'value' => Shop::active()->count(),
             ],
             [
                 'title' => 'Total InActive Shops',
                 'icon' => 'heroicons:exclamation-circle',
                 'iconBgColor' => 'bg-danger-500 bg-opacity-20 text-danger-500',
                 'textColor' => 'text-slate-500',
-                'value' => User::shop()->inactive()->count(),
+                'value' => Shop::inactive()->count(),
             ],
         ];
 
@@ -49,9 +52,9 @@ class ShopController extends Controller
             ],
         ];
 
-        PageHeader::set()->title('Coupons')->buttons($buttons);
+        PageHeader::set()->title('Shops')->buttons($buttons);
 
-        $shops = User::shop()->paginate();
+        $shops = Shop::paginate();
 
         return Inertia::render('Admin/Shop/Index', compact('shops', 'overviews'));
     }
@@ -69,33 +72,54 @@ class ShopController extends Controller
             ]
         ]);
 
-        return Inertia::render('Admin/Shop/Create');
+        $users = User::whereNull('shop_id')
+            ->shop()
+            ->select('id as value', 'name as label')
+            ->get();
+        return Inertia::render('Admin/Shop/Create', compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ShopStoreRequest $request)
+    public function store(StoreShopRequest $request)
     {
-         DB::beginTransaction();
         try {
-            $user = User::create($request->validated());
-            // role as shop
-            $user->assignRole('shop');
+            DB::beginTransaction();
+            $shop = Shop::create($request->validated());
 
+            if ($request->user_id) {
+                $shop->users()->attach($request->user_id);
+            }
             DB::commit();
-        } catch (\Throwable $th) {
+        } catch (\Exception $ex) {
             DB::rollBack();
-            return back()->with('error', $th->getMessage());
+            return back()->with('error', $ex->getMessage());
         }
 
-        return to_route('admin.shops.index')->with('success', 'User created successfully');
+        return to_route('admin.shops.index')->with('success', 'Shop created successfully');
+    }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Shop $shop)
+    {
+        PageHeader::set()->title($shop->name)->buttons([
+            [
+                'title' => 'Back',
+                'url' => route('admin.shops.index'),
+                'icon' => 'heroicons:arrow-left',
+            ]
+        ]);
+        return Inertia::render('Admin/Shop/Show', compact('shop'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $shop)
+    public function edit(Shop $shop)
     {
         PageHeader::set()->title('Edit Shop')->buttons([
             [
@@ -111,7 +135,7 @@ class ShopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ShopUpdateRequest $request, User $shop)
+    public function update(UpdateShopRequest $request, Shop $shop)
     {
         $shop->update($request->validated());
 
@@ -121,10 +145,12 @@ class ShopController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $shop)
+    public function destroy(Shop $shop)
     {
+        if ($shop->image){
+            $this->delete($shop->image);
+        }
         $shop->delete();
-
         return back()->with('success', 'Shop deleted successfully');
     }
 }

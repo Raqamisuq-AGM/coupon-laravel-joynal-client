@@ -41,7 +41,7 @@ export default function Footer() {
         },
     ];
     return (
-        <section className="flex justify-center items-center bg-[#111111] py-10 lg:h-[423px] lg:py-20">
+        <section className="flex justify-center items-center bg-[#111111] h-80 lg:h-[423px] lg:py-20">
             <div className="flex flex-col gap-12">
                 <div className="flex items-center justify-center gap-6">
                     {socialLinks.map((link) => (

@@ -27,6 +27,7 @@ class UserStoreRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10' ],
             'password' => ['required', 'string', 'min:8', 'max:30'],
+            'role' => ['required', 'in:admin,shop'],
         ];
     }
 
@@ -46,10 +47,10 @@ class UserStoreRequest extends FormRequest
         ];
     }
 
-    // public function validated($key = null, $default = null)
-    // {
-    //     $data = parent::validated();
-    //     $data['password'] = Hash::make($data['password']);
-    //     return $data;
-    // }
+    public function validated ($key = null, $default = null)
+    {
+        $data = parent::validated();
+        unset($data['role']);
+        return $data;
+    }
 }
