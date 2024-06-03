@@ -3,6 +3,7 @@ import { Link, usePage } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import sharedComposable from "@/Composables/sharedComposable";
+import logo from "@/images/frontend/logo.png";
 export default function Header() {
     const { logout } = sharedComposable();
     const auth = usePage().props?.auth;
@@ -69,7 +70,7 @@ export default function Header() {
             <div className="container mx-auto flex items-center justify-between px-6 py-4">
                 <div className="flex items-center text-white">
                     <Link href={route("home")} className="text-3xl font-bold">
-                        Balash
+                        <img src={logo} alt="" className="h-12 w-16" />
                     </Link>
                 </div>
                 <button
