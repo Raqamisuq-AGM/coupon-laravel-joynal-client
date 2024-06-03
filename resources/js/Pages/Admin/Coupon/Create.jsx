@@ -43,6 +43,14 @@ export default function Create({ shops }) {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
+                                <InputGroup
+                                    label="Coupon Code"
+                                    placeholder="000001"
+                                    name="code"
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
                                 <div className="md:col-span-2">
                                     <InputGroup
                                         label="Short Description"
@@ -53,14 +61,7 @@ export default function Create({ shops }) {
                                         validationError={errors}
                                     />
                                 </div>
-                                <InputGroup
-                                    label="Coupon Code"
-                                    placeholder="000001"
-                                    name="code"
-                                    formObject={data}
-                                    setFormObject={setData}
-                                    validationError={errors}
-                                />
+
                                 <InputGroup
                                     label="Coupon Banner"
                                     name="image"

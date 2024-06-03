@@ -54,11 +54,12 @@ class ShopController extends Controller
 
         PageHeader::set()->title('Shops')->buttons($buttons);
 
-        $shops = Shop::withCount('users as total_users')->paginate();
+        $shops = Shop::withCount('users as total_users')->latest()->paginate();
 
         $users = User::whereNull('shop_id')
         ->shop()
         ->select('id as value', 'name as label')
+        ->latest()
         ->get();
 
         return Inertia::render('Admin/Shop/Index', compact('shops', 'overviews', 'users'));

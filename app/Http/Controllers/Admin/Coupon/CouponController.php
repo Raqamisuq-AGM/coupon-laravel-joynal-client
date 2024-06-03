@@ -61,7 +61,7 @@ class CouponController extends Controller
 
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
-        $coupons = Coupon::with('shop:id,name')->withCount('couponUsers as total_purchased')->paginate();
+        $coupons = Coupon::with('shop:id,name')->withCount('couponUsers as total_purchased')->latest()->paginate();
 
         return Inertia::render('Admin/Coupon/Index', compact('coupons', 'overviews'));
     }
