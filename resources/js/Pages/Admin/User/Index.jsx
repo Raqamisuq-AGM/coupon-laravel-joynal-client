@@ -30,6 +30,14 @@ export default function Index({ users, overviews }) {
             accessor: "email",
         },
         {
+            header: "Role",
+            call: ({ original }) => {
+                let role = original.roles;
+
+                return <>{role[0]?.name}</>;
+            }
+        },
+        {
             header: "Status",
             accessor: "status",
             call: ({ value }) => {

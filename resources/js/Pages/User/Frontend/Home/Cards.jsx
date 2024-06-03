@@ -13,7 +13,10 @@ export default function Cards({ lists, title, total = 24 }) {
                         <a href="#" className="relative w-full" key={list.id}>
                             <div className="w-full ">
                                 <img
-                                    src={list.image}
+                                    src={
+                                        list?.image ??
+                                        "https://via.placeholder.com/150"
+                                    }
                                     alt={list.name}
                                     className="cover-fill h-[200px] w-full object-cover"
                                 />
@@ -32,9 +35,9 @@ export default function Cards({ lists, title, total = 24 }) {
                     ))}
                 </div>
             </div>
-            <div className="absolute right-2 lg:right-10 top-14 ">
+            <div className="absolute right-2 top-14 lg:right-10 ">
                 <a href="#" className="flex flex-row items-center gap-2">
-                    <p className="text-sm lg:text-[30px] tracking-[-1px] text-[#ffffff]">
+                    <p className="text-sm tracking-[-1px] text-[#ffffff] lg:text-[30px]">
                         View All {total}
                     </p>
                     <img

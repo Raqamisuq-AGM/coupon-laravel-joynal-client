@@ -8,7 +8,7 @@ import { TextAreaGroup } from "@/Components/shared/TextAreaGroup";
 import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import React from "react";
-export default function Create() {
+export default function Create({ shops }) {
     const { data, setData, post, processing, errors } = useForm({});
 
     const createCoupon = (e) => {
@@ -35,20 +35,38 @@ export default function Create() {
                     <div className="card-body">
                         <form onSubmit={createCoupon}>
                             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <InputGroup
+                                    label="Coupon Title"
+                                    placeholder="Pizza coupon"
+                                    name="title"
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <InputGroup
+                                    label="Coupon Code"
+                                    placeholder="000001"
+                                    name="code"
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
                                 <div className="md:col-span-2">
                                     <InputGroup
-                                        label="Coupon Title"
-                                        placeholder="Pizza coupon"
-                                        name="title"
+                                        label="Short Description"
+                                        placeholder="50 % off on pizza"
+                                        name="short_description"
                                         formObject={data}
                                         setFormObject={setData}
                                         validationError={errors}
                                     />
                                 </div>
+
                                 <InputGroup
-                                    label="Coupon Code"
-                                    placeholder="000001"
-                                    name="code"
+                                    label="Coupon Banner"
+                                    name="image"
+                                    type="file"
+                                    except="image/*"
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
@@ -116,6 +134,14 @@ export default function Create() {
                                     label="Select Status"
                                     name="status"
                                     options={status}
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <SelectGroup
+                                    label="Select A Shop"
+                                    name="shop_id"
+                                    options={shops}
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}

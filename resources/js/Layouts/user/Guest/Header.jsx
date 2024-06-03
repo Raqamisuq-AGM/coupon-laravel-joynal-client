@@ -2,7 +2,10 @@ import { Icon } from "@iconify-icon/react";
 import { Link, usePage } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
+import sharedComposable from "@/Composables/sharedComposable";
+import logo from "@/images/frontend/logo.png";
 export default function Header() {
+    const { logout } = sharedComposable();
     const auth = usePage().props?.auth;
     const [dashboard, setDashboard] = useState(route("login"));
     useEffect(() => {
@@ -47,14 +50,17 @@ export default function Header() {
         {
             id: "en",
             flag: "circle-flags:us",
+            url: '/locale/en',
         },
         {
             id: "ar",
             flag: "circle-flags:sa",
+            url: '/locale/ar',
         },
         {
             id: "ru",
             flag: "circle-flags:ru",
+            url: '/locale/ru',
         },
     ];
 
@@ -64,7 +70,7 @@ export default function Header() {
             <div className="container mx-auto flex items-center justify-between px-6 py-4">
                 <div className="flex items-center text-white">
                     <Link href={route("home")} className="text-3xl font-bold">
-                        Balash
+                        <img src={logo} alt="" className="h-12 w-16" />
                     </Link>
                 </div>
                 <button
@@ -94,7 +100,7 @@ export default function Header() {
                         {auth?.user ? (
                             <button
                                 type="button"
-                                onClick={() => route("logout")}
+                                onClick={logout}
                                 className="flex h-12 w-32 items-center justify-center rounded-full bg-[#725b36] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
                             >
                                 Logout
@@ -118,13 +124,13 @@ export default function Header() {
                     </div>
                     <div className="mt-4 flex flex-row gap-3 md:mt-0">
                         {langs.map((lang, index) => (
-                            <button
+                            <a
                                 key={index}
                                 className="rounded-full"
-                                aria-label={`Language ${lang.name}`}
+                                href={lang.url}
                             >
                                 <Icon icon={lang.flag} width={40} height={40} />
-                            </button>
+                            </a>
                         ))}
                     </div>
                 </div>
@@ -154,7 +160,7 @@ export default function Header() {
                         {auth?.user ? (
                             <button
                                 type="button"
-                                onClick={() => route("logout")}
+                                onClick={logout}
                                 className="flex h-12 w-32 items-center justify-center rounded-full bg-[#725b36] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
                             >
                                 Logout
@@ -178,69 +184,18 @@ export default function Header() {
                     </div>
                     <div className="mt-4 flex flex-row gap-3">
                         {langs.map((lang, index) => (
-                            <button
+                            <a
                                 key={index}
                                 className="rounded-full"
-                                aria-label={`Language ${lang.name}`}
+                                href={lang.url}
                             >
                                 <Icon icon={lang.flag} width={40} height={40} />
-                            </button>
+                            </a>
                         ))}
                     </div>
                 </div>
             </Transition>
-            {/* {isMobileMenu && (
-                <div className="py-4 flex w-full flex-col items-center justify-center gap-6 bg-black md:hidden">
-                    <nav className="flex flex-wrap items-center justify-center space-x-8">
-                        {urls.map((url, index) => (
-                            <Link
-                                key={index}
-                                href={url.url}
-                                className="text-center text-2xl font-normal uppercase tracking-tight text-white"
-                            >
-                                {url.name}
-                            </Link>
-                        ))}
-                    </nav>
-                    <div className="mt-4 flex flex-col items-center gap-3">
-                        {auth?.user ? (
-                            <button
-                                type="button"
-                                onClick={() => route("logout")}
-                                className="flex h-12 w-32 items-center justify-center rounded-full bg-[#725b36] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
-                            >
-                                Logout
-                            </button>
-                        ) : (
-                            <>
-                                <Link
-                                    href={route("register")}
-                                    className="flex h-12 w-32 items-center justify-center rounded-full bg-[#725b36] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
-                                >
-                                    Register
-                                </Link>
-                                <Link
-                                    href={dashboard}
-                                    className="flex h-12 w-32 items-center justify-center rounded-full bg-[#526d6e] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
-                                >
-                                    Login
-                                </Link>
-                            </>
-                        )}
-                    </div>
-                    <div className="mt-4 flex flex-row gap-3">
-                        {langs.map((lang, index) => (
-                            <button
-                                key={index}
-                                className="rounded-full"
-                                aria-label={`Language ${lang.name}`}
-                            >
-                                <Icon icon={lang.flag} width={40} height={40} />
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            )} */}
+
         </header>
     );
 }

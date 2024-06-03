@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $fillable = [
         'name',
@@ -28,33 +29,21 @@ class Shop extends Model
     public function image(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => url("storage/{$value}"),
+            get: fn ($value) => url($value),
         );
     }
-    // generate unique slug
-    public static function boot()
+       /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
     {
-        parent::boot();
-
-        static::saving(function ($model) {
-            $model->slug = self::generateUniqueSlug($model);
-        });
-    }
-
-    public static function generateUniqueSlug($model)
-    {
-        $slug = str($model->name)->slug()->toString();
-        $i = 1;
-        $isUnique = false;
-        while (!$isUnique) {
-            if (!self::where('slug', $slug)->exists()) {
-                $isUnique = true;
-            } else {
-                $slug = $slug . '-' . $i;
-                $i++;
-            }
-        }
-        return $slug;
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 
     public function scopeActive($builder)
@@ -70,5 +59,10 @@ class Shop extends Model
     public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    public function coupons(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Coupon::class);
     }
 }

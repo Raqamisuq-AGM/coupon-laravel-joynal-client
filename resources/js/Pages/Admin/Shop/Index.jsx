@@ -8,6 +8,7 @@ import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { Icon } from "@iconify/react";
 import { Link } from "@inertiajs/react";
 import React from "react";
+import { AddShopUser } from "./AddShopUser";
 
 export default function Index({ shops, overviews }) {
     const { deleteRow } = sharedComposable();
@@ -17,10 +18,7 @@ export default function Index({ shops, overviews }) {
             header: "Image",
             accessor: "image",
             call: ({ value }) => (
-                <img
-                    src={value}
-                    className="w-20 h-12 object-cover"
-                />
+                <img src={value} className="h-12 w-20 object-cover" />
             ),
         },
         {
@@ -35,7 +33,11 @@ export default function Index({ shops, overviews }) {
             header: "Type",
             accessor: "type",
         },
-
+        {
+            header: "Shop Users",
+            accessor: "total_users",
+            call: ({ value }) => <div className="text-center">{value}</div>,
+        },
         {
             header: "Status",
             accessor: "status",
@@ -62,6 +64,18 @@ export default function Index({ shops, overviews }) {
                         </div>
                         <div className="dropdown-content w-40">
                             <ul className="dropdown-list">
+                                <li className="dropdown-list-item">
+                                    <button
+                                        className="dropdown-link"
+                                        onClick={() => addUserToShop(original)}
+                                    >
+                                        <Icon
+                                            className="h-6"
+                                            icon="material-symbols:add-box-outline"
+                                        />
+                                        <span>Add User</span>
+                                    </button>
+                                </li>
                                 <li className="dropdown-list-item">
                                     <Link
                                         href={route(
@@ -106,14 +120,24 @@ export default function Index({ shops, overviews }) {
         },
     ];
 
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [shop, setShop] = React.useState({});
+    const addUserToShop = (shop) => {
+        setShop(shop);
+        setIsOpen(true);
+    };
+
     return (
-        <AdminLayout>
-            <Container>
-                <PageHeader />
-                <OverviewGrid items={overviews} cla />
-                <Filter />
-                <Table tableData={shops} columns={columns} />
-            </Container>
-        </AdminLayout>
+        <React.Fragment>
+            <AddShopUser isOpen={isOpen} setIsOpen={setIsOpen} shop={shop} />
+            <AdminLayout>
+                <Container>
+                    <PageHeader />
+                    <OverviewGrid items={overviews} />
+                    <Filter />
+                    <Table tableData={shops} columns={columns} />
+                </Container>
+            </AdminLayout>
+        </React.Fragment>
     );
 }

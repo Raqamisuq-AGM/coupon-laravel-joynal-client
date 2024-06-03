@@ -8,7 +8,7 @@ import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import React from "react";
 import { shopStatus, shopTypes } from "./constant";
-export default function Create() {
+export default function Create({ users }) {
     const { data, setData, post, processing, errors } = useForm({
         name: "",
         short_description: "",
@@ -38,16 +38,6 @@ export default function Create() {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-
-                                <InputGroup
-                                    label="Short Description"
-                                    name="short_description"
-                                    type="text"
-                                    placeholder="Enter Short Description"
-                                    formObject={data}
-                                    setFormObject={setData}
-                                    validationError={errors}
-                                />
                                 <SelectGroup
                                     label="Select Type"
                                     name="type"
@@ -56,6 +46,18 @@ export default function Create() {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
+                                <div className="md:col-span-2">
+                                    <InputGroup
+                                        label="Short Description"
+                                        name="short_description"
+                                        type="text"
+                                        placeholder="Enter Short Description"
+                                        formObject={data}
+                                        setFormObject={setData}
+                                        validationError={errors}
+                                    />
+                                </div>
+
                                 <InputGroup
                                     label="Image"
                                     name="image"
@@ -83,7 +85,15 @@ export default function Create() {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-                                <div className="col-span-2" >
+                                <SelectGroup
+                                    label="Add Shop User"
+                                    name="user_id"
+                                    options={users}
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <div className="col-span-2">
                                     <TextAreaGroup
                                         label="Description (optional)"
                                         name="description"

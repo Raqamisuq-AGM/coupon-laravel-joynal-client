@@ -11,7 +11,9 @@ class Coupon extends Model
 
     protected $fillable = [
         'title',
+        'short_description',
         'description',
+        'image',
         'code',
         'discount_type',
         'discount',
@@ -20,6 +22,7 @@ class Coupon extends Model
         'usage_limit',
         'valid_from',
         'valid_to',
+        'shop_id',
         'status',
     ];
 
@@ -52,5 +55,10 @@ class Coupon extends Model
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, CouponUser::class);
+    }
+
+    public function shop(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Shop::class);
     }
 }
