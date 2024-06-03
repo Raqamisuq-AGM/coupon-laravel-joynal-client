@@ -18,7 +18,9 @@ class CouponFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
+            'short_description' => fake()->sentence(),
             'description' => fake()->sentence(),
+            'image' => fake()->imageUrl(),
             'code' => fake()->unique()->word(),
             'discount_type' => fake()->randomElement(['fixed', 'percentage']),
             'discount' => fake()->numberBetween(1, 10),
@@ -27,6 +29,7 @@ class CouponFactory extends Factory
             'usage_limit' => fake()->numberBetween(1, 10),
             'valid_from' => now(),
             'valid_to' => now()->addDays(30),
+            'shop_id' => \App\Models\Shop::factory()->create()->id,
             'status' => fake()->boolean(),
         ];
     }

@@ -1,16 +1,16 @@
 import React from "react";
-export default function Shops() {
-    const shops = () => {
-        let lists = [];
-        for (let i = 0; i < 10; i++) {
-            lists.push({
-                id: i,
-                name: "Shop " + i,
-                image: "https://via.placeholder.com/150",
-            });
-        }
-        return lists;
-    };
+export default function Shops({ shops }) {
+//     const shops = () => {
+//         let lists = [];
+//         for (let i = 0; i < 10; i++) {
+//             lists.push({
+//                 id: i,
+//                 name: "Shop " + i,
+//                 image: "https://via.placeholder.com/150",
+//             });
+//         }
+//         return lists;
+//     };
     return (
         <section className="px-2 font-['Poetsen_One'] lg:px-10">
             <div className="container mx-auto">
@@ -20,7 +20,7 @@ export default function Shops() {
                     </h2>
                 </div>
                 <div className="grid grid-cols-4 gap-4 md:grid-cols-7">
-                    {shops().map((shop) => (
+                    {shops.map((shop) => (
                         <a
                             href="#"
                             className="flex flex-col items-center  p-4"
@@ -28,7 +28,7 @@ export default function Shops() {
                         >
                             <img
                                 className="h-32 w-32 rounded-full object-cover"
-                                src={shop.image}
+                                src={shop.image??"https://via.placeholder.com/150"}
                                 alt={shop.name}
                             />
                             <h3 className="mt-4 text-[27px] font-[400] tracking-[-1px] text-[#ffffff]">

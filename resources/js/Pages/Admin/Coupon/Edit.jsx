@@ -9,7 +9,7 @@ import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import moment from "moment";
 import React, { useEffect } from "react";
-export default function Edit({ coupon }) {
+export default function Edit({ coupon, shops }) {
     const { data, setData, put, processing, errors } = useForm({});
 
     const editCoupon = (e) => {
@@ -58,6 +58,15 @@ export default function Edit({ coupon }) {
                                     label="Coupon Code"
                                     placeholder="000001"
                                     name="code"
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <InputGroup
+                                    label="Coupon Banner"
+                                    name="image"
+                                    type="file"
+                                    except="image/*"
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
@@ -124,6 +133,14 @@ export default function Edit({ coupon }) {
                                     label="Select Status"
                                     name="status"
                                     options={status}
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <SelectGroup
+                                    label="Select A Shop"
+                                    name="shop_id"
+                                    options={shops}
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}

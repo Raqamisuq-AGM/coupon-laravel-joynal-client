@@ -29,14 +29,7 @@ const TableBody = ({ data, columns }) => {
             {data?.map((item) => (
                 <tr key={item.id}>
                     {columns.map((column, index) => (
-                        <td
-                            key={index}
-                            className={
-                                (index == columns.length - 1
-                                    ? "flex justify-end "
-                                    : "") + column?.tdClass || ''
-                            }
-                        >
+                        <td key={index} className={column?.tdClass ?? ""}>
                             {placeCellData(item, column)}
                         </td>
                     ))}

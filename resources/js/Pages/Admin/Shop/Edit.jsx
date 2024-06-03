@@ -36,15 +36,17 @@ export default function Edit({ shop }) {
                                     validationError={errors}
                                 />
 
-                                <InputGroup
-                                    label="Short Description"
-                                    name="short_description"
-                                    type="text"
-                                    placeholder="Enter Short Description"
-                                    formObject={data}
-                                    setFormObject={setData}
-                                    validationError={errors}
-                                />
+                                <div className="md:col-span-2">
+                                    <InputGroup
+                                        label="Short Description"
+                                        name="short_description"
+                                        type="text"
+                                        placeholder="Enter Short Description"
+                                        formObject={data}
+                                        setFormObject={setData}
+                                        validationError={errors}
+                                    />
+                                </div>
                                 <SelectGroup
                                     label="Select Type"
                                     name="type"

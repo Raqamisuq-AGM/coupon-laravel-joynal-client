@@ -27,6 +27,7 @@ class UserStoreRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10' ],
             'password' => ['required', 'string', 'min:8', 'max:30'],
+            'status' => ['nullable', 'boolean'],
             'role' => ['required', 'in:admin,shop'],
         ];
     }
@@ -51,6 +52,10 @@ class UserStoreRequest extends FormRequest
     {
         $data = parent::validated();
         unset($data['role']);
+
+        if (!isset($data['status'])) {
+            $data['status'] = true;
+        }
         return $data;
     }
 }

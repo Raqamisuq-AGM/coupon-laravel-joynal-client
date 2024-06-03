@@ -1,3 +1,4 @@
+import { Transition } from "@headlessui/react";
 import React, { useEffect, useRef } from "react";
 
 export const Modal = ({ children, title, isOpen, setIsOpen }) => {
@@ -17,11 +18,15 @@ export const Modal = ({ children, title, isOpen, setIsOpen }) => {
         };
     }, [setIsOpen]);
     return (
-        <div className={`modal ${isOpen ? "show flex" : ""} `}>
+        <div
+            className={`modal  ${
+                isOpen ? "show flex" : ""
+            }`}
+        >
             <div className="modal-dialog">
                 <div className="modal-content" ref={modalRef}>
                     <div className="modal-header px-4 sm:px-6">
-                        <div className="group flex justify-between items-center">
+                        <div className="group flex items-center justify-between">
                             <p>{title}</p>
                             <button
                                 className="rounded-primary bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600"

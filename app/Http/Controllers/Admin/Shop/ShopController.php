@@ -54,9 +54,14 @@ class ShopController extends Controller
 
         PageHeader::set()->title('Shops')->buttons($buttons);
 
-        $shops = Shop::paginate();
+        $shops = Shop::withCount('users as total_users')->paginate();
 
-        return Inertia::render('Admin/Shop/Index', compact('shops', 'overviews'));
+        $users = User::whereNull('shop_id')
+        ->shop()
+        ->select('id as value', 'name as label')
+        ->get();
+
+        return Inertia::render('Admin/Shop/Index', compact('shops', 'overviews', 'users'));
     }
 
     /**
@@ -89,7 +94,7 @@ class ShopController extends Controller
             $shop = Shop::create($request->validated());
 
             if ($request->user_id) {
-                $shop->users()->attach($request->user_id);
+                User::find((int)$request->user_id)->update(['shop_id' => $shop->id]);
             }
             DB::commit();
         } catch (\Exception $ex) {

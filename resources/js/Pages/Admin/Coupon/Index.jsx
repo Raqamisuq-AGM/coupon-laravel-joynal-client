@@ -19,6 +19,10 @@ export default function Index({ coupons, overviews }) {
             accessor: "code",
         },
         {
+            header: "Shop",
+            accessor: "shop.name",
+        },
+        {
             header: "Discount",
             accessor: "discount",
         },
@@ -38,7 +42,7 @@ export default function Index({ coupons, overviews }) {
         },
         {
             header: "Purchased",
-            accessor: "used",
+            accessor: "total_purchased",
         },
         {
             header: "Status",

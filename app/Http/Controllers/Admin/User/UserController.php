@@ -52,8 +52,7 @@ class UserController extends Controller
 
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
-        $users = User::whereRelation('roles', 'name', '!=', 'user')->paginate();
-
+        $users = User::with(['roles'])->whereRelation('roles', 'name', '!=', 'user')->paginate();
         return Inertia::render('Admin/User/Index', compact('users', 'overviews'));
     }
 

@@ -7,10 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Coupon as CP;
 use App\Models\Coupon;
 use App\Models\CouponUser;
+use App\Models\Shop;
+use App\Traits\Uploader;
 use Inertia\Inertia;
 
 class CouponController extends Controller
 {
+    use Uploader;
     /**
      * Display a listing of the resource.
      */
@@ -58,7 +61,7 @@ class CouponController extends Controller
 
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
-        $coupons = Coupon::withCount('couponUsers as used')->paginate();
+        $coupons = Coupon::with('shop:id,name')->withCount('couponUsers as total_purchased')->paginate();
 
         return Inertia::render('Admin/Coupon/Index', compact('coupons', 'overviews'));
     }
@@ -75,8 +78,8 @@ class CouponController extends Controller
                 'icon' => 'heroicons:arrow-left',
             ],
         ]);
-
-        return Inertia::render('Admin/Coupon/Create');
+        $shops = Shop::active()->select('id as value', 'name as label')->get();
+        return Inertia::render('Admin/Coupon/Create', compact('shops'));
     }
 
     /**
@@ -84,6 +87,7 @@ class CouponController extends Controller
      */
     public function store(CP\StoreCouponRequest $request)
     {
+
         Coupon::create($request->validated());
 
         return redirect()->route('admin.coupons.index')->with('success', 'Coupon created successfully');
@@ -117,9 +121,10 @@ class CouponController extends Controller
                 'icon' => 'heroicons:arrow-left',
             ],
         ]);
-
+        $shops = Shop::active()->select('id as value', 'name as label')->get();
         return Inertia::render('Admin/Coupon/Edit', [
             'coupon' => $coupon,
+            'shops' => $shops
         ]);
     }
 
@@ -128,6 +133,7 @@ class CouponController extends Controller
      */
     public function update(CP\UpdateCouponRequest $request, Coupon $coupon)
     {
+
         $coupon->update($request->validated());
 
         return to_route('admin.coupons.index')->with('success', 'Coupon updated successfully');
@@ -138,6 +144,9 @@ class CouponController extends Controller
      */
     public function destroy(Coupon $coupon)
     {
+        if ($coupon->image) {
+            $this->delete($coupon->image);
+        }
         $coupon->delete();
 
         return redirect()->back()->with('success', 'Coupon deleted successfully');

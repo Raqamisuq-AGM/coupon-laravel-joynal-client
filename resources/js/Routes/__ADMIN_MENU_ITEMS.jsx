@@ -10,11 +10,6 @@ export const __ADMIN_MENU_ITEMS = [
         url: route("admin.dashboard"),
     },
     {
-        icon: "heroicons:rectangle-stack",
-        title: "Coupon",
-        url: route("admin.coupons.index"),
-    },
-    {
         icon: "heroicons:user-group",
         title: "User",
         url: route("admin.users.index"),
@@ -24,6 +19,12 @@ export const __ADMIN_MENU_ITEMS = [
         title: "Shop",
         url: route("admin.shops.index"),
     },
+    {
+        icon: "heroicons:rectangle-stack",
+        title: "Coupon",
+        url: route("admin.coupons.index"),
+    },
+
     // {
     //     head: "APPEARANCE",
     //     menus: [

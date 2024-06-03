@@ -56,7 +56,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'locale' => session('locale', 'en'),
+            // 'locale' => session('locale', 'en'),
             'toast' => fn () => Toastr::Toast(),
             'pageHeader' => fn () => PageHeader::toArray(),
         ];
