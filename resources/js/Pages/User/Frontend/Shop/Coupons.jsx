@@ -2,7 +2,7 @@ import React from "react";
 import board from "@/images/frontend/board.jpg";
 export default function Coupons({ coupons }) {
     return (
-        <div className="w-2/3 font-['Poetsen_One']">
+        <div className="w-full md:w-2/3  font-['Poetsen_One']">
             <div className="flex flex-col gap-5">
                 {coupons.map((coupon) => (
                     <a href="#" className="relative w-full" key={coupon.id}>

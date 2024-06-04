@@ -10,7 +10,7 @@ export default function ShopLayout({ children }) {
             <div
                 style={{
                     backgroundImage:
-                        "url('/assets/frontend/images/bg-image.png')",
+                        "url('/assets/frontend/images/bg-content.png')",
                 }}
                 className=" bg-cover bg-center bg-no-repeat"
             >
