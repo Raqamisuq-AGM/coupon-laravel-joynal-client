@@ -56,9 +56,9 @@ class Shop extends Model
         return $builder->where('status', false);
     }
 
-    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class, ShopUser::class);
     }
 
     public function coupons(): \Illuminate\Database\Eloquent\Relations\HasMany

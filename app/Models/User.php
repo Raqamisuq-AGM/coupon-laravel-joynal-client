@@ -78,8 +78,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Coupon::class, CouponUser::class);
     }
 
-    public function shop(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function shops(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsTo(Shop::class);
+        return $this->belongsToMany(Shop::class, ShopUser::class);
     }
 }

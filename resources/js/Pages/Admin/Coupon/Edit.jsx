@@ -10,20 +10,26 @@ import { useForm } from "@inertiajs/react";
 import moment from "moment";
 import React, { useEffect } from "react";
 export default function Edit({ coupon, shops }) {
-    const { data, setData, put, processing, errors } = useForm({});
+    const { data, setData, post, processing, errors } = useForm({
+        title: coupon.title,
+        code: coupon.code,
+        discount_type: coupon.discount_type,
+        discount: coupon.discount,
+        valid_from: moment(coupon.valid_from).format("YYYY-MM-DD"),
+        valid_to: moment(coupon.valid_to).format("YYYY-MM-DD"),
+        status: coupon.status,
+        shop_id: coupon.shop_id,
+        usage_limit: coupon.usage_limit,
+        description: coupon.description,
+        daily_limit: coupon.daily_limit,
+        price: coupon.price,
+        _method: "put",
+    });
 
     const editCoupon = (e) => {
         e.preventDefault();
-        put(route("admin.coupons.update", coupon.id));
+        post(route("admin.coupons.update", coupon.id));
     };
-
-    useEffect(() => {
-        setData({
-            ...coupon,
-            valid_from: moment(coupon.valid_from).format("YYYY-MM-DD"),
-            valid_to: moment(coupon.valid_to).format("YYYY-MM-DD"),
-        });
-    }, [coupon]);
 
     const status = [
         {

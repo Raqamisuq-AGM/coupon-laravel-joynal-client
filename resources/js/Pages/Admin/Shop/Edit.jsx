@@ -9,14 +9,20 @@ import { useForm } from "@inertiajs/react";
 import React from "react";
 import { shopStatus, shopTypes } from "./constant";
 export default function Edit({ shop }) {
-    const { data, setData, put, processing, errors } = useForm({
-        ...shop,
-        image: undefined,
+    const { data, setData, post, processing, errors } = useForm({
+        name: shop.name,
+        short_description: shop.short_description,
+        type: shop.type,
+        image: null,
+        status: shop.status,
+        description: shop.description,
+        site_url: shop.site_url,
+        _method: "put",
     });
 
     const editShop = (e) => {
         e.preventDefault();
-        put(route("admin.shops.update", shop.id));
+        post(route("admin.shops.update", shop.id));
     };
 
     return (
@@ -35,7 +41,14 @@ export default function Edit({ shop }) {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-
+                                <SelectGroup
+                                    label="Select Type"
+                                    name="type"
+                                    options={shopTypes}
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
                                 <div className="md:col-span-2">
                                     <InputGroup
                                         label="Short Description"
@@ -47,14 +60,7 @@ export default function Edit({ shop }) {
                                         validationError={errors}
                                     />
                                 </div>
-                                <SelectGroup
-                                    label="Select Type"
-                                    name="type"
-                                    options={shopTypes}
-                                    formObject={data}
-                                    setFormObject={setData}
-                                    validationError={errors}
-                                />
+
                                 <InputGroup
                                     label="Image"
                                     name="image"
@@ -78,6 +84,14 @@ export default function Edit({ shop }) {
                                     label="Select Status"
                                     name="status"
                                     options={shopStatus}
+                                    formObject={data}
+                                    setFormObject={setData}
+                                    validationError={errors}
+                                />
+                                <SelectGroup
+                                    label="Add Shop User"
+                                    name="user_id"
+                                    options={users}
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}

@@ -50,6 +50,7 @@ class StoreShopRequest extends FormRequest
 
     public function validated ($key = null, $default = null)
     {
+        
         $data = parent::validated();
 
         if (!isset($data['site_url'])) {

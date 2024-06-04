@@ -56,8 +56,7 @@ class ShopController extends Controller
 
         $shops = Shop::withCount('users as total_users')->latest()->paginate();
 
-        $users = User::whereNull('shop_id')
-        ->shop()
+        $users = User::shop()
         ->select('id as value', 'name as label')
         ->latest()
         ->get();
@@ -78,8 +77,7 @@ class ShopController extends Controller
             ]
         ]);
 
-        $users = User::whereNull('shop_id')
-            ->shop()
+        $users = User::shop()
             ->select('id as value', 'name as label')
             ->get();
         return Inertia::render('Admin/Shop/Create', compact('users'));
@@ -95,7 +93,7 @@ class ShopController extends Controller
             $shop = Shop::create($request->validated());
 
             if ($request->user_id) {
-                User::find((int)$request->user_id)->update(['shop_id' => $shop->id]);
+                $shop->users()->attach($request->user_id);
             }
             DB::commit();
         } catch (\Exception $ex) {
@@ -145,6 +143,10 @@ class ShopController extends Controller
     {
         $shop->update($request->validated());
 
+        if ($request->user_id) {
+            $shop->users()->sync($request->user_id);
+        }
+
         return to_route('admin.shops.index')->with('success', 'Shop updated successfully');
     }
 
@@ -156,7 +158,11 @@ class ShopController extends Controller
         if ($shop->image){
             $this->delete($shop->image);
         }
+
+        $shop->users()->detach();
         $shop->delete();
         return back()->with('success', 'Shop deleted successfully');
     }
+
+
 }
