@@ -106,6 +106,8 @@ class CouponController extends Controller
             ],
         ]);
 
+        $coupon->load(['shop:id,name'])->withCount('couponUsers as total_purchased');
+
         return Inertia::render('Admin/Coupon/View', compact('coupon'));
     }
 

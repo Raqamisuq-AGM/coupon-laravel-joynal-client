@@ -1,9 +1,16 @@
 import { Icon } from "@iconify/react";
-import React from "react";
+import { router } from "@inertiajs/react";
+import React, { useState } from "react";
 
 export const Shops = ({ shops, shop, setShop }) => {
+
+
+    const handleSelectShop = (s) => {
+        setShop(s)
+    };
+
     return (
-        <div className="flex w-1/3 flex-col gap-6 font-['Poetsen_One'] lg:gap-10 ">
+        <div className="flex w-full flex-col gap-6 font-['Poetsen_One'] md:w-1/3 lg:gap-10 ">
             {shops
                 ? shops
                       .filter((s) => s.id !== shop?.id)
@@ -11,7 +18,7 @@ export const Shops = ({ shops, shop, setShop }) => {
                           <button
                               key={shop?.id}
                               type="button"
-                              onClick={() => setShop(shop)}
+                              onClick={() => handleSelectShop(shop)}
                               className="flex items-center justify-end gap-4 lg:gap-6 "
                           >
                               <h4 className="text-2xl font-[400] tracking-[-1px] text-[#ffffff]">

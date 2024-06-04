@@ -26,7 +26,7 @@ export default function Index({ shops }) {
             <TopShop shop={shop} coupon={shop?.coupons?.length ? shop.coupons[0] : []} />
 
             {/* coupons and cafes */}
-            <section className="relative flex flex-row">
+            <section className="relative flex flex-col gap-6 md:flex-row md:gap-0">
                 {/* coupons */}
                 <Coupons coupons={shop?.coupons ? shop.coupons : []} />
                 {/* cafes */}
