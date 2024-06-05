@@ -8,7 +8,7 @@ import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import React from "react";
 import { shopStatus, shopTypes } from "./constant";
-export default function Edit({ shop }) {
+export default function Edit({ shop, users }) {
     const { data, setData, post, processing, errors } = useForm({
         name: shop.name,
         short_description: shop.short_description,

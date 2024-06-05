@@ -50,9 +50,6 @@ class ShopUserController extends Controller
 
     public function destroy(Shop $shop, User $user)
     {
-        if ($user->shop_id != $shop->id) {
-            return back()->with('error', 'User is not in this shop');
-        }
 
         $user->shops()->detach($shop->id);
         return back()->with('success', 'User removed from shop successfully');
