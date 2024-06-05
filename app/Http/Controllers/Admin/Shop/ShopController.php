@@ -133,7 +133,11 @@ class ShopController extends Controller
             ]
         ]);
 
-        return Inertia::render('Admin/Shop/Edit', compact('shop'));
+        $users = User::shop()
+        ->select('id as value', 'name as label')
+        ->get();
+
+        return Inertia::render('Admin/Shop/Edit', compact('shop', 'users'));
     }
 
     /**
