@@ -10,12 +10,13 @@ export const AddShopUser = ({ isOpen, setIsOpen, shop }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route("admin.add.shop-users", shop.id), data)
-            .then((res) => {
-                reset();
+        post(route("admin.shops.users.store", shop.id), [
+            onSuccess(() => {
                 setIsOpen(false);
+                reset();
             })
-            .catch((error) => console.log(error));
+        ])
+
     };
     return (
         <Modal title="View Users" isOpen={isOpen} setIsOpen={setIsOpen}>

@@ -11,7 +11,7 @@ import React from "react";
 import { AddShopUser } from "./AddShopUser";
 
 export default function Index({ shops, overviews }) {
-    const { deleteRow } = sharedComposable();
+    const { deleteRow, textExcerpt } = sharedComposable();
 
     const columns = [
         {
@@ -28,6 +28,7 @@ export default function Index({ shops, overviews }) {
         {
             header: "Short Description",
             accessor: "short_description",
+            call: ({ value }) => textExcerpt(value),
         },
         {
             header: "Type",
@@ -75,6 +76,21 @@ export default function Index({ shops, overviews }) {
                                         />
                                         <span>Add User</span>
                                     </button>
+                                </li>
+                                <li className="dropdown-list-item">
+                                    <Link
+                                        href={route(
+                                            "admin.shops.users.index",
+                                            original.id
+                                        )}
+                                        className="dropdown-link"
+                                    >
+                                        <Icon
+                                            className="h-6 text-slate-400"
+                                            icon="heroicons:users"
+                                        />
+                                        <span>Users</span>
+                                    </Link>
                                 </li>
                                 <li className="dropdown-list-item">
                                     <Link

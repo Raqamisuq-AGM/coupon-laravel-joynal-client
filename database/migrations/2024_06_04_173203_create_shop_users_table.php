@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('shop_id')->nullable()->after('email');
+        Schema::create('shop_users', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(\App\Models\Shop::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('shop_id');
-        });
+        Schema::dropIfExists('shop_users');
     }
 };
