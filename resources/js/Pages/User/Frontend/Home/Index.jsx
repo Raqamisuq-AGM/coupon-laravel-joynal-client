@@ -60,7 +60,7 @@ export default function Dashboard({ shops, cafes, clubs }) {
             <Shops shops={shops} />
 
             {/* Club Section */}
-            <Cards title={"Clubs"} lists={clubs?.data.map((item, index) => ({ ...item, image: club1 }))} total={clubs?.count} />
+            <Cards title={"Clubs"} lists={clubs?.data} />
 
             {/* Cafes Section */}
             <Cards title={"Cafes"} lists={cafes?.data} total={cafes?.count} />
