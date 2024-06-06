@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/locale/{locale}', function ($locale) {
     App::setLocale($locale);
     session(['locale' => $locale]);
+
     return redirect()->back();
 });
 
-
 Route::middleware('guest')->group(function () {
     Route::get('register', [Auth\RegisteredUserController::class, 'create'])
-            ->name('register');
+        ->name('register');
     Route::post('register', [Auth\RegisteredUserController::class, 'store']);
 
     Route::get('login', [Auth\AuthenticatedSessionController::class, 'create'])

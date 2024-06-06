@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Coupon;
 
-use Carbon\Carbon;
-
 class UpdateCouponRequest extends StoreCouponRequest
 {
     /**
@@ -27,5 +25,4 @@ class UpdateCouponRequest extends StoreCouponRequest
 
         return $rules;
     }
-
 }

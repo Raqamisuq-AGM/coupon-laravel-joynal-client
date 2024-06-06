@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -53,6 +52,7 @@ class UserController extends Controller
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
         $users = User::with(['roles'])->whereRelation('roles', 'name', '!=', 'user')->latest()->paginate();
+
         return Inertia::render('Admin/User/Index', compact('users', 'overviews'));
     }
 
@@ -66,7 +66,7 @@ class UserController extends Controller
                 'title' => 'Back',
                 'url' => route('admin.users.index'),
                 'icon' => 'heroicons:arrow-left',
-            ]
+            ],
         ]);
 
         return Inertia::render('Admin/User/Create');
@@ -77,7 +77,7 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-         DB::beginTransaction();
+        DB::beginTransaction();
         try {
             $user = User::create($request->validated());
             // role as admin
@@ -86,6 +86,7 @@ class UserController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+
             return back()->with('error', $th->getMessage());
         }
 
@@ -102,7 +103,7 @@ class UserController extends Controller
                 'title' => 'Back',
                 'url' => route('admin.users.index'),
                 'icon' => 'heroicons:arrow-left',
-            ]
+            ],
         ]);
 
         return Inertia::render('Admin/User/Edit', compact('user'));

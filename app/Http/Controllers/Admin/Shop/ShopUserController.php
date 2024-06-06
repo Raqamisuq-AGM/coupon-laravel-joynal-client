@@ -28,9 +28,10 @@ class ShopUserController extends Controller
 
         return Inertia::render('Admin/Shop/User/Index', [
             'users' => $users,
-            'shop' => $shop
+            'shop' => $shop,
         ]);
     }
+
     public function store(Shop $shop, Request $request)
     {
         $request->validate([
@@ -52,6 +53,7 @@ class ShopUserController extends Controller
     {
 
         $user->shops()->detach($shop->id);
+
         return back()->with('success', 'User removed from shop successfully');
     }
 }

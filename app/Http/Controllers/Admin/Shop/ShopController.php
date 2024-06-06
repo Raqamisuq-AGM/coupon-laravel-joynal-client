@@ -15,6 +15,7 @@ use Inertia\Inertia;
 class ShopController extends Controller
 {
     use Uploader;
+
     /**
      * Display a listing of the resource.
      */
@@ -57,9 +58,9 @@ class ShopController extends Controller
         $shops = Shop::withCount('users as total_users')->latest()->paginate();
 
         $users = User::shop()
-        ->select('id as value', 'name as label')
-        ->latest()
-        ->get();
+            ->select('id as value', 'name as label')
+            ->latest()
+            ->get();
 
         return Inertia::render('Admin/Shop/Index', compact('shops', 'overviews', 'users'));
     }
@@ -74,12 +75,13 @@ class ShopController extends Controller
                 'title' => 'Back',
                 'url' => route('admin.shops.index'),
                 'icon' => 'heroicons:arrow-left',
-            ]
+            ],
         ]);
 
         $users = User::shop()
             ->select('id as value', 'name as label')
             ->get();
+
         return Inertia::render('Admin/Shop/Create', compact('users'));
     }
 
@@ -98,12 +100,12 @@ class ShopController extends Controller
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
+
             return back()->with('error', $ex->getMessage());
         }
 
         return to_route('admin.shops.index')->with('success', 'Shop created successfully');
     }
-
 
     /**
      * Display the specified resource.
@@ -115,8 +117,9 @@ class ShopController extends Controller
                 'title' => 'Back',
                 'url' => route('admin.shops.index'),
                 'icon' => 'heroicons:arrow-left',
-            ]
+            ],
         ]);
+
         return Inertia::render('Admin/Shop/Show', compact('shop'));
     }
 
@@ -130,12 +133,12 @@ class ShopController extends Controller
                 'title' => 'Back',
                 'url' => route('admin.shops.index'),
                 'icon' => 'heroicons:arrow-left',
-            ]
+            ],
         ]);
 
         $users = User::shop()
-        ->select('id as value', 'name as label')
-        ->get();
+            ->select('id as value', 'name as label')
+            ->get();
 
         return Inertia::render('Admin/Shop/Edit', compact('shop', 'users'));
     }
@@ -159,14 +162,13 @@ class ShopController extends Controller
      */
     public function destroy(Shop $shop)
     {
-        if ($shop->image){
+        if ($shop->image) {
             $this->delete($shop->image);
         }
 
         $shop->users()->detach();
         $shop->delete();
+
         return back()->with('success', 'Shop deleted successfully');
     }
-
-
 }

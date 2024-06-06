@@ -9,6 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreCouponRequest extends FormRequest
 {
     use Uploader;
+
     /**
      * Determine if the user is authorized to make this request.
      */

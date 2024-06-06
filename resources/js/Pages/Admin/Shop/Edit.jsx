@@ -16,7 +16,6 @@ export default function Edit({ shop, users }) {
         status: shop.status,
         description: shop.description,
         site_url: shop.site_url,
-        status: shop.status,
         _method: "put",
     });
 

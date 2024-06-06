@@ -3,7 +3,6 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 
 class UserStoreRequest extends FormRequest
 {
@@ -25,7 +24,7 @@ class UserStoreRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10' ],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
             'password' => ['required', 'string', 'min:8', 'max:30'],
             'status' => ['nullable', 'boolean'],
             'role' => ['required', 'in:admin,shop'],
@@ -48,14 +47,15 @@ class UserStoreRequest extends FormRequest
         ];
     }
 
-    public function validated ($key = null, $default = null)
+    public function validated($key = null, $default = null)
     {
         $data = parent::validated();
         unset($data['role']);
 
-        if (!isset($data['status'])) {
+        if (! isset($data['status'])) {
             $data['status'] = true;
         }
+
         return $data;
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Requests\Shop;
-use App\Http\Requests\Shop\StoreShopRequest;
 
 class UpdateShopRequest extends StoreShopRequest
 {

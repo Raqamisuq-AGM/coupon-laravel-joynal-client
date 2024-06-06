@@ -8,6 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreShopRequest extends FormRequest
 {
     use Uploader;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -48,12 +49,12 @@ class StoreShopRequest extends FormRequest
         ];
     }
 
-    public function validated ($key = null, $default = null)
+    public function validated($key = null, $default = null)
     {
 
         $data = parent::validated();
 
-        if (!isset($data['site_url'])) {
+        if (! isset($data['site_url'])) {
             $data['site_url'] = '#';
         }
 
