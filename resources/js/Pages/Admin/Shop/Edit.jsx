@@ -13,10 +13,10 @@ export default function Edit({ shop, users }) {
         name: shop.name,
         short_description: shop.short_description,
         type: shop.type,
-        image: null,
         status: shop.status,
         description: shop.description,
         site_url: shop.site_url,
+        status: shop.status,
         _method: "put",
     });
 
