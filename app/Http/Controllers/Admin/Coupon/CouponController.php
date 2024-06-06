@@ -14,6 +14,7 @@ use Inertia\Inertia;
 class CouponController extends Controller
 {
     use Uploader;
+
     /**
      * Display a listing of the resource.
      */
@@ -79,6 +80,7 @@ class CouponController extends Controller
             ],
         ]);
         $shops = Shop::active()->select('id as value', 'name as label')->get();
+
         return Inertia::render('Admin/Coupon/Create', compact('shops'));
     }
 
@@ -124,9 +126,10 @@ class CouponController extends Controller
             ],
         ]);
         $shops = Shop::active()->select('id as value', 'name as label')->get();
+
         return Inertia::render('Admin/Coupon/Edit', [
             'coupon' => $coupon,
-            'shops' => $shops
+            'shops' => $shops,
         ]);
     }
 

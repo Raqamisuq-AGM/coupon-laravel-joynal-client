@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Shop;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ShopSeeder extends Seeder
@@ -17,13 +16,13 @@ class ShopSeeder extends Seeder
 
             $shop->users()->saveMany(\App\Models\User::factory(3)->make([
                 'shop_id' => $shop->id,
-                'status' => true
+                'status' => true,
             ]))->each(function ($user) {
                 $user->assignRole('shop');
             });
             $shop->coupons()->saveMany(\App\Models\Coupon::factory(3)->make([
                 'shop_id' => $shop->id,
-                'status' => true
+                'status' => true,
             ]));
         });
     }

@@ -3,8 +3,6 @@
 namespace App\Http\Requests\User;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 
 class UserUpdateRequest extends UserStoreRequest
 {

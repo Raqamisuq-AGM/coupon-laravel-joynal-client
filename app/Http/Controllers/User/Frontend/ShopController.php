@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\User\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Coupon;
 use App\Models\Shop;
-use App\Models\User;
 
 class ShopController extends Controller
 {
