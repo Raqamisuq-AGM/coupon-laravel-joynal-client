@@ -50,7 +50,7 @@ class StoreShopRequest extends FormRequest
 
     public function validated ($key = null, $default = null)
     {
-        
+
         $data = parent::validated();
 
         if (!isset($data['site_url'])) {
@@ -60,7 +60,7 @@ class StoreShopRequest extends FormRequest
         unset($data['user_id']);
 
         if (isset($data['image'])) {
-            $data['image'] = $this->upload($data['image']);
+            $data['image'] = $this->upload($data['image'], 'shops');
         }
 
         return $data;

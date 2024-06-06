@@ -50,7 +50,7 @@ class StoreCouponRequest extends FormRequest
         $data['valid_to'] = Carbon::parse($data['valid_to']);
 
         if (isset($data['image'])) {
-            $data['image'] = $this->upload($data['image']);
+            $data['image'] = $this->upload($data['image'], 'coupons');
         }
 
         return $data;
