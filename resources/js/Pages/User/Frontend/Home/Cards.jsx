@@ -4,7 +4,7 @@ export default function Cards({ lists, title, total = 24 }) {
         <section className="relative px-4 font-['Poetsen_One'] sm:px-6 md:px-8 lg:px-10">
             <div className="container mx-auto">
                 <div className="my-4 flex items-start justify-center">
-                    <h2 className="w-[150px] border-b-4 border-white pb-6 text-center text-4xl font-[400] tracking-[-1px] text-[#ffffff] sm:w-[200px] sm:text-[48px] sm:tracking-[-2px] md:text-[63px]">
+                    <h2 className="w-[150px] border-b-4 border-white pb-3 md:pb-3 text-center text-4xl font-[400] tracking-[-1px] text-[#ffffff] sm:w-[200px] sm:text-[48px] sm:tracking-[-2px] md:text-[63px]">
                         {title}
                     </h2>
                 </div>
