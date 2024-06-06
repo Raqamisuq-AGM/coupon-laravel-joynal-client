@@ -23,6 +23,7 @@ export default function Edit({ coupon, shops }) {
         description: coupon.description,
         daily_limit: coupon.daily_limit,
         price: coupon.price,
+        status: coupon.status,
         _method: "put",
     });
 
