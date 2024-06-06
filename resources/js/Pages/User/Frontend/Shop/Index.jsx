@@ -28,7 +28,7 @@ export default function Index({ shops }) {
             {/* coupons and cafes */}
             <section className="relative flex flex-col gap-6 md:flex-row md:gap-0">
                 {/* coupons */}
-                <Coupons coupons={shop?.coupons ? shop.coupons : []} />
+                <Coupons shop={shop} />
                 {/* cafes */}
                 <Shops shop={shop} setShop={setShop} shops={shops?.data} />
             </section>

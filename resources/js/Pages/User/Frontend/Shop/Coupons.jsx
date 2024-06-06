@@ -1,10 +1,10 @@
 import React from "react";
 import board from "@/images/frontend/board.jpg";
-export default function Coupons({ coupons }) {
+export default function Coupons({ shop }) {
     return (
         <div className="w-full md:w-2/3  font-['Poetsen_One']">
             <div className="flex flex-col gap-5">
-                {coupons.map((coupon) => (
+                {shop && shop?.coupons && shop?.coupons.length && shop.coupons.map((coupon) => (
                     <a href="#" className="relative w-full" key={coupon.id}>
                         <div className="relative w-full">
                             <div className="flex">
@@ -36,10 +36,10 @@ export default function Coupons({ coupons }) {
                         <div className="w-[calc(100%-20px] absolute left-0 top-0 flex h-full items-center justify-center text-[#ffffff]">
                             <div className="pl-8 pr-16 text-left">
                                 <p className="text-[46px] font-[400] uppercase leading-tight tracking-[-1px]">
-                                    {coupon.name}
+                                    {coupon.name || coupon.title}
                                 </p>
                                 <p className="text-wrap text-[25px] font-[400] leading-tight tracking-[-1px] ">
-                                    {coupon.sort_description}
+                                    {coupon.short_description}
                                 </p>
                             </div>
                         </div>
