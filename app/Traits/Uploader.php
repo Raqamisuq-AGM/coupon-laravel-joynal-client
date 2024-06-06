@@ -14,12 +14,20 @@ trait Uploader
      * @param $filename
      * @return string
      */
-    public function upload($file, $path = 'uploads', $filename = null)
+    public function upload($file, $path = 'shop', $filename = null)
     {
         $filename = $filename ?? $file->getClientOriginalName();
         $filename = time() . '_'  . rand(5000, 5555555) . rand(9999, 99999). $filename;
-        $file = Storage::disk('public')->putFileAs($path, $file, $filename); //Storage
-        return "storage/$file";
+        // check upload folder exists
+        $disk = Storage::disk('public');
+
+        if (!$disk->exists($path)) {
+            $disk->makeDirectory($path);
+        }
+
+        $disk->putFileAs($path, $file, $filename);
+
+        return "/uploads/$path/$filename";
     }
 
 
