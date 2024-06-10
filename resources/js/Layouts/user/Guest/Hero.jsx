@@ -1,7 +1,7 @@
 import React from "react";
 export default function Hero() {
     return (
-        <section className="flex min-h-[400px] items-center justify-center px-4 font-['Poetsen_One'] text-white sm:px-6 md:px-8 lg:h-[calc(1080px-144px)] lg:justify-end lg:px-10">
+        <section className="relative flex min-h-[400px] items-center justify-center px-4 font-['Poetsen_One'] text-white sm:px-6 md:px-8 lg:h-[calc(1080px-144px)] lg:justify-end lg:px-10">
             <div className="max-w-full text-center lg:max-w-[80%] lg:text-right xl:max-w-[70%]">
                 <h1
                     style={{ filter: "drop-shadow(0 0 12px #000000)" }}

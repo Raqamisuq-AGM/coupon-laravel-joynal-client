@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->string('site_url')->nullable();
-            $table->string('type', 20)->default('restaurant')->comment('cafe, club, restaurant');
+            $table->string('type', 20)->default('others')->comment('cafe, club, others');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

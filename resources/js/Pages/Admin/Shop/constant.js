@@ -4,8 +4,8 @@ export const shopTypes = [
         value: "cafe",
     },
     {
-        label: "Restaurant",
-        value: "restaurant",
+        label: "Others",
+        value: "others",
     },
     {
         label: "Club",

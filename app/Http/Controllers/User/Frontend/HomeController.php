@@ -12,19 +12,13 @@ class HomeController extends Controller
     {
         $shops = Shop::active()->select('id', 'name', 'image', 'site_url', 'slug')->take(24)->get();
 
-        $cafes_query = Coupon::query()->active()->whereRelation('shop', 'type', 'cafe');
-        $cafes = [
-            'count' => $cafes_query->count(),
-            'data' => $cafes_query->take(3)->get(),
-        ];
+        $shopsCoupons  = Shop::active()
+            ->withCount(['coupons as total_coupons' => fn($query) => $query->active()])
+            ->with(['coupons' => fn($query) => $query->active()->take(3)])
+            ->whereIn('type', ['club', 'cafe'])
+            ->get();
 
-        $clubs_query = Coupon::query()->active()->whereRelation('shop', 'type', 'club');
 
-        $clubs = [
-            'count' => $clubs_query->count(),
-            'data' => $clubs_query->take(3)->get(),
-        ];
-
-        return inertia('User/Frontend/Home/Index', compact('shops', 'clubs', 'cafes'));
+        return inertia('User/Frontend/Home/Index', compact('shops', 'shopsCoupons'));
     }
 }

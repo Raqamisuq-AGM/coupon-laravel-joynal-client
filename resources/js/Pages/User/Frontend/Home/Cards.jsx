@@ -1,15 +1,15 @@
 import React from "react";
-export default function Cards({ lists, title, total = 24 }) {
+export default function Cards({ shop }) {
     return (
         <section className="relative px-4 font-['Poetsen_One'] sm:px-6 md:px-8 lg:px-10">
             <div className="container mx-auto">
-                <div className="my-4 flex items-start justify-center">
-                    <h2 className="w-[150px] border-b-4 border-white pb-3 md:pb-3 text-center text-4xl font-[400] tracking-[-1px] text-[#ffffff] sm:w-[200px] sm:text-[48px] sm:tracking-[-2px] md:text-[63px]">
-                        {title}
-                    </h2>
+                <div className="my-4 flex items-center justify-center">
+                    <div className="w-[180px] md:w-[200px] border-b-4 border-white pb-3 md:pb-4 text-center">
+                        <span className="text-center text-4xl font-[400] tracking-[-1px] text-[#ffffff] sm:text-[48px] sm:tracking-[-2px] md:text-[63px]">{shop?.name}</span>
+                    </div>
                 </div>
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
-                    {lists.map((list) => (
+                    {shop?.coupons.map((list) => (
                         <a href="#" className="relative w-full" key={list.id}>
                             <div className="w-full">
                                 <img
@@ -35,15 +35,15 @@ export default function Cards({ lists, title, total = 24 }) {
                     ))}
                 </div>
             </div>
-            <div className="absolute right-4 top-14 sm:right-6 md:right-8 lg:right-10">
+            <div className="absolute right-4 top-8 sm:right-6 md:right-8 lg:right-10">
                 <a href="#" className="flex items-center gap-2">
                     <p className="text-base tracking-[-0.5px] text-[#ffffff] sm:text-lg sm:tracking-[-1px] md:text-xl lg:text-[30px]">
-                        View All {total}
+                        view All {shop?.total_coupons}
                     </p>
                     <img
-                        src="https://img.icons8.com/ios-filled/50/ffffff/chevron-right.png"
+                        src={shop.image}
                         alt="View All"
-                        className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-6 lg:w-6"
+                        className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-7 lg:w-7 rounded-full"
                     />
                 </a>
             </div>

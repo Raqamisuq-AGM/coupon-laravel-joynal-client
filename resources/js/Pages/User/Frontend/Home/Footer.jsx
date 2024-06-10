@@ -1,25 +1,31 @@
 import React from "react";
+import fb from "@/images/frontend/socialIcon/fb.png"
+import insta from "@/images/frontend/socialIcon/insta.png"
+import sp from "@/images/frontend/socialIcon/sp.png"
+import twe from "@/images/frontend/socialIcon/twe.png"
+import wp from "@/images/frontend/socialIcon/wp.png"
+
 export default function Footer() {
     const socialLinks = [
         {
             id: 1,
-            image: "https://via.placeholder.com/150",
+            image: fb,
         },
         {
             id: 2,
-            image: "https://via.placeholder.com/150",
+            image: insta,
         },
         {
             id: 3,
-            image: "https://via.placeholder.com/150",
+            image: sp,
         },
         {
             id: 4,
-            image: "https://via.placeholder.com/150",
+            image: twe,
         },
         {
             id: 5,
-            image: "https://via.placeholder.com/150",
+            image: wp,
         },
     ];
 
