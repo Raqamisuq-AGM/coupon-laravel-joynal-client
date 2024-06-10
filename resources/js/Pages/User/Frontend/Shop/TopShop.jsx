@@ -8,9 +8,9 @@ export const TopShop = ({ shop, coupon }) => {
             className="relative flex flex-col gap-3 border-2 border-[#ffffff] px-4 py-5 sm:px-6 lg:flex-row lg:gap-5 lg:px-8 lg:py-10"
             style={{ filter: "drop-shadow(0 0 5px #ffffff)" }}
         >
-            <div className="absolute inset-0 bg-[#12161c] bg-opacity-60 backdrop-blur-sm"></div>
-            <div className="border-3 relative h-full w-full border-2 border-[#ffffff] sm:w-48 md:w-52 lg:w-64">
-                <div className="flex h-24 w-full items-center justify-center text-wrap p-3 lg:h-[270px]">
+            <div className="absolute inset-0 bg-[#12161c] opacity-80 backdrop-blur-sm"></div>
+            <div className="border-3 relative bg-[#000000] h-full w-full border-2 border-[#ffffff] sm:w-48 md:w-52 lg:w-64">
+                <div className="flex h-24 w-full items-center justify-center text-wrap  p-3 lg:h-[270px]">
                     <p className="text-center text-2xl font-[400] uppercase tracking-[-1px] text-[#ffffff] sm:text-3xl sm:tracking-[-2px] lg:text-4xl lg:leading-[60px]">
                         {shop?.name}
                     </p>
