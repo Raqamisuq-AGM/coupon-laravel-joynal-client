@@ -1,16 +1,6 @@
 import React from "react";
 export default function Shops({ shops }) {
-//     const shops = () => {
-//         let lists = [];
-//         for (let i = 0; i < 10; i++) {
-//             lists.push({
-//                 id: i,
-//                 name: "Shop " + i,
-//                 image: "https://via.placeholder.com/150",
-//             });
-//         }
-//         return lists;
-//     };
+
     return (
 <section className="px-4 sm:px-6 md:px-8 lg:px-10 font-['Poetsen_One']">
     <div className="container mx-auto">

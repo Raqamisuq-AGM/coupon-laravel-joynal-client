@@ -9,7 +9,9 @@ import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import React from "react";
 export default function Create({ shops }) {
-    const { data, setData, post, processing, errors } = useForm({});
+    const { data, setData, post, processing, errors } = useForm({
+        status: true,
+    });
 
     const createCoupon = (e) => {
         e.preventDefault();

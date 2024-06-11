@@ -49,28 +49,35 @@ export default function Header() {
     const langs = [
         {
             id: "en",
-            flag: "circle-flags:us",
-            url: '/locale/en',
+            flag: "circle-flags:ir",
+            url: "/locale/ir",
         },
         {
             id: "ar",
-            flag: "circle-flags:sa",
-            url: '/locale/ar',
+            flag: "circle-flags:ku",
+            url: "/locale/ar",
         },
         {
             id: "ru",
-            flag: "circle-flags:ru",
-            url: '/locale/ru',
+            flag: "circle-flags:uk",
+            url: "/locale/ru",
         },
     ];
 
     const [isMobileMenu, setMobileMenu] = useState(false);
     return (
-        <header className="relative flex flex-col items-center gap-2 bg-black font-['Poetsen_One'] opacity-80 md:gap-1 lg:h-36 lg:flex-row">
-            <div className="container mx-auto flex items-center justify-between px-6 py-4">
-                <div className="flex items-center text-white">
-                    <Link href={route("home")} className="text-3xl font-bold">
-                        <img src={logo} alt="" className="h-12 w-16" />
+        <header className="relative flex flex-col items-center gap-2 bg-black bg-opacity-90 font-['Poetsen_One']  md:gap-1 lg:h-36 lg:flex-row">
+            <div className="container mx-auto flex h-full items-center justify-between px-6 py-2">
+                <div className="flex h-full items-center text-white">
+                    <Link
+                        href={route("home")}
+                        className="flex h-full items-center text-3xl font-bold"
+                    >
+                        <img
+                            src={logo}
+                            alt=""
+                            className="h-12 w-20 md:h-28 md:w-28 rotate-12 "
+                        />
                     </Link>
                 </div>
                 <button
@@ -84,8 +91,8 @@ export default function Header() {
                         icon={isMobileMenu ? "mdi:close" : "mdi:menu"}
                     />
                 </button>
-                <div className="hidden flex-col items-center justify-between gap-8 md:flex md:flex-row md:justify-between">
-                    <nav className="flex flex-wrap items-center justify-center space-x-8 md:justify-start">
+                <div className="hidden flex-col items-center gap-12 md:flex md:flex-row md:justify-between">
+                    <nav className="flex flex-wrap items-center justify-center space-x-14 md:justify-start">
                         {urls.map((url, index) => (
                             <Link
                                 key={index}
@@ -96,42 +103,48 @@ export default function Header() {
                             </Link>
                         ))}
                     </nav>
-                    <div className="mt-4 flex flex-col items-center gap-3 md:mt-0 md:flex-row">
-                        {auth?.user ? (
-                            <button
-                                type="button"
-                                onClick={logout}
-                                className="flex h-12 w-32 items-center justify-center rounded-full bg-[#725b36] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
-                            >
-                                Logout
-                            </button>
-                        ) : (
-                            <>
-                                <Link
-                                    href={route("register")}
-                                    className="flex h-12 w-32 items-center justify-center rounded-full bg-[#725b36] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
+                    <div className="flex flex-row gap-6">
+                        <div className="mt-4 flex flex-col items-center gap-3 md:mt-0 md:flex-row">
+                            {auth?.user ? (
+                                <button
+                                    type="button"
+                                    onClick={logout}
+                                    className="flex items-center justify-center rounded-full bg-[#725b36] px-3 py-2 text-center text-lg font-normal uppercase tracking-tight text-white md:px-6"
                                 >
-                                    Register
-                                </Link>
-                                <Link
-                                    href={dashboard}
-                                    className="flex h-12 w-32 items-center justify-center rounded-full bg-[#526d6e] text-center text-lg font-normal uppercase tracking-tight text-white lg:w-48 xl:w-60"
+                                    Logout
+                                </button>
+                            ) : (
+                                <>
+                                    <Link
+                                        href={route("register")}
+                                        className="flex items-center justify-center rounded-full bg-[#725b36] px-3 py-2 text-center text-lg font-normal uppercase tracking-tight text-white md:px-6"
+                                    >
+                                        Register
+                                    </Link>
+                                    <Link
+                                        href={dashboard}
+                                        className="flex items-center justify-center rounded-full bg-[#526d6e] px-3 py-2 text-center text-lg font-normal uppercase tracking-tight text-white md:px-6"
+                                    >
+                                        Login
+                                    </Link>
+                                </>
+                            )}
+                        </div>
+                        <div className="mt-4 flex flex-row gap-3 md:mt-0">
+                            {langs.map((lang, index) => (
+                                <a
+                                    key={index}
+                                    className="rounded-full"
+                                    href={lang.url}
                                 >
-                                    Login
-                                </Link>
-                            </>
-                        )}
-                    </div>
-                    <div className="mt-4 flex flex-row gap-3 md:mt-0">
-                        {langs.map((lang, index) => (
-                            <a
-                                key={index}
-                                className="rounded-full"
-                                href={lang.url}
-                            >
-                                <Icon icon={lang.flag} width={40} height={40} />
-                            </a>
-                        ))}
+                                    <Icon
+                                        icon={lang.flag}
+                                        width={40}
+                                        height={40}
+                                    />
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -195,7 +208,6 @@ export default function Header() {
                     </div>
                 </div>
             </Transition>
-
         </header>
     );
 }

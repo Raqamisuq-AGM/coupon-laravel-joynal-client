@@ -8,9 +8,10 @@ export default function HomLayout({ children }) {
         <div>
             <ToastContainer />
             <div
-                className="bg-cover bg-center bg-no-repeat lg:h-[1080px]"
+                className="bg-cover bg-center bg-no-repeat lg:h-[1080px] relative"
                 style={{ backgroundImage: "url('/assets/frontend/images/bg-hero.jpg')" }}
             >
+                <div className="absolute h-full inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
                 {/* Header */}
                 <Header />
                 {/* Hero Section */}

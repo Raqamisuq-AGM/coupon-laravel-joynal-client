@@ -1,12 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-import cafe1 from "@/images/frontend/cafe1.jpg";
-import cafe2 from "@/images/frontend/cafe2.jpg";
-import cafe3 from "@/images/frontend/cafe3.jpg";
-import cafe4 from "@/images/frontend/cafe4.jpg";
-import cafe5 from "@/images/frontend/cafe5.png";
-import cafe6 from "@/images/frontend/cafe6.jpg";
-
 import ShopLayout from "@/Layouts/user/Guest/ShopLayout";
 import { TopShop } from "./TopShop";
 import Coupons from "./Coupons";

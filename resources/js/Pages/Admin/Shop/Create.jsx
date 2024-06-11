@@ -14,7 +14,7 @@ export default function Create({ users }) {
         short_description: "",
         type: "",
         image: "",
-        status: "",
+        status: true,
     });
 
     const createShop = (e) => {
