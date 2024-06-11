@@ -30,7 +30,7 @@ class StoreShopRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:1000'],
             'image' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'site_url' => ['nullable', 'string', 'max:256'],
-            'type' => ['required', 'string', 'in:cafe,restaurant,club'],
+            'type' => ['required', 'string', 'in:cafe,others,club'],
             'user_id' => ['nullable', 'exists:users,id'],
             'status' => ['nullable', 'boolean'],
         ];
