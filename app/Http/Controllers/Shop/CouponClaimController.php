@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Shop;
 
 use App\Helpers\PageHeader;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CouponClaim\StoreCouponClaimRequest;
+use App\Http\Requests\Shop\CouponClaim\StoreCouponClaimRequest;
 use App\Models\Coupon;
 use App\Models\CouponClaim;
 use App\Models\User;

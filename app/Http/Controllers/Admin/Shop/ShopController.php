@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Shop;
 
 use App\Helpers\PageHeader;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Shop\StoreShopRequest;
-use App\Http\Requests\Shop\UpdateShopRequest;
+use App\Http\Requests\Admin\Shop\StoreShopRequest;
+use App\Http\Requests\Admin\Shop\UpdateShopRequest;
 use App\Models\Shop;
 use App\Models\User;
 use App\Traits\Uploader;

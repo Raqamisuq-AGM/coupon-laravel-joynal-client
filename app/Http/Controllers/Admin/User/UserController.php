@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Helpers\PageHeader;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UserStoreRequest;
-use App\Http\Requests\User\UserUpdateRequest;
+use App\Http\Requests\Admin\User\UserStoreRequest;
+use App\Http\Requests\Admin\User\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;

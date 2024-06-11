@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Shop;
+namespace App\Http\Requests\Admin\Shop;
 
 use App\Traits\Uploader;
 use Illuminate\Foundation\Http\FormRequest;

@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Coupon;
+namespace App\Http\Requests\Admin\SocialLink;
 
-class UpdateCouponRequest extends StoreCouponRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateSocialIconRequest extends StoreSocialIconRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,10 +21,6 @@ class UpdateCouponRequest extends StoreCouponRequest
      */
     public function rules(): array
     {
-        $rules = parent::rules();
-
-        $rules['code'] = ['required', 'string', 'max:255', 'unique:coupons,code,'.$this->coupon->id];
-
-        return $rules;
+        return parent::rules();
     }
 }
