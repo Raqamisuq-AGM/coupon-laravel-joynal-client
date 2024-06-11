@@ -32,8 +32,12 @@ trait Uploader
      *
      * @return bool
      */
-    public function delete($path)
+    public function delete($path): bool
     {
-        return Storage::disk('public')->delete($path);
+        if (file_exists(public_path($path))) {
+            return unlink(public_path($path));
+        }
+        return false;
+
     }
 }

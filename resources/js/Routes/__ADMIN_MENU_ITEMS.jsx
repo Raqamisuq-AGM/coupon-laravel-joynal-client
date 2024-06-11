@@ -24,7 +24,11 @@ export const __ADMIN_MENU_ITEMS = [
         title: "Coupon",
         url: route("admin.coupons.index"),
     },
-
+    {
+        icon: "heroicons:squares-2x2",
+        title: "Social Link",
+        url: route("admin.social.index"),
+    },
     // {
     //     head: "APPEARANCE",
     //     menus: [

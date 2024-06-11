@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Shop;
+namespace App\Http\Requests\Admin\Coupon;
 
-class UpdateShopRequest extends StoreShopRequest
+class UpdateCouponRequest extends StoreCouponRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +21,7 @@ class UpdateShopRequest extends StoreShopRequest
     {
         $rules = parent::rules();
 
-        $rules['image'] = ['nullable', 'image', 'mimes:png,jpg,jpeg', 'max:2048'];
+        $rules['code'] = ['required', 'string', 'max:255', 'unique:coupons,code,'.$this->coupon->id];
 
         return $rules;
     }
