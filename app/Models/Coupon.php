@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Coupon extends Model
 {
     use HasFactory;
-
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     protected $fillable = [
         'title',
         'short_description',

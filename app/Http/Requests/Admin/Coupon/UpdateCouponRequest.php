@@ -22,7 +22,7 @@ class UpdateCouponRequest extends StoreCouponRequest
         $rules = parent::rules();
 
         $rules['code'] = ['required', 'string', 'max:255', 'unique:coupons,code,'.$this->coupon->id];
-
+        $rules['image'] = ['nullable', 'image', 'mimes:jpeg,jpg,png,gif', 'max:2048'];
         return $rules;
     }
 }

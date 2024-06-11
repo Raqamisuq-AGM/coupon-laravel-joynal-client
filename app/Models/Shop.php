@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Shop extends Model
 {
     use HasFactory, Sluggable;
-
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     protected $fillable = [
         'name',
         'slug',

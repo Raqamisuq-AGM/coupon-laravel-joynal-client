@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.8",
         "predis/predis": "^2.2",
         "spatie/laravel-permission": "^6.7",
+        "staudenmeir/eloquent-eager-limit": "^1.0",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

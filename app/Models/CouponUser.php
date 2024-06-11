@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CouponUser extends Model
 {
     use HasFactory;
-
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     protected $fillable = [
         'coupon_id',
         'user_id',

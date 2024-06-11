@@ -14,10 +14,12 @@ class HomeController extends Controller
 
         $shopsCoupons  = Shop::active()
             ->withCount(['coupons as total_coupons' => fn($query) => $query->active()])
-            ->with(['coupons' => fn($query) => $query->active()->take(3)])
+            ->with(['coupons' => fn($query) => $query->active()->limit(3)])
             ->whereIn('type', ['club', 'cafe'])
-            ->get();
+            ->get()->toArray();
 
+        // reverse order shopCoupons
+        $shopsCoupons = array_reverse($shopsCoupons);
 
         return inertia('User/Frontend/Home/Index', compact('shops', 'shopsCoupons'));
     }
