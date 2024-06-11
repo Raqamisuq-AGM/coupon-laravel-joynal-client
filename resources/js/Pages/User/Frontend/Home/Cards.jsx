@@ -10,7 +10,7 @@ export default function Cards({ shop }) {
                 </div>
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
                     {shop?.coupons.map((list) => (
-                        <a href="#" className="relative w-full" key={list.id}>
+                        <a href="#" className="relative w-full transition-all duration-700 hover:scale-105" key={list.id}>
                             <div className="w-full">
                                 <img
                                     src={
@@ -35,10 +35,10 @@ export default function Cards({ shop }) {
                     ))}
                 </div>
             </div>
-            <div className="absolute right-4 top-8 sm:right-6 md:right-8 lg:right-10">
-                <a href="#" className="flex items-center gap-2">
+            <div className="absolute right-4 top-6 sm:right-6 md:right-8 lg:right-10">
+                <a href="#" className="flex items-center gap-3">
                     <p className="text-base tracking-[-0.5px] text-[#ffffff] sm:text-lg sm:tracking-[-1px] md:text-xl lg:text-[30px]">
-                        view All {shop?.total_coupons}
+                        view all {shop?.total_coupons}
                     </p>
                     <img
                         src={shop.image}
