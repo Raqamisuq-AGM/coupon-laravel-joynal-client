@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CouponClaim extends Model
 {
     use HasFactory;
-
+    use \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
     public $timestamps = false;
 
     protected $casts = [
