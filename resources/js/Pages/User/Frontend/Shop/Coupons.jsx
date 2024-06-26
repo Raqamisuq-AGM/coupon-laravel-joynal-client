@@ -4,121 +4,177 @@ import cafe2 from "@/images/frontend/cafe2.jpg";
 import cardLeft from "@/images/frontend/cardLeft.png";
 import cardRight from "@/images/frontend/cardRight.png";
 import cardRightBar from "@/images/frontend/cardRightBar.png";
+import { Modal } from "@/Components/shared/Modal";
+import { LoginForm } from "@/Components/Auth/LoginForm";
 import moment from "moment";
 
-export default function Coupons({ shop }) {
+export default function Coupons({ shop, isLoggedIn }) {
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-    const customCoupons = [
-        {
-            name: "Cafe 1",
-            image: cafe2,
-            code: "ABCD9578EF",
-            claimed: true,
-        },
-        {
-            name: "Cafe 2",
-            code: "ABCD9578EF",
-            image: cafe2,
+    const handleCouponClick = (coupon) => {
+        if (!isLoggedIn) {
+            setIsLoginModalOpen(true);
+        } else {
+            setCouponClicked(coupon.code);
         }
-    ]
+    };
 
     useEffect(() => {
         if (shop && shop.coupons && Array.isArray(shop.coupons)) {
-            customCoupons.map((coupon) => {
-                const find = shop.coupons.find((shopCoupon) => shopCoupon.name === coupon.name);
+            shop.coupons.map((coupon) => {
+                const find = shop.coupons.find(
+                    (shopCoupon) => shopCoupon.name === coupon.name
+                );
                 if (!find) {
                     shop.coupons.unshift(coupon);
                 }
-            })
+            });
         }
-        setCouponClicked("")
-    },[shop])
+        setCouponClicked("");
+    }, [shop]);
 
     const [couponClicked, setCouponClicked] = useState("");
     return (
-        <div className="w-full md:w-2/3  font-['Poetsen_One']">
-            <div className="flex flex-col gap-5">
-                {shop && shop?.coupons && shop?.coupons.length && shop.coupons.map((coupon, index) => (
-                    <button type="button" disabled={coupon.claimed} onClick={() => setCouponClicked(coupon.code)} className="relative w-full transition-all duration-700 hover:scale-[1.02]" key={index}>
-
-                        <div className="relative w-full">
-                            <div className="relative">
-                            {
-                                coupon.claimed ? <div className="absolute inset-0 bg-opacity-60 bg-black z-10"></div> : (
-                                    couponClicked === coupon.code ? <div className="absolute inset-0 bg-opacity-20 bg-black z-10"></div> : ""
-                                )
-                            }
-                               <div className="flex items-center">
-                                   <div className="relative h-[180px] md:h-[220px] w-2/3 md:w-4/5">
-                                        <img
-                                            src={cardLeft}
-                                            className="h-full w-full object-cover"
-                                        />
-                                        <img
-                                            src={coupon.image}
-                                            className="absolute bottom-0 right-0 h-full w-full"
-                                        />
-                                   </div>
-                                    <div className="relative h-[180px] md:h-[220px] w-1/3 md:w-1/5">
-                                        <img
-                                            src={cardRight}
-                                            className="h-full w-full object-fill"
-                                        />
-                                        <div className="absolute w-[180px] md:w-[220px] h-[120px] md:h-[160px] top-[28px] left-0 -rotate-90 flex flex-col items-center gap-2 md:gap-4">
-                                            <h1 className="uppercase text-xl font-normal"><span className="text-[#ff0000]">balash</span> coupon</h1>
-                                            <div className={`relative h-[30px] md:h-[40px] w-[140px] md:w-[180px] border-2 border-[#ffec75] border-dashed rounded-md flex justify-center items-center`}>
-                                                <p className={`text-xl font-normal text-center ${coupon.claimed ? "bg-[#f7e572] rounded-md w-full h-full flex justify-center items-center uppercase" : ""}`}>{coupon.claimed ? "Redeem" : coupon.code}</p>
-                                                {
-                                                    couponClicked != coupon.code && !coupon.claimed && (
-                                                        <React.Fragment>
-                                                            <div className="absolute w-full h-full top-0 left-0">
-                                                                <img src={cardRightBar} className="absolute -top-[56px] h-[150px] left-[54px] w-[30px] md:w-[40px] rotate-90" />
-                                                            </div>
-                                                            <p className="text-xl font-normal absolute top-1 left-6">Get Code</p>
-                                                        </React.Fragment>
-                                                    )
-                                                }
+        <>
+            <div className="w-full font-['Poetsen_One']  md:w-2/3">
+                <div className="flex flex-col gap-5">
+                    {shop &&
+                        shop?.coupons &&
+                        shop?.coupons.length &&
+                        shop.coupons.map((coupon, index) => (
+                            <button
+                                type="button"
+                                disabled={coupon.claimed}
+                                onClick={() => handleCouponClick(coupon)}
+                                className="relative w-full transition-all duration-700 hover:scale-[1.02]"
+                                key={index}
+                            >
+                                <div className="relative w-full">
+                                    <div className="relative">
+                                        {coupon.claimed ? (
+                                            <div className="absolute inset-0 z-10 bg-black bg-opacity-60"></div>
+                                        ) : couponClicked === coupon.code ? (
+                                            <div className="absolute inset-0 z-10 bg-black bg-opacity-20"></div>
+                                        ) : (
+                                            ""
+                                        )}
+                                        <div className="flex items-center">
+                                            <div className="relative h-[180px] w-2/3 md:h-[220px] md:w-4/5">
+                                                <img
+                                                    src={cardLeft}
+                                                    className="h-full w-full object-cover"
+                                                />
+                                                <img
+                                                    src={coupon.image}
+                                                    className="absolute bottom-0 right-0 h-full w-full"
+                                                />
+                                            </div>
+                                            <div className="relative h-[180px] w-1/3 md:h-[220px] md:w-1/5">
+                                                <img
+                                                    src={cardRight}
+                                                    className="h-full w-full object-fill"
+                                                />
+                                                <div className="absolute left-0 top-[28px] flex h-[120px] w-[180px] -rotate-90 flex-col items-center gap-2 md:h-[160px] md:w-[220px] md:gap-4">
+                                                    <h1 className="text-xl font-normal uppercase">
+                                                        <span className="text-[#ff0000]">
+                                                            balash
+                                                        </span>{" "}
+                                                        coupon
+                                                    </h1>
+                                                    <div
+                                                        className={`relative flex h-[30px] w-[140px] items-center justify-center rounded-md border-2 border-dashed border-[#ffec75] md:h-[40px] md:w-[180px]`}
+                                                    >
+                                                        <p
+                                                            className={`text-center text-xl font-normal ${
+                                                                coupon.claimed
+                                                                    ? "flex h-full w-full items-center justify-center rounded-md bg-[#f7e572] uppercase"
+                                                                    : ""
+                                                            }`}
+                                                        >
+                                                            {coupon.claimed
+                                                                ? "Redeem"
+                                                                : coupon.code}
+                                                        </p>
+                                                        {couponClicked !=
+                                                            coupon.code &&
+                                                            !coupon.claimed && (
+                                                                <React.Fragment>
+                                                                    <div className="absolute left-0 top-0 h-full w-full">
+                                                                        <img
+                                                                            src={
+                                                                                cardRightBar
+                                                                            }
+                                                                            className="absolute -top-[56px] left-[54px] h-[150px] w-[30px] rotate-90 md:w-[40px]"
+                                                                        />
+                                                                    </div>
+                                                                    <p className="absolute left-6 top-1 text-xl font-normal">
+                                                                        Get Code
+                                                                    </p>
+                                                                </React.Fragment>
+                                                            )}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                               </div>
-
-                            </div>
-                            {coupon?.claimed || couponClicked === coupon.code ? (
-                                <div className="absolute bottom-5 top-[6px] right-[80px] md:right-[200px] z-40">
-                                    <div className="relative">
-                                        <img
-                                            src={board}
-                                            alt="board"
-                                            className="h-[180px] md:h-[220px] w-[180px] md:w-[380px] object-fill"
-                                        />
-                                        <p className="absolute left-[80px] md:left-[180px] top-[80px] md:top-[105px] -translate-x-1/2 -translate-y-1/2 -rotate-[14deg] md:-rotate-[8deg] text-[#ffffff]">
-                                            {coupon.claimed
-                                                ? (<span className="text-xl uppercase md:text-[58px]  ">Claimed</span>)
-                                                : (<span className="text-md md:text-xl uppercase  ">{coupon.code} Enter This Code at Checkout</span>)}
+                                    {coupon?.claimed ||
+                                    couponClicked === coupon.code ? (
+                                        <div className="absolute bottom-5 right-[80px] top-[6px] z-40 md:right-[200px]">
+                                            <div className="relative">
+                                                <img
+                                                    src={board}
+                                                    alt="board"
+                                                    className="h-[180px] w-[180px] object-fill md:h-[220px] md:w-[380px]"
+                                                />
+                                                <p className="absolute left-[80px] top-[80px] -translate-x-1/2 -translate-y-1/2 -rotate-[14deg] text-[#ffffff] md:left-[180px] md:top-[105px] md:-rotate-[8deg]">
+                                                    {coupon.claimed ? (
+                                                        <span className="text-xl uppercase md:text-[58px]  ">
+                                                            Claimed
+                                                        </span>
+                                                    ) : (
+                                                        <span className="text-md uppercase md:text-xl  ">
+                                                            {coupon.code} Enter
+                                                            This Code at
+                                                            Checkout
+                                                        </span>
+                                                    )}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
+                                </div>
+                                <div className="w-[calc(100%-20px] absolute left-0 top-0 flex h-full items-center justify-center text-[#ffffff]">
+                                    <div className="pl-8 pr-16 text-left">
+                                        <p className="text-xl font-[400] uppercase leading-tight tracking-[-1px] md:text-[46px]">
+                                            {coupon.name || coupon.title}
+                                        </p>
+                                        <p className="text-wrap text-lg font-[400] leading-tight tracking-[-1px] md:text-[25px] ">
+                                            {coupon.short_description}
+                                        </p>
+                                        <p className="text-wrap text-lg font-[400] leading-tight tracking-[-1px] md:text-[25px] ">
+                                            Ends{" "}
+                                            {moment(coupon.valid_to).format(
+                                                "DD MMM"
+                                            )}
                                         </p>
                                     </div>
                                 </div>
-                            ) : (
-                                ""
-                            )}
-                        </div>
-                        <div className="w-[calc(100%-20px] absolute left-0 top-0 flex h-full items-center justify-center text-[#ffffff]">
-                            <div className="pl-8 pr-16 text-left">
-                                <p className="text-xl md:text-[46px] font-[400] uppercase leading-tight tracking-[-1px]">
-                                    {coupon.name || coupon.title}
-                                </p>
-                                <p className="text-wrap text-lg md:text-[25px] font-[400] leading-tight tracking-[-1px] ">
-                                    {coupon.short_description}
-                                </p>
-                                <p className="text-wrap text-lg md:text-[25px] font-[400] leading-tight tracking-[-1px] ">
-                                    Ends {moment(coupon.valid_to).format("DD MMM")}
-                                </p>
-                            </div>
-                        </div>
-                    </button>
-                ))}
+                            </button>
+                        ))}
+                </div>
             </div>
-        </div>
+
+            {shop && shop.coupons && Array.isArray(shop.coupons) && (
+                <Modal
+                    title="Login"
+                    isOpen={isLoginModalOpen}
+                    setIsOpen={setIsLoginModalOpen}
+                >
+                    <LoginForm onSuccess={() => setIsLoginModalOpen(false)} />
+                </Modal>
+            )}
+        </>
     );
 }

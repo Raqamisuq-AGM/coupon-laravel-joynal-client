@@ -97,7 +97,7 @@ export default function Create({ shops }) {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-                                <InputGroup
+                                {/* <InputGroup
                                     label="Daily Limit (Per Phone Number can buy)"
                                     name="daily_limit"
                                     placeholder="5"
@@ -112,7 +112,7 @@ export default function Create({ shops }) {
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
-                                />
+                                /> */}
 
                                 <InputGroup
                                     label="Valid From"

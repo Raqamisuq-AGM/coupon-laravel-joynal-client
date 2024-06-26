@@ -26,10 +26,10 @@ export default function Index({ coupons, overviews }) {
             header: "Discount",
             accessor: "discount",
         },
-        {
-            header: "Usage Limit",
-            accessor: "usage_limit",
-        },
+        // {
+        //     header: "Usage Limit",
+        //     accessor: "usage_limit",
+        // },
         {
             header: "Valid From",
             accessor: "valid_from",
