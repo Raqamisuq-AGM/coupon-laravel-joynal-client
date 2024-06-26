@@ -211,7 +211,10 @@ export default function index() {
                     </div>
 
                     <div className="dropdown -mt-0.5" data-strategy="absolute">
-                        <div className="dropdown-toggle px-3">
+                        <div
+                            className="dropdown-toggle px-3"
+                            style={{ display: "none" }}
+                        >
                             <button className="relative mt-1 flex items-center justify-center rounded-full text-slate-500 transition-colors duration-150 hover:text-slate-700 focus:text-primary-500 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-primary-500">
                                 <i
                                     width="24"
@@ -224,7 +227,10 @@ export default function index() {
                             </button>
                         </div>
 
-                        <div className="dropdown-content mt-3 w-[17.5rem] divide-y dark:divide-slate-700 sm:w-80">
+                        <div
+                            className="dropdown-content mt-3 w-[17.5rem] divide-y dark:divide-slate-700 sm:w-80"
+                            style={{ display: "none" }}
+                        >
                             <div className="flex items-center justify-between px-4 py-4">
                                 <h6 className="text-slate-800 dark:text-slate-300">
                                     Notifications

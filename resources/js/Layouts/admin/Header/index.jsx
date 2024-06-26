@@ -211,7 +211,10 @@ export default function index() {
                     </div>
 
                     <div className="dropdown -mt-0.5" data-strategy="absolute">
-                        <div className="dropdown-toggle px-3">
+                        <div
+                            className="dropdown-toggle px-3"
+                            style={{ display: "none" }}
+                        >
                             <button className="relative mt-1 flex items-center justify-center rounded-full text-slate-500 transition-colors duration-150 hover:text-slate-700 focus:text-primary-500 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-primary-500">
                                 <i
                                     width="24"
@@ -224,155 +227,10 @@ export default function index() {
                             </button>
                         </div>
 
-                        <div className="dropdown-content mt-3 w-[17.5rem] divide-y dark:divide-slate-700 sm:w-80">
-                            <div className="flex items-center justify-between px-4 py-4">
-                                <h6 className="text-slate-800 dark:text-slate-300">
-                                    Notifications
-                                </h6>
-                                <button className="text-xs font-medium text-slate-600 hover:text-primary-500 dark:text-slate-300">
-                                    Clear All
-                                </button>
-                            </div>
-
-                            <div className="h-80 w-full" data-simplebar>
-                                <ul>
-                                    <li className="flex cursor-pointer gap-4 px-4 py-3 transition-colors duration-150 hover:bg-slate-100/70 dark:hover:bg-slate-700">
-                                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-500">
-                                            <i
-                                                data-feather="alert-circle"
-                                                width="20"
-                                                height="20"
-                                            ></i>
-                                        </div>
-
-                                        <div>
-                                            <h6 className="text-sm font-normal">
-                                                New order received
-                                            </h6>
-                                            <p className="text-xs text-slate-400">
-                                                Order #1234 has been placed
-                                            </p>
-                                            <p className="mt-1 flex items-center gap-1 text-xs text-slate-400">
-                                                <i
-                                                    data-feather="clock"
-                                                    width="1em"
-                                                    height="1em"
-                                                ></i>
-                                                <span>2 min ago</span>
-                                            </p>
-                                        </div>
-                                    </li>
-
-                                    <li className="flex cursor-pointer gap-4 px-4 py-3 transition-colors duration-150 hover:bg-slate-100/70 dark:hover:bg-slate-700">
-                                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 text-yellow-500">
-                                            <i
-                                                data-feather="alert-triangle"
-                                                width="20"
-                                                height="20"
-                                            ></i>
-                                        </div>
-
-                                        <div>
-                                            <h6 className="text-sm font-normal">
-                                                High CPU usage
-                                            </h6>
-                                            <p className="text-xs text-slate-400">
-                                                CPU usage is at 92%
-                                            </p>
-                                            <p className="mt-1 flex items-center gap-1 text-xs text-slate-400">
-                                                <i
-                                                    data-feather="clock"
-                                                    width="1em"
-                                                    height="1em"
-                                                ></i>
-                                                <span>5 min ago</span>
-                                            </p>
-                                        </div>
-                                    </li>
-
-                                    <li className="flex cursor-pointer gap-4 px-4 py-3 transition-colors duration-150 hover:bg-slate-100/70 dark:hover:bg-slate-700">
-                                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green-100 text-green-500">
-                                            <i
-                                                data-feather="check-circle"
-                                                width="20"
-                                                height="20"
-                                            ></i>
-                                        </div>
-
-                                        <div>
-                                            <h6 className="text-sm font-normal">
-                                                Your order has been shipped
-                                            </h6>
-                                            <p className="text-xs text-slate-400">
-                                                Order #1234 has been shipped
-                                            </p>
-                                            <p className="mt-1 flex items-center gap-1 text-xs text-slate-400">
-                                                <i
-                                                    data-feather="clock"
-                                                    width="1em"
-                                                    height="1em"
-                                                ></i>
-                                                <span>10 min ago</span>
-                                            </p>
-                                        </div>
-                                    </li>
-
-                                    <li className="flex cursor-pointer gap-4 px-4 py-3 transition-colors duration-150 hover:bg-slate-100/70 dark:hover:bg-slate-700">
-                                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-danger-100 text-danger-500">
-                                            <i
-                                                data-feather="x-circle"
-                                                width="20"
-                                                height="20"
-                                            ></i>
-                                        </div>
-
-                                        <div>
-                                            <h6 className="text-sm font-normal">
-                                                Something went wrong
-                                            </h6>
-                                            <p className="text-xs text-slate-400">
-                                                Order #1234 has been placed
-                                            </p>
-                                            <p className="mt-1 flex items-center gap-1 text-xs text-slate-400">
-                                                <i
-                                                    data-feather="clock"
-                                                    width="1em"
-                                                    height="1em"
-                                                ></i>
-                                                <span>1 hour ago</span>
-                                            </p>
-                                        </div>
-                                    </li>
-
-                                    <li className="flex cursor-pointer gap-4 px-4 py-3 transition-colors duration-150 hover:bg-slate-100/70 dark:hover:bg-slate-700">
-                                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green-100 text-green-500">
-                                            <i
-                                                data-feather="check-circle"
-                                                width="20"
-                                                height="20"
-                                            ></i>
-                                        </div>
-
-                                        <div>
-                                            <h6 className="text-sm font-normal">
-                                                Your order has been shipped
-                                            </h6>
-                                            <p className="text-xs text-slate-400">
-                                                Order #1234 has been shipped
-                                            </p>
-                                            <p className="mt-1 flex items-center gap-1 text-xs text-slate-400">
-                                                <i
-                                                    data-feather="clock"
-                                                    width="1em"
-                                                    height="1em"
-                                                ></i>
-                                                <span>10 min ago</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-
+                        <div
+                            className="dropdown-content mt-3 hidden w-[17.5rem] divide-y dark:divide-slate-700 sm:w-80"
+                            style={{ display: "none" }}
+                        >
                             <div className="px-4 py-2">
                                 <button
                                     className="btn btn-primary-plain btn-sm w-full"
