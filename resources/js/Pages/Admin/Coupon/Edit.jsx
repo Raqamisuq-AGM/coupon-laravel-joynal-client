@@ -19,9 +19,9 @@ export default function Edit({ coupon, shops }) {
         valid_to: moment(coupon.valid_to).format("YYYY-MM-DD"),
         status: coupon.status,
         shop_id: coupon.shop_id,
-        usage_limit: coupon.usage_limit,
+        // usage_limit: coupon.usage_limit,
         description: coupon.description,
-        daily_limit: coupon.daily_limit,
+        // daily_limit: coupon.daily_limit,
         price: coupon.price,
         _method: "put",
     });
@@ -101,7 +101,7 @@ export default function Edit({ coupon, shops }) {
                                     setFormObject={setData}
                                     validationError={errors}
                                 />
-                                <InputGroup
+                                {/* <InputGroup
                                     label="Daily Limit (Per Phone Number can buy)"
                                     name="daily_limit"
                                     placeholder="5"
@@ -116,7 +116,7 @@ export default function Edit({ coupon, shops }) {
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
-                                />
+                                /> */}
                                 <InputGroup
                                     label="Valid From"
                                     name="valid_from"

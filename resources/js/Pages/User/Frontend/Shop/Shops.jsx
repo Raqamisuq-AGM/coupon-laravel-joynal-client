@@ -3,10 +3,8 @@ import { router } from "@inertiajs/react";
 import React, { useState } from "react";
 
 export const Shops = ({ shops, shop, setShop }) => {
-
-
     const handleSelectShop = (s) => {
-        setShop(s)
+        setShop(s);
     };
 
     return (

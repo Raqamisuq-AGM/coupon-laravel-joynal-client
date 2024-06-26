@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Shop;
 
+use App\Models\User;
+use App\Models\Coupon;
 use App\Helpers\PageHeader;
+use App\Models\CouponClaim;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shop\CouponClaim\StoreCouponClaimRequest;
-use App\Models\Coupon;
-use App\Models\CouponClaim;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
 
 class CouponClaimController extends Controller
 {
@@ -48,25 +49,32 @@ class CouponClaimController extends Controller
 
         $coupon = Coupon::where('status', true)->where('code', $params['coupon_code'])->first();
 
-        if (! $coupon) {
+        if (!$coupon) {
             return back()->with('error', 'Coupon not found');
         }
         // Check if coupon is expired
         if ($coupon->valid_to->lt(now())) {
             return back()->with('error', 'Coupon is expired');
         }
-
         $user = User::where('phone', $params['phone'])->first();
 
         $coupon_user = $user->couponUsers()->where('coupon_id', $coupon->id)->first();
 
-        if (! $coupon_user) {
+        if (!$coupon_user) {
             return back()->with('error', 'Coupon is not valid for this user');
         }
-
         // Check if coupon is already claimed
         if ($coupon->usage_limit == $coupon_user->used) {
             return back()->with('error', 'Coupon is already claimed');
+        }
+
+        $today = Carbon::today();
+        $couponsClaimedToday = $user->couponUsers()
+            ->where('created_at', '>=', $today)
+            ->count();
+
+        if ($couponsClaimedToday >= 5) {
+            return back()->with('error', 'User has reached the daily limit of 5 coupons');
         }
 
         try {
@@ -84,10 +92,10 @@ class CouponClaimController extends Controller
             ]);
 
             DB::commit();
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
 
-            return back()->with('error', $th->getMessage());
+            return back()->with('error', $e->getMessage());
         }
 
         return to_route('shop.coupon-claims.index')->with('success', 'Coupon Claimed');

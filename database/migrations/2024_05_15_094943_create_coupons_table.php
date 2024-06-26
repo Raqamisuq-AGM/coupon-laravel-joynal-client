@@ -20,9 +20,9 @@ return new class extends Migration
             $table->enum('discount_type', ['fixed', 'percentage'])->default('fixed');
             $table->float('discount')->default(0);
 
-            $table->unsignedInteger('daily_limit')->default(0);
+            $table->unsignedInteger('daily_limit')->default(1);
             $table->float('price')->default(0);
-            $table->unsignedInteger('usage_limit')->default(0);
+            $table->unsignedInteger('usage_limit')->default(1);
 
             $table->timestamp('valid_from')->nullable();
             $table->timestamp('valid_to')->nullable();

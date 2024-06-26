@@ -33,6 +33,13 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(DashboardRedirectPath::get($request));
     }
 
+    public function UserStore(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+        $request->session()->regenerate();
+        return redirect()->back()->intended();
+    }
+
     /**
      * Destroy an authenticated session.
      */
