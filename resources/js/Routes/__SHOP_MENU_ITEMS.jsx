@@ -5,8 +5,23 @@ export const __SHOP_MENU_ITEMS = [
     //     url: route("shop.dashboard"),
     // },
     {
-        icon: "heroicons:rectangle-stack",
+        icon: "material-symbols:dashboard-customize-outline",
         title: "Dashboard",
+        url: route("shop.coupons.index"),
+    },
+    {
+        icon: "heroicons:rectangle-stack",
+        title: "Coupon Claim",
         url: route("shop.coupon-claims.index"),
+    },
+    {
+        icon: "heroicons:key",
+        title: "Change Password",
+        url: route("shop.change-password.index"),
+    },
+    {
+        icon: "heroicons:pencil-square",
+        title: "Edit Shop",
+        url: route("shop.profile.index"),
     },
 ];

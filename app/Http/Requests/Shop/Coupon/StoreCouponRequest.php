@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Coupon;
+namespace App\Http\Requests\Shop\Coupon;
 
+use App\Models\Shop;
 use App\Traits\Uploader;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCouponRequest extends FormRequest
@@ -36,9 +37,9 @@ class StoreCouponRequest extends FormRequest
             // 'daily_limit' => ['required', 'numeric'],
             'price' => ['required', 'numeric'],
             // 'usage_limit' => ['required', 'numeric'],
+            'shop_id' => ['nullable', 'exists:shops,id'],
             'valid_from' => ['required', 'date'],
             'valid_to' => ['required', 'date'],
-            'shop_id' => ['required', 'exists:shops,id'],
             'status' => ['required', 'boolean'],
         ];
     }
@@ -46,6 +47,14 @@ class StoreCouponRequest extends FormRequest
     public function validated($key = null, $default = null)
     {
         $data = parent::validated();
+        if (!$this->has('shop_id')) {
+            $shop = Shop::withUser(auth()->user()->id)->first();
+            if ($shop) {
+                $data['shop_id'] = $shop->id;
+            } else {
+                throw new \RuntimeException('User is not assigned to any shop.');
+            }
+        }
         // create timestamp value
         $data['valid_from'] = Carbon::parse($data['valid_from']);
         $data['valid_to'] = Carbon::parse($data['valid_to']);

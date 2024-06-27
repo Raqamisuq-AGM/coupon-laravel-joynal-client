@@ -12,7 +12,7 @@ class DashboardRedirectPath
         $redirectPath = match ($role) {
             'admin' => route('admin.coupons.index'),
             'user' => route('home'),
-            'shop' => route('shop.coupon-claims.index'),
+            'shop' => route('shop.coupons.index'),
         };
 
         return $redirectPath;
