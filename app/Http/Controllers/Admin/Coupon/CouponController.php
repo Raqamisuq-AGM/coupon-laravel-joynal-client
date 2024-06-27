@@ -60,7 +60,7 @@ class CouponController extends Controller
             ],
         ];
 
-        PageHeader::set()->title('Coupons')->buttons($buttons);
+        PageHeader::set()->title('Dashboard')->buttons($buttons);
 
         $coupons = Coupon::with('shop:id,name')->withCount('couponUsers as total_purchased')->latest()->paginate();
 

@@ -19,7 +19,7 @@ class CouponClaimController extends Controller
     public function index()
     {
         $coupon_claims = CouponClaim::latest('id')->paginate();
-        PageHeader::set()->title('Coupon Claims')->buttons([
+        PageHeader::set()->title('Dashboard')->buttons([
             [
                 'title' => 'New Coupon Claim',
                 'url' => route('shop.coupon-claims.create'),
@@ -60,11 +60,7 @@ class CouponClaimController extends Controller
 
         $coupon_user = $user->couponUsers()->where('coupon_id', $coupon->id)->first();
 
-        if (!$coupon_user) {
-            return back()->with('error', 'Coupon is not valid for this user');
-        }
-        // Check if coupon is already claimed
-        if ($coupon->usage_limit == $coupon_user->used) {
+        if (!is_null($coupon_user)) {
             return back()->with('error', 'Coupon is already claimed');
         }
 
@@ -80,6 +76,13 @@ class CouponClaimController extends Controller
         try {
             DB::beginTransaction();
 
+            // Create a new coupon_user record
+            $coupon_user = $user->couponUsers()->create([
+                'coupon_id' => $coupon->id,
+                'used' => 1,
+                'status' => 1,
+            ]);
+
             CouponClaim::create([
                 'coupon_user_id' => $coupon_user->id,
                 'user_id' => $coupon_user->user_id,
@@ -87,9 +90,9 @@ class CouponClaimController extends Controller
                 'claimed_at' => now(),
             ]);
 
-            $coupon_user->update([
-                'used' => $coupon_user->used + 1,
-            ]);
+            // $coupon_user->update([
+            //     'used' => $coupon_user->used + 1,
+            // ]);
 
             DB::commit();
         } catch (\Exception $e) {

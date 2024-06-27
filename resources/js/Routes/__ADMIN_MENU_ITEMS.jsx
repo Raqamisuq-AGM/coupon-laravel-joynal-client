@@ -4,10 +4,16 @@
 // if permission not given it will be publicly visible
 
 export const __ADMIN_MENU_ITEMS = [
+    // {
+    //     icon: "material-symbols:dashboard-customize-outline",
+    //     title: "Dashboard",
+    //     url: route("admin.dashboard"),
+    // },
+
     {
-        icon: "material-symbols:dashboard-customize-outline",
+        icon: "heroicons:rectangle-stack",
         title: "Dashboard",
-        url: route("admin.dashboard"),
+        url: route("admin.coupons.index"),
     },
     {
         icon: "heroicons:user-group",
@@ -18,11 +24,6 @@ export const __ADMIN_MENU_ITEMS = [
         icon: "heroicons:shopping-cart",
         title: "Shop",
         url: route("admin.shops.index"),
-    },
-    {
-        icon: "heroicons:rectangle-stack",
-        title: "Coupon",
-        url: route("admin.coupons.index"),
     },
     {
         icon: "heroicons:squares-2x2",

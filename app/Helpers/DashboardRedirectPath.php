@@ -10,9 +10,9 @@ class DashboardRedirectPath
         $role = $request->user()->getRoleNames()->first();
 
         $redirectPath = match ($role) {
-            'admin' => route('admin.dashboard'),
+            'admin' => route('admin.coupons.index'),
             'user' => route('home'),
-            'shop' => route('shop.dashboard'),
+            'shop' => route('shop.coupon-claims.index'),
         };
 
         return $redirectPath;
