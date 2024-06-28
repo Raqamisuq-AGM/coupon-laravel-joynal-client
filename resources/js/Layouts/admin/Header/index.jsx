@@ -43,7 +43,7 @@ export default function index() {
                     {/* <!-- Mobile Search Ends --> */}
 
                     {/* <!-- Searchbar Start --> */}
-                    <button
+                    {/* <button
                         type="button"
                         data-trigger="search-modal"
                         className="group hidden h-10 w-72 items-center overflow-hidden rounded-primary bg-slate-100 px-3 shadow-sm dark:border-transparent dark:bg-slate-700 sm:flex"
@@ -57,13 +57,13 @@ export default function index() {
                         <span className="ml-2 text-sm text-slate-400">
                             Search
                         </span>
-                    </button>
+                    </button> */}
                 </div>
 
                 <div className="flex items-center">
                     <div className="dropdown" data-strategy="absolute">
                         <div className="dropdown-toggle px-3">
-                            <button
+                            {/* <button
                                 type="button"
                                 className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-700 focus:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-slate-300"
                             >
@@ -74,7 +74,7 @@ export default function index() {
                                 <span className="inline-block font-medium md:hidden">
                                     EN
                                 </span>
-                            </button>
+                            </button> */}
                         </div>
 
                         <div className="dropdown-content mt-3 w-40">

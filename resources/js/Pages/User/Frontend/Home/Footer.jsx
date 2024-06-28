@@ -4,6 +4,7 @@ import insta from "@/images/frontend/socialIcon/insta.png";
 import sp from "@/images/frontend/socialIcon/sp.png";
 import twe from "@/images/frontend/socialIcon/twe.png";
 import wp from "@/images/frontend/socialIcon/wp.png";
+import { Link, usePage } from "@inertiajs/react";
 
 export default function Footer({ socials }) {
     const socialLinks = [
@@ -32,18 +33,15 @@ export default function Footer({ socials }) {
     const urls = [
         {
             name: "Shops",
+            url: route("shops.index"),
         },
         {
             name: "About",
+            url: "#",
         },
         {
             name: "Contact",
-        },
-        {
-            name: "Admin",
-        },
-        {
-            name: "Register",
+            url: "#",
         },
     ];
     return (
@@ -69,13 +67,14 @@ export default function Footer({ socials }) {
                     ))}
                 </div>
                 <nav className="flex flex-row items-center justify-center gap-4 sm:gap-5 md:gap-6">
-                    {urls.map((url) => (
-                        <a
-                            className="font-['Poetsen_One'] text-lg font-[400] tracking-[-0.5px] text-[#ffffff] hover:text-[#e3e3e3] sm:text-xl sm:tracking-[-1px] md:text-2xl lg:text-[35px]"
-                            key={url.name}
+                    {urls.map((url, index) => (
+                        <Link
+                            key={index}
+                            href={url.url}
+                            className="text-center text-2xl font-normal uppercase tracking-tight text-white md:text-3xl"
                         >
                             {url.name}
-                        </a>
+                        </Link>
                     ))}
                 </nav>
             </div>
