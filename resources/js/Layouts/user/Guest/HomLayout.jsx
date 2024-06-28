@@ -8,10 +8,13 @@ export default function HomLayout({ children }) {
         <div>
             <ToastContainer />
             <div
-                className="bg-cover bg-center bg-no-repeat lg:h-[1080px] relative"
-                style={{ backgroundImage: "url('/assets/frontend/images/bg-hero.jpg')" }}
+                className="relative bg-cover bg-center bg-no-repeat lg:h-[1080px]"
+                style={{
+                    backgroundImage:
+                        "url('/assets/frontend/images/bg-hero.jpg')",
+                }}
             >
-                <div className="absolute h-full inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
+                <div className="absolute inset-0 h-full bg-black bg-opacity-20 backdrop-blur-sm"></div>
                 {/* Header */}
                 <Header />
                 {/* Hero Section */}
@@ -19,11 +22,14 @@ export default function HomLayout({ children }) {
             </div>
 
             <div
-                style={{ backgroundImage: "url('/assets/frontend/images/bg-content.png')" }}
+                style={{
+                    backgroundImage:
+                        "url('/assets/frontend/images/bg-content.png')",
+                }}
                 className="relative bg-cover bg-center bg-no-repeat"
             >
                 <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
-                <div className="relative py-8 lg:py-12 flex flex-col gap-10">
+                <div className="relative flex flex-col gap-10 py-8 lg:py-12">
                     {children}
                 </div>
             </div>
