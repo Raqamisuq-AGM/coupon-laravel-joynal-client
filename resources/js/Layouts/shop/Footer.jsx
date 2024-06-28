@@ -13,13 +13,7 @@ export default function Footer() {
             </p>
 
             <p className="flex items-center gap-1 text-sm">
-                Hand-crafted &amp; Made with
-                <i
-                    className="text-danger-500"
-                    data-feather="heart"
-                    height="1em"
-                    width="1em"
-                ></i>
+
             </p>
         </footer>
     );

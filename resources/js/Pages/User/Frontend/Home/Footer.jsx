@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect, useState } from "react";
 import fb from "@/images/frontend/socialIcon/fb.png";
 import insta from "@/images/frontend/socialIcon/insta.png";
 import sp from "@/images/frontend/socialIcon/sp.png";
@@ -7,6 +7,26 @@ import wp from "@/images/frontend/socialIcon/wp.png";
 import { Link, usePage } from "@inertiajs/react";
 
 export default function Footer({ socials }) {
+    const auth = usePage().props?.auth;
+    const [dashboard, setDashboard] = useState(route("login"));
+    useEffect(() => {
+        if (auth.user && auth.role) {
+            switch (auth.role) {
+                case "admin":
+                    setDashboard(route("admin.coupons.index"));
+                    break;
+                case "shop":
+                    setDashboard(route("shop.coupons.index"));
+                    break;
+                case "user":
+                    setDashboard(route("user.coupons.index"));
+                    break;
+                default:
+                    setDashboard(route("login"));
+                    break;
+            }
+        }
+    }, [auth]);
     const socialLinks = [
         {
             id: 1,
@@ -42,6 +62,10 @@ export default function Footer({ socials }) {
         {
             name: "Contact",
             url: "#",
+        },
+        {
+            name: auth.role == "admin" ? "Admin" : "Dashboard",
+            url: dashboard,
         },
     ];
     return (
