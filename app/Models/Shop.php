@@ -64,4 +64,11 @@ class Shop extends Model
     {
         return $this->hasMany(Coupon::class);
     }
+
+    public function scopeWithUser($query, $userId)
+    {
+        return $query->whereHas('users', function ($q) use ($userId) {
+            $q->where('user_id', $userId);
+        });
+    }
 }

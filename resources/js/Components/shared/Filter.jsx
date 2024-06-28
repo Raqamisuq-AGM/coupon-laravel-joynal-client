@@ -33,14 +33,14 @@ export const Filter = ({ form }) => {
             <div className="itransems-center flex w-full justify-between gap-x-4 md:w-auto">
                 <div className="dropdown" data-placement="bottom-end">
                     <div className="dropdown-toggle">
-                        <button
+                        {/* <button
                             type="button"
                             className="btn bg-white font-medium shadow-sm dark:bg-slate-800"
                         >
                             <i className="w-4" data-feather="filter"></i>
                             <span>{trans("Filter")}</span>
                             <i className="w-4" data-feather="chevron-down"></i>
-                        </button>
+                        </button> */}
                     </div>
                     <div className="dropdown-content w-72 !overflow-visible">
                         <ul className="dropdown-list space-y-4 p-4">

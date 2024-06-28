@@ -26,4 +26,17 @@ class CouponClaim extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeShopUserCouponClaim($query, $userId)
+    {
+        return $query->whereHas('couponUser', function ($q) use ($userId) {
+            $q->whereHas('coupon', function ($q) use ($userId) {
+                $q->whereHas('shop', function ($q) use ($userId) {
+                    $q->whereHas('users', function ($q) use ($userId) {
+                        $q->where('user_id', $userId);
+                    });
+                });
+            });
+        });
+    }
 }

@@ -6,6 +6,7 @@ import PrimaryButton from "@/Components/shared/PrimaryButton";
 import logo from "@/Assets/images/logo-small.svg";
 import { Icon } from "@iconify-icon/react";
 import { PasswordInput } from "@/Components/shared/PasswordInput";
+import { SelectGroup } from "@/Components/shared/SelectGroup";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -14,7 +15,19 @@ export default function Register() {
         phone: "",
         password: "",
         password_confirmation: "",
+        user_type: "",
     });
+
+    const userTypes = [
+        {
+            label: "User",
+            value: "user",
+        },
+        {
+            label: "Shop",
+            value: "shop",
+        },
+    ];
 
     useEffect(() => {
         return () => {
@@ -85,6 +98,15 @@ export default function Register() {
                             setFormObject={setData}
                             validationError={errors}
                         />
+
+                        <SelectGroup
+                            label="Register As"
+                            name="user_type"
+                            options={userTypes}
+                            formObject={data}
+                            setFormObject={setData}
+                            validationError={errors}
+                        />
                     </div>
                     <div className="mt-2 flex">
                         <div className="flex items-center gap-1.5">
@@ -122,7 +144,7 @@ export default function Register() {
                                 Or
                             </div>
                         </div>
-                        <button className="btn btn-outline-primary mt-4 w-full gap-3 py-2">
+                        {/* <button className="btn btn-outline-primary mt-4 w-full gap-3 py-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 48 48"
@@ -147,7 +169,7 @@ export default function Register() {
                                 />
                             </svg>
                             <span>Continue With Google</span>
-                        </button>
+                        </button> */}
                     </div>
                     {/* Don't Have An Account */}
                     <div className="mt-4 flex justify-center">

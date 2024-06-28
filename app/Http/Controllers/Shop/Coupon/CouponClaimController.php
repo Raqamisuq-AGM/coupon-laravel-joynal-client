@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Shop;
+namespace App\Http\Controllers\Shop\Coupon;
 
 use App\Models\User;
 use App\Models\Coupon;
@@ -18,7 +18,7 @@ class CouponClaimController extends Controller
      */
     public function index()
     {
-        $coupon_claims = CouponClaim::latest('id')->paginate();
+        $coupon_claims = CouponClaim::shopUserCouponClaim(auth()->user()->id)->latest('id')->paginate();
         PageHeader::set()->title('Dashboard')->buttons([
             [
                 'title' => 'New Coupon Claim',
@@ -47,11 +47,20 @@ class CouponClaimController extends Controller
     {
         $params = $request->validated();
 
-        $coupon = Coupon::where('status', true)->where('code', $params['coupon_code'])->first();
+        $couponId = $request->couponId;
+
+        if ($couponId) {
+            $coupon = Coupon::find($couponId);
+            $redirectRouteName = $request->redirectRoute;
+        } else {
+            $coupon = Coupon::forUser(auth()->user()->id)->where('status', true)->where('code', $params['coupon_code'])->first();
+            $redirectRouteName = 'shop.coupon-claims.index';
+        }
 
         if (!$coupon) {
             return back()->with('error', 'Coupon not found');
         }
+
         // Check if coupon is expired
         if ($coupon->valid_to->lt(now())) {
             return back()->with('error', 'Coupon is expired');
@@ -101,6 +110,6 @@ class CouponClaimController extends Controller
             return back()->with('error', $e->getMessage());
         }
 
-        return to_route('shop.coupon-claims.index')->with('success', 'Coupon Claimed');
+        return to_route($redirectRouteName)->with('success', 'Coupon Claimed');
     }
 }

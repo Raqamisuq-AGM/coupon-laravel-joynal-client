@@ -45,7 +45,8 @@ export default function Coupons({ shop, isLoggedIn }) {
                             <button
                                 type="button"
                                 disabled={coupon.claimed}
-                                onClick={() => handleCouponClick(coupon)}
+                                onClick={() => setCouponClicked(coupon.code)}
+                                // onClick={() => handleCouponClick(coupon)}
                                 className="relative w-full transition-all duration-700 hover:scale-[1.02]"
                                 key={index}
                             >
