@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Shop\Coupon;
+namespace App\Http\Controllers\Admin\Coupon;
 
 use App\Models\User;
 use App\Models\Coupon;
 use App\Helpers\PageHeader;
 use App\Models\CouponClaim;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -18,16 +19,16 @@ class CouponClaimController extends Controller
      */
     public function index()
     {
-        $coupon_claims = CouponClaim::shopUserCouponClaim(auth()->user()->id)->latest('id')->paginate();
+        $coupon_claims = CouponClaim::latest('id')->paginate();
         PageHeader::set()->title('Coupon Claim')->buttons([
             [
                 'title' => 'New Coupon Claim',
-                'url' => route('shop.coupon-claims.create'),
+                'url' => route('admin.coupon-claims.create'),
                 'icon' => 'heroicons:plus',
             ],
         ]);
 
-        return inertia('Shop/CouponClaim/Index', compact('coupon_claims'));
+        return inertia('Admin/CouponClaim/Index', compact('coupon_claims'));
     }
 
     /**
@@ -37,7 +38,7 @@ class CouponClaimController extends Controller
     {
         PageHeader::set()->title('New Coupon Claim');
 
-        return inertia('Shop/CouponClaim/create');
+        return inertia('Admin/CouponClaim/create');
     }
 
     /**
@@ -53,8 +54,8 @@ class CouponClaimController extends Controller
             $coupon = Coupon::find($couponId);
             $redirectRouteName = $request->redirectRoute;
         } else {
-            $coupon = Coupon::forUser(auth()->user()->id)->where('status', true)->where('code', $params['coupon_code'])->first();
-            $redirectRouteName = 'shop.coupon-claims.index';
+            $coupon = Coupon::where('code', $params['coupon_code'])->first();
+            $redirectRouteName = 'admin.coupon-claims.index';
         }
 
         if (!$coupon) {

@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
         return Inertia::render('Shop/Profile/Update', compact('shop'));
     }
-    public function changePasswordView()
+    public function changeCredentialView()
     {
         PageHeader::set()->title('Change Password')->buttons([
             [
@@ -48,8 +48,8 @@ class ProfileController extends Controller
                 'icon' => 'heroicons:edit',
             ],
         ]);
-
-        return inertia('Shop/Profile/ChangePassword');
+        $user = auth()->user();
+        return inertia('Shop/Profile/ChangeCredential', \compact('user'));
     }
 
     public function changePassword(Request $request)
@@ -62,7 +62,20 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return to_route('shop.change-password.index')->with('success', 'Password has been changed successfully');
+        return to_route('shop.change-credential.index')->with('success', 'Password has been changed successfully');
+    }
+
+    public function changeEmail(Request $request)
+    {
+        $this->validate($request,  [
+            'email' => 'required|email|unique:users,email,' . auth()->user()->id
+        ]);
+
+        $user = User::find(auth()->user()->id);
+        $user->email = $request->email;
+        $user->save();
+
+        return to_route('shop.change-credential.index')->with('success', 'Email has been changed successfully');
     }
 
     public function update(UpdateProfileRequest $request, $shopId)

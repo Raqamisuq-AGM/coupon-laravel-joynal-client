@@ -17,7 +17,7 @@ class ShopController extends Controller
                 }]);
         }])
             ->active()
-            ->cursorPaginate(20);
+            ->cursorPaginate(500);
 
         $user = auth()->user();
         $isLoggedIn = $user !== null;

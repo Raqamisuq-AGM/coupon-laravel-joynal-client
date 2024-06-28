@@ -59,7 +59,7 @@ class Coupon extends Model
 
     public function shop(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Shop::class);
+        return $this->belongsTo(Shop::class)->withDefault();
     }
 
     public function scopeForUser($query, $userId)

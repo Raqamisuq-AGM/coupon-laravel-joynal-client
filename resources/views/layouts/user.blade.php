@@ -10,7 +10,7 @@
 
     <meta name="app-name" content="{{ config('app.name') }}" />
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title inertia>{{ config('app.name', 'Balash') }}</title>
     <script>
         if (
             localStorage.getItem('theme') === 'dark' ||

@@ -31,6 +31,11 @@ class CouponUser extends Model
         return $this->hasMany(CouponClaim::class, 'coupon_user_id');
     }
 
+    public function claimForUser(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(CouponClaim::class, 'coupon_user_id')->where('user_id', auth()->user()->id);
+    }
+
     public function scopeShopUserCoupon($query, $userId)
     {
         return $query->whereHas('coupon', function ($q) use ($userId) {

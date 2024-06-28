@@ -14,13 +14,8 @@ export default function Index({ coupons, overviews }) {
             accessor: "coupon.code",
         },
         {
-            header: "Discount",
-            accessor: "coupon.discount",
-        },
-
-        {
-            header: "used",
-            accessor: "used",
+            header: "Phone Number",
+            accessor: "claim_for_user.user.phone",
         },
 
         {
