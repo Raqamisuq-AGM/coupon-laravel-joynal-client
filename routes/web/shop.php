@@ -17,6 +17,7 @@ Route::group(['middleware' => ['auth', VerifyShop::class], 'prefix' => 'shop', '
     Route::get('coupons/{coupon}/users/{couponUser}/claims', [CouponUserController::class, 'userClaims'])->name('coupon-user-claims');
 
     Route::resource('profile', ProfileController::class)->only(['index', 'update']);
-    Route::get('change-password', [ProfileController::class, 'changePasswordView'])->name('change-password.index');
+    Route::get('change-credential', [ProfileController::class, 'changeCredentialView'])->name('change-credential.index');
     Route::post('change-password', [ProfileController::class, 'changePassword'])->name('change-password.store');
+    Route::post('change-email', [ProfileController::class, 'changeEmail'])->name('change-email.store');
 });

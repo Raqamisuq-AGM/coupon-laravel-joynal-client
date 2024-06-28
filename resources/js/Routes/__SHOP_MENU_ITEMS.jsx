@@ -16,8 +16,8 @@ export const __SHOP_MENU_ITEMS = [
     },
     {
         icon: "heroicons:key",
-        title: "Change Password",
-        url: route("shop.change-password.index"),
+        title: "Change Credentials",
+        url: route("shop.change-credential.index"),
     },
     {
         icon: "heroicons:pencil-square",

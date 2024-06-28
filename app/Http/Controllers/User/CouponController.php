@@ -50,7 +50,10 @@ class CouponController extends Controller
 
         PageHeader::set()->title('Coupons')->buttons($buttons);
 
-        $coupons = $user->couponUsers()->with('coupon')->paginate();
+        $coupons = $user->couponUsers()
+            ->with(['coupon', 'claimForUser' => function ($q) {
+                $q->with('user');
+            }])->paginate();
 
         return inertia('User/Dashboard/Coupon/Index', compact('coupons', 'overviews'));
     }
@@ -72,7 +75,7 @@ class CouponController extends Controller
 
         try {
             DB::beginTransaction();
-            if (! $coupon) {
+            if (!$coupon) {
                 throw new \Exception('Coupon not found');
             }
 
@@ -85,7 +88,7 @@ class CouponController extends Controller
             }
 
             // check if user not has role as user than assign role as user
-            if (! $user->hasRole('user')) {
+            if (!$user->hasRole('user')) {
                 $user->assignRole('user');
             }
 

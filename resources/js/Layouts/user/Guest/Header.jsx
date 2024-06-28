@@ -12,13 +12,13 @@ export default function Header() {
         if (auth.user && auth.role) {
             switch (auth.role) {
                 case "admin":
-                    setDashboard(route("admin.dashboard"));
+                    setDashboard(route("admin.coupons.index"));
                     break;
                 case "shop":
-                    setDashboard(route("shop.dashboard"));
+                    setDashboard(route("shop.coupons.index"));
                     break;
                 case "user":
-                    setDashboard(route("user.dashboard"));
+                    setDashboard(route("user.coupons.index"));
                     break;
                 default:
                     setDashboard(route("login"));
@@ -41,7 +41,7 @@ export default function Header() {
             url: "#",
         },
         {
-            name: "Admin",
+            name: auth.role == "admin" ? "Admin" : "Dashboard",
             url: dashboard,
         },
     ];
@@ -76,7 +76,7 @@ export default function Header() {
                         <img
                             src={logo}
                             alt=""
-                            className="h-12 w-20 md:h-28 md:w-28 rotate-12 "
+                            className="h-12 w-20 rotate-12 md:h-28 md:w-28 "
                         />
                     </Link>
                 </div>

@@ -265,13 +265,13 @@ export default function index() {
                         </Dropdown.Trigger>
 
                         <Dropdown.Content>
-                            <div className="px-4 py-3">
+                            {/* <div className="px-4 py-3">
                                 <p className="text-sm">Signed in as</p>
                                 <p className="truncate text-sm font-medium">
                                     admin@example.com
                                 </p>
                             </div>
-                            <div className="py-1"></div>
+                            <div className="py-1"></div> */}
                             <div className="py-1">
                                 <button
                                     type="button"

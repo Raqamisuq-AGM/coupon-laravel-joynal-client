@@ -8,10 +8,30 @@ import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { Icon } from "@iconify/react";
 import { Link } from "@inertiajs/react";
 import moment from "moment";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Modal } from "@/Components/shared/Modal";
+import CreateModal from "@/Pages/Admin/CouponClaim/CreateModal";
 
 export default function Index({ coupons, overviews }) {
     const { deleteRow } = sharedComposable();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [couponClaim, setCouponClaim] = useState(false);
+
+    const handleClaimClick = (couponClaim) => {
+        setCouponClaim(couponClaim);
+        openModal();
+    };
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    useEffect(() => {
+        if (!isModalOpen) {
+            setCouponClaim(null);
+        }
+    }, [isModalOpen]);
 
     const columns = [
         {
@@ -70,6 +90,20 @@ export default function Index({ coupons, overviews }) {
                         </div>
                         <div className="dropdown-content w-40">
                             <ul className="dropdown-list">
+                                <li className="dropdown-list-item">
+                                    <button
+                                        onClick={() =>
+                                            handleClaimClick(original)
+                                        }
+                                        className="dropdown-link"
+                                    >
+                                        <Icon
+                                            className="h-6 text-slate-400"
+                                            icon="heroicons:rectangle-stack"
+                                        />
+                                        <span>Claim</span>
+                                    </button>
+                                </li>
                                 <li className="dropdown-list-item">
                                     <Link
                                         href={route(
@@ -152,6 +186,18 @@ export default function Index({ coupons, overviews }) {
                 <Filter />
                 <Table tableData={coupons} columns={columns} />
             </Container>
+            {couponClaim && (
+                <Modal
+                    title="Claim Your Coupon"
+                    isOpen={isModalOpen}
+                    setIsOpen={setIsModalOpen}
+                >
+                    <CreateModal
+                        couponClaim={couponClaim}
+                        onSuccess={() => setIsModalOpen(false)}
+                    />
+                </Modal>
+            )}
         </AdminLayout>
     );
 }

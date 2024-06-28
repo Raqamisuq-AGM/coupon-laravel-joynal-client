@@ -21,10 +21,6 @@ export default function Index({ coupons, overviews }) {
         setIsModalOpen(true);
     };
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
     const handleClaimClick = (couponClaim) => {
         setCouponClaim(couponClaim);
         openModal();

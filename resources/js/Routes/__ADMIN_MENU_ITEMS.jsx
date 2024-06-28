@@ -16,6 +16,11 @@ export const __ADMIN_MENU_ITEMS = [
         url: route("admin.coupons.index"),
     },
     {
+        icon: "heroicons:rectangle-stack",
+        title: "Coupon Claim",
+        url: route("admin.coupon-claims.index"),
+    },
+    {
         icon: "heroicons:user-group",
         title: "User",
         url: route("admin.users.index"),
@@ -29,6 +34,11 @@ export const __ADMIN_MENU_ITEMS = [
         icon: "heroicons:squares-2x2",
         title: "Social Link",
         url: route("admin.social.index"),
+    },
+    {
+        icon: "heroicons:key",
+        title: "Change Credentials",
+        url: route("admin.change-credential.index"),
     },
     // {
     //     head: "APPEARANCE",
