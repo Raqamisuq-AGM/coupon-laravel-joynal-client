@@ -60,6 +60,9 @@ export default function CouponDetail({user,coupon,couponsClaimedToday}) {
                                 <p>Claimed today : {couponsClaimedToday}</p>
                             </div>
                         </div>
+                        <div className="mt-5">
+                            <h2>Claim this coupon now</h2>
+                        </div>
                         <form
                                 onSubmit={claimACoupon}
                                 className="text-left"
@@ -72,6 +75,7 @@ export default function CouponDetail({user,coupon,couponsClaimedToday}) {
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
+                                    disabled
                                 />
                                 <InputGroup
                                     label="Customer PHone Number"
@@ -80,6 +84,7 @@ export default function CouponDetail({user,coupon,couponsClaimedToday}) {
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
+                                    disabled
                                 />
                                 <div className="mt-4 lg:mt-8">
                                     <PrimaryButton

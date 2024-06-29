@@ -67,7 +67,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
         if ($request->user_type == 'shop') {
-            return redirect('shops/coupon');
+            return redirect('shop/profile');
         }
         return redirect(RouteServiceProvider::HOME);
     }

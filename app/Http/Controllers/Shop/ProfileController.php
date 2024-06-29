@@ -85,4 +85,26 @@ class ProfileController extends Controller
 
         return to_route('shop.profile.index')->with('success', 'Shop updated successfully');
     }
+
+    public function updateShopProfile(Request $request)
+    {
+        // dd($request->id);
+
+        $shop = Shop::find($request->id);
+        $shop->name = $request->name;
+        $shop->short_description = $request->short_description;
+        $shop->description = $request->description;
+        $shop->site_url = $request->site_url;
+        $shop->type = $request->type;
+
+        if ($request->hasFile('image')) {
+            $logoName = time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('uploads/shops'), $logoName);
+            $shop->image = 'uploads/shops/' . $logoName;
+        }
+
+        $shop->save();
+
+        return to_route('shop.profile.index')->with('success', 'Shop updated successfully');
+    }
 }

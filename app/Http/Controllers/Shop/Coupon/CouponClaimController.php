@@ -47,8 +47,6 @@ class CouponClaimController extends Controller
      */
     public function store(StoreCouponClaimRequest $request)
     {
-
-        // dd($request);
         $params = $request->validated();
 
         $couponId = $request->couponId;
@@ -86,6 +84,10 @@ class CouponClaimController extends Controller
             return back()->with('error', 'User has reached the daily limit of 5 coupons');
         }
 
+        $getCoupon = Coupon::find($coupon->id);
+        $getCoupon->status = false;
+        $getCoupon->save();
+
         try {
             DB::beginTransaction();
 
@@ -95,6 +97,8 @@ class CouponClaimController extends Controller
                 'used' => 1,
                 'status' => 1,
             ]);
+
+
 
             CouponClaim::create([
                 'coupon_user_id' => $coupon_user->id,

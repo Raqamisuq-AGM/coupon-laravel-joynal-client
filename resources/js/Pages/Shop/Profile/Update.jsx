@@ -6,23 +6,41 @@ import { SelectGroup } from "@/Components/shared/SelectGroup";
 import { TextAreaGroup } from "@/Components/shared/TextAreaGroup";
 import ShopLayout from "@/Layouts/shop/ShopLayout";
 import { useForm } from "@inertiajs/react";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { shopStatus, shopTypes } from "./constant";
 
 export default function Update({ shop }) {
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, transform } = useForm({
         name: shop.name,
         short_description: shop.short_description,
         type: shop.type,
         status: shop.status,
         description: shop.description,
         site_url: shop.site_url,
-        _method: "put",
+        id: shop.id,
+        image: null, // Initialize the image field
+        _method: "post",
     });
+
+    const fileInputRef = useRef();
+
+    useEffect(() => {
+        transform((data) => {
+            const formData = new FormData();
+            for (let key in data) {
+                if (data[key] !== null) {
+                    formData.append(key, data[key]);
+                }
+            }
+            return formData;
+        });
+    }, [data]);
 
     const editShop = (e) => {
         e.preventDefault();
-        post(route("shop.profile.update", shop.id));
+        post(route("shop.profile-update", shop.id), {
+            forceFormData: true, // Ensure the form is submitted as multipart/form-data
+        });
     };
 
     return (
@@ -31,7 +49,7 @@ export default function Update({ shop }) {
                 <PageHeader />
                 <div className="card mx-auto max-w-[800px]">
                     <div className="card-body">
-                        <form onSubmit={editShop}>
+                        <form onSubmit={editShop} encType="multipart/form-data">
                             <div className="grid grid-cols-2 gap-4">
                                 <InputGroup
                                     label="Shop Name"
@@ -65,11 +83,13 @@ export default function Update({ shop }) {
                                     label="Image"
                                     name="image"
                                     type="file"
-                                    except="image/*"
+                                    accept="image/*"
                                     placeholder="Enter Short Description"
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}
+                                    ref={fileInputRef}
+                                    onChange={(e) => setData('image', e.target.files[0])}
                                 />
                                 <InputGroup
                                     label="Site Link (optional)"
@@ -99,10 +119,7 @@ export default function Update({ shop }) {
                                 </div>
                             </div>
                             <div className="mt-4 flex justify-end">
-                                <PrimaryButton
-                                    isLoading={processing}
-                                    type="submit"
-                                >
+                                <PrimaryButton isLoading={processing} type="submit">
                                     Update
                                 </PrimaryButton>
                             </div>

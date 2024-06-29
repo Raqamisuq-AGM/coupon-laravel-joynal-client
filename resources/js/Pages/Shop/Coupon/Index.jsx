@@ -67,7 +67,7 @@ export default function Index({ coupons, overviews }) {
                     return <span className="badge badge-success">Active</span>;
                 } else {
                     return (
-                        <span className="badge badge-warning">Inactive</span>
+                        <span className="badge badge-warning">Claimed</span>
                     );
                 }
             },

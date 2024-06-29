@@ -125,7 +125,7 @@ export default function Coupons({ shop, isLoggedIn }) {
                                                     className="h-[180px] w-[180px] object-fill md:h-[220px] md:w-[380px]"
                                                 />
                                                 <p className="absolute left-[80px] top-[80px] -translate-x-1/2 -translate-y-1/2 -rotate-[14deg] text-[#ffffff] md:left-[180px] md:top-[105px] md:-rotate-[8deg]">
-                                                    {coupon.claimed ? (
+                                                    {coupon.status == 0 ? (
                                                         <span className="text-xl uppercase md:text-[58px]  ">
                                                             Claimed
                                                         </span>

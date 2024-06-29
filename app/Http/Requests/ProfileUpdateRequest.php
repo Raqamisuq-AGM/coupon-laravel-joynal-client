@@ -21,7 +21,7 @@ class ProfileUpdateRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:1000'],
             'image' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'site_url' => ['nullable', 'string', 'max:256'],
-            'type' => ['required', 'string', 'in:cafe,others,club']
+            'type' => ['required', 'string']
         ];
     }
 
