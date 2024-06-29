@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
-import { router } from "@inertiajs/react";
-import React, { useState } from "react";
+import React from "react";
+import { Link, usePage } from "@inertiajs/react";
 
 export const Shops = ({ shops, shop, setShop }) => {
     const handleSelectShop = (s) => {
@@ -13,7 +13,7 @@ export const Shops = ({ shops, shop, setShop }) => {
                 ? shops
                       .filter((s) => s.id !== shop?.id)
                       .map((shop) => (
-                          <button
+                          <Link href={route("home")}
                               key={shop?.id}
                               type="button"
                               onClick={() => handleSelectShop(shop)}
@@ -29,7 +29,7 @@ export const Shops = ({ shops, shop, setShop }) => {
                                       className="h-full w-full"
                                   />
                               </div>
-                          </button>
+                          </Link>
                       ))
                 : ""}
         </div>

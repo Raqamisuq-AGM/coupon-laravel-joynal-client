@@ -112,4 +112,16 @@ class CouponClaimController extends Controller
 
         return to_route($redirectRouteName)->with('success', 'Coupon Claimed');
     }
+
+    public function showUser($id)
+    {
+        $user = User::findOrFail($id);
+        return response()->json($user);
+    }
+
+    public function showCoupon($id)
+    {
+        $coupon = Coupon::findOrFail($id);
+        return response()->json($coupon);
+    }
 }

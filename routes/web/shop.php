@@ -20,4 +20,7 @@ Route::group(['middleware' => ['auth', VerifyShop::class], 'prefix' => 'shop', '
     Route::get('change-credential', [ProfileController::class, 'changeCredentialView'])->name('change-credential.index');
     Route::post('change-password', [ProfileController::class, 'changePassword'])->name('change-password.store');
     Route::post('change-email', [ProfileController::class, 'changeEmail'])->name('change-email.store');
+
+    Route::get('/user/{id}', [CouponController::class, 'showUser']);
+    Route::get('/coupon/{id}', [CouponController::class, 'showCoupon']);
 });

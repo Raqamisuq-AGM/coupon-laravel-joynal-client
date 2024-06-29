@@ -10,7 +10,8 @@ use App\Http\Controllers\User\Frontend\HomeController;
 use App\Http\Controllers\User\Frontend\ShopController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('shops', [ShopController::class, 'index'])->name('shops.index');
+Route::get('shops/{slug}', [ShopController::class, 'index'])->name('shops.index');
+// Route::get('/shop/{slug}', [ShopController::class, 'viewShopWithCoupon'])->name('shop.show');
 
 Route::group(['middleware' => ['auth', VerifyUser::class], 'prefix' => 'user', 'as' => 'user.'], function () {
 

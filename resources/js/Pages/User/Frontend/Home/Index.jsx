@@ -1,19 +1,21 @@
 import UserGuestLayout from "@/Layouts/user/Guest/HomLayout";
 import React from "react";
-import Shops from "./Shops";
+// import Shops from "./Shops";
 import Cards from "./Cards";
 import Footer from "./Footer";
+import ShopCategory from "./ShopCategory";
+import ShopCard from "./ShopCard";
+import ShopCategoryCard from "./ShopCategoryCard";
+import AllShops from "./AllShops";
 
-export default function Dashboard({ shops, shopsCoupons, socials }) {
+export default function Dashboard({ shopCategory, shops, socials }) {
     return (
         <UserGuestLayout>
             {/* Shops Section */}
-            <Shops shops={shops} />
+            <ShopCategory shopCategory={shopCategory} />
 
-            {/* Cards Section showing 2 categories club and cafe */}
-            {shopsCoupons?.map((shop) => (
-                <Cards key={shop.id} shop={shop} />
-            ))}
+            <AllShops combinedData={shops} />
+
             {/* Footer Section */}
             <Footer socials={socials} />
             {/* Footer Buttons Section */}

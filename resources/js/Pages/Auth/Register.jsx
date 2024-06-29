@@ -3,7 +3,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { InputGroup } from "@/Components/shared/InputGroup";
 import PrimaryButton from "@/Components/shared/PrimaryButton";
-import logo from "@/Assets/images/logo-small.svg";
+import logo from "@/images/frontend/logo.png";
 import { Icon } from "@iconify-icon/react";
 import { PasswordInput } from "@/Components/shared/PasswordInput";
 import { SelectGroup } from "@/Components/shared/SelectGroup";

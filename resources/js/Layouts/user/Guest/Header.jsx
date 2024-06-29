@@ -30,7 +30,7 @@ export default function Header() {
     const urls = [
         {
             name: "Shops",
-            url: route("shops.index"),
+            url: "#shops",
         },
         {
             name: "About",

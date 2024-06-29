@@ -6,24 +6,33 @@ use App\Models\Shop;
 use App\Models\Coupon;
 use App\Models\SocialIcon;
 use App\Http\Controllers\Controller;
+use App\Models\ShopCategory;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $shops = Shop::active()->select('id', 'name', 'image', 'site_url', 'slug')->take(24)->get();
+        $shopCategory = ShopCategory::get();
 
-        $shopsCoupons  = Shop::active()
-            ->withCount(['coupons as total_coupons' => fn ($query) => $query->active()])
-            ->with(['coupons' => fn ($query) => $query->active()->limit(3)])
-            ->whereIn('type', ['club', 'cafe'])
-            ->get()->toArray();
+        $shopsByCategory = Shop::select('type', DB::raw('count(*) as total'))
+            ->groupBy('type')
+            ->get();
 
-        // reverse order shopCoupons
-        $shopsCoupons = array_reverse($shopsCoupons);
+        $allShops = Shop::all();
+
+        $shops = $shopsByCategory->map(function ($category) use ($allShops) {
+            $category->shops = $allShops->where('type', $category->type)->values();
+            return $category;
+        });
+
+        // Log the combinedData to inspect its structure
+        \Log::info($shops->toArray());
+
+        // dd($shops);
 
         $socials = SocialIcon::all();
 
-        return inertia('User/Frontend/Home/Index', compact('shops', 'shopsCoupons', 'socials'));
+        return inertia('User/Frontend/Home/Index', compact('shopCategory', 'shops', 'socials'));
     }
 }

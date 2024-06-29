@@ -4,29 +4,36 @@ import { TopShop } from "./TopShop";
 import Coupons from "./Coupons";
 import { Shops } from "./Shops";
 
-export default function Index({ shops, isLoggedIn }) {
-    const [shop, setShop] = useState({});
+export default function Index({ shop, otherShops, isLoggedIn }) {
+    const [currentShop, setCurrentShop] = useState(shop);
 
     useEffect(() => {
-        setShop(shops?.data[0]);
-    }, [shops]);
+        setCurrentShop(shop);
+    }, [shop]);
+
+    const handleSelectShop = (selectedShop) => {
+        setCurrentShop(selectedShop);
+        router.get(`/shop/${selectedShop.slug}`, undefined, {
+            replace: true,
+            preserveScroll: true,
+        });
+    };
 
     return (
         <ShopLayout>
-            {/* Tot Selected Shop Section */}
+            {/* Top Selected Shop Section */}
             <TopShop
-                shop={shop}
-                coupon={shop?.coupons?.length ? shop.coupons[0] : []}
+                shop={currentShop}
+                coupon={currentShop?.coupons?.length ? currentShop.coupons[0] : null}
             />
 
-            {/* coupons and cafes */}
+            {/* Coupons and Shops Section */}
             <section className="relative flex flex-col gap-6 md:flex-row md:gap-0">
-                {/* coupons */}
-                <Coupons shop={shop} isLoggedIn={isLoggedIn} />
-                {/* cafes */}
-                <Shops shop={shop} setShop={setShop} shops={shops?.data} />
+                {/* Coupons */}
+                <Coupons shop={currentShop} isLoggedIn={isLoggedIn} />
+                {/* Shops */}
+                <Shops shop={currentShop} setShop={handleSelectShop} shops={otherShops} />
             </section>
-            {/* Club Section */}
         </ShopLayout>
     );
 }

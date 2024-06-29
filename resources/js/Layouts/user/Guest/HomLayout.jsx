@@ -27,6 +27,7 @@ export default function HomLayout({ children }) {
                         "url('/assets/frontend/images/bg-content.png')",
                 }}
                 className="relative bg-cover bg-center bg-no-repeat"
+                id="shops"
             >
                 <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
                 <div className="relative flex flex-col gap-10 py-8 lg:py-12">

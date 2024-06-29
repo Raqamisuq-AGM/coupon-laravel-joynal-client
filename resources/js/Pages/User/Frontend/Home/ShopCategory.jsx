@@ -1,5 +1,5 @@
 import React from "react";
-export default function Shops({ shops }) {
+export default function ShopCategory({ shopCategory }) {
 
     return (
 <section className="px-4 sm:px-6 md:px-8 lg:px-10 font-['Poetsen_One']">
@@ -10,19 +10,19 @@ export default function Shops({ shops }) {
             </h2>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
-            {shops.map((shop) => (
+            {shopCategory.map((category) => (
                 <a
-                    href={'#'+shop.category}
+                    href={'#'+category.category}
                     className="flex flex-col items-center text-center p-4"
-                    key={shop.id}
+                    key={category.id}
                 >
                     <img
                         className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full object-cover"
-                        src={shop.img ?? "https://via.placeholder.com/150"}
-                        alt={shop.category}
+                        src={category.img ?? "https://via.placeholder.com/150"}
+                        alt={category.category}
                     />
                     <h3 className="mt-4 text-base sm:text-lg md:text-xl font-[400] tracking-[-0.5px] sm:tracking-[-1px] text-[#ffffff]">
-                        {shop.category}
+                        {category.category}
                     </h3>
                 </a>
             ))}

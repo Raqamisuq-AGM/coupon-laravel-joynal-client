@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import board from "@/images/frontend/board.png";
-import cafe2 from "@/images/frontend/cafe2.jpg";
 import cardLeft from "@/images/frontend/cardLeft.png";
 import cardRight from "@/images/frontend/cardRight.png";
 import cardRightBar from "@/images/frontend/cardRightBar.png";
@@ -10,6 +9,7 @@ import moment from "moment";
 
 export default function Coupons({ shop, isLoggedIn }) {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [couponClicked, setCouponClicked] = useState("");
 
     const handleCouponClick = (coupon) => {
         if (!isLoggedIn) {
@@ -33,14 +33,11 @@ export default function Coupons({ shop, isLoggedIn }) {
         setCouponClicked("");
     }, [shop]);
 
-    const [couponClicked, setCouponClicked] = useState("");
     return (
         <>
-            <div className="w-full font-['Poetsen_One']  md:w-2/3">
+            <div className="w-full font-['Poetsen_One'] md:w-2/3">
                 <div className="flex flex-col gap-5">
-                    {shop &&
-                        shop?.coupons &&
-                        shop?.coupons.length &&
+                    {shop && shop.coupons && shop.coupons.length > 0 ? (
                         shop.coupons.map((coupon, index) => (
                             <button
                                 type="button"
@@ -96,7 +93,7 @@ export default function Coupons({ shop, isLoggedIn }) {
                                                                 ? "Redeem"
                                                                 : coupon.code}
                                                         </p>
-                                                        {couponClicked !=
+                                                        {couponClicked !==
                                                             coupon.code &&
                                                             !coupon.claimed && (
                                                                 <React.Fragment>
@@ -163,7 +160,12 @@ export default function Coupons({ shop, isLoggedIn }) {
                                     </div>
                                 </div>
                             </button>
-                        ))}
+                        ))
+                    ) : (
+                        <p className="text-xl font-[400] uppercase leading-tight tracking-[-1px] text-white">
+                            No coupon found
+                        </p>
+                    )}
                 </div>
             </div>
 

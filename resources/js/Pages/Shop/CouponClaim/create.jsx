@@ -33,7 +33,7 @@ export default function Create() {
                             >
                                 <InputGroup
                                     label="Coupon Code"
-                                    placeholder="Pizza coupon"
+                                    placeholder="89651"
                                     name="coupon_code"
                                     formObject={data}
                                     setFormObject={setData}
