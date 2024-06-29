@@ -86,7 +86,7 @@ export default function Index({ coupons, overviews }) {
                             </div>
                             <div className="dropdown-content w-40">
                                 <ul className="dropdown-list">
-                                    <li className="dropdown-list-item">
+                                    {/* <li className="dropdown-list-item">
                                         <button
                                             onClick={() =>
                                                 handleClaimClick(original)
@@ -99,7 +99,7 @@ export default function Index({ coupons, overviews }) {
                                             />
                                             <span>Claim</span>
                                         </button>
-                                    </li>
+                                    </li> */}
 
                                     <li className="dropdown-list-item">
                                         <Link
@@ -113,7 +113,7 @@ export default function Index({ coupons, overviews }) {
                                                 className="h-6 text-slate-400"
                                                 icon="heroicons:users"
                                             />
-                                            <span>Users</span>
+                                            <span>User</span>
                                         </Link>
                                     </li>
                                     <li className="dropdown-list-item">

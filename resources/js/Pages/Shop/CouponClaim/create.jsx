@@ -4,14 +4,18 @@ import { PageHeader } from "@/Components/shared/PageHeader";
 import PrimaryButton from "@/Components/shared/PrimaryButton";
 import ShopLayout from "@/Layouts/shop/ShopLayout";
 import { useForm } from "@inertiajs/react";
-import React from "react";
-export default function Create() {
-    const { data, setData, post, processing, errors } = useForm({});
+import React, { useState } from "react";
+import CouponClaimModal from "./CouponClaimModal"; // Adjust the import path as per your project structure
+import { Modal } from "@/Components/shared/Modal";
 
-    const claimACoupon = (e) => {
+export default function Create() {
+    const { data, setData, post, get, processing, errors } = useForm({});
+
+    const getCoupon = async (e) => {
         e.preventDefault();
-        post(route("shop.coupon-claims.store"));
+        get(route("shop.coupon.claim.user.get"));
     };
+
     return (
         <ShopLayout>
             <Container>
@@ -27,7 +31,7 @@ export default function Create() {
                                 discount.
                             </p>
                             <form
-                                onSubmit={claimACoupon}
+                                onSubmit={getCoupon}
                                 className="text-left"
                                 method="POST"
                             >
@@ -40,7 +44,7 @@ export default function Create() {
                                     validationError={errors}
                                 />
                                 <InputGroup
-                                    label="Customer PHone Number"
+                                    label="Customer Phone Number"
                                     placeholder="Enter customer phone number"
                                     name="phone"
                                     formObject={data}
@@ -52,7 +56,7 @@ export default function Create() {
                                         className="w-full"
                                         isLoading={processing}
                                     >
-                                        Claim
+                                        Check
                                     </PrimaryButton>
                                 </div>
                             </form>

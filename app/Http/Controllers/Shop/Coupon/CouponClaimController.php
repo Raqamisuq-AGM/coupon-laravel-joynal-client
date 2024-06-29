@@ -10,6 +10,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shop\CouponClaim\StoreCouponClaimRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class CouponClaimController extends Controller
 {
@@ -45,6 +47,8 @@ class CouponClaimController extends Controller
      */
     public function store(StoreCouponClaimRequest $request)
     {
+
+        // dd($request);
         $params = $request->validated();
 
         $couponId = $request->couponId;
@@ -113,15 +117,42 @@ class CouponClaimController extends Controller
         return to_route($redirectRouteName)->with('success', 'Coupon Claimed');
     }
 
-    public function showUser($id)
+    public function showUser(Request $request)
     {
-        $user = User::findOrFail($id);
-        return response()->json($user);
-    }
+        $request->validate([
+            'phone' => 'required', // Add any validation rules needed
+            'coupon_code' => 'required',
+        ]);
 
-    public function showCoupon($id)
-    {
-        $coupon = Coupon::findOrFail($id);
-        return response()->json($coupon);
+        // Retrieve user based on phone number
+        $user = User::where('phone', $request->phone)->first();
+
+        // Retrieve coupon with its associated shop based on coupon code
+        $coupon = Coupon::with('shop')->where('code', $request->coupon_code)->first();
+
+
+        if (!$coupon) {
+            return back()->with('error', 'Coupon not found');
+        }
+
+        // Check if coupon is expired
+        if ($coupon->valid_to->lt(now())) {
+            return back()->with('error', 'Coupon is expired');
+        }
+
+        $coupon_user = $user->couponUsers()->where('coupon_id', $coupon->id)->first();
+
+        if (!is_null($coupon_user)) {
+            return back()->with('error', 'Coupon is already claimed');
+        }
+
+        $today = Carbon::today();
+        $couponsClaimedToday = $user->couponUsers()
+            ->where('created_at', '>=', $today)
+            ->count();
+        // dd($coupon);
+
+        // Return a JSON response with both user and coupon data
+        return inertia('Shop/CouponClaim/CouponDetails', compact('user', 'coupon', 'couponsClaimedToday'));
     }
 }

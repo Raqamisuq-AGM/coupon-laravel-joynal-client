@@ -26,7 +26,10 @@ export default function Index({ coupon_claims }) {
     return (
         <AdminLayout>
             <Container>
-                <PageHeader />
+                {/* <PageHeader /> */}
+                <div className="flex flex-col justify-between gap-y-1 sm:flex-row sm:gap-y-0">
+                <h5>Coupon claimed</h5>
+            </div>
                 <Table tableData={coupon_claims} columns={columns} />
             </Container>
         </AdminLayout>
