@@ -45,7 +45,7 @@ export default function Update({ shop, category }) {
 
      // Transform category data into options format
      const categoryOptions = category.map(cat => ({
-        value: cat.id,
+        value: cat.category,
         label: cat.category
     }));
 

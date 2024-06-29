@@ -30,7 +30,7 @@ class StoreShopRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:1000'],
             'image' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'site_url' => ['nullable', 'string', 'max:256'],
-            'type' => ['required', 'string', 'in:cafe,others,club'],
+            'type' => ['required', 'string'],
             'user_id' => ['nullable', 'exists:users,id'],
             'status' => ['nullable', 'boolean'],
         ];
@@ -54,7 +54,7 @@ class StoreShopRequest extends FormRequest
 
         $data = parent::validated();
 
-        if (! isset($data['site_url'])) {
+        if (!isset($data['site_url'])) {
             $data['site_url'] = '#';
         }
 

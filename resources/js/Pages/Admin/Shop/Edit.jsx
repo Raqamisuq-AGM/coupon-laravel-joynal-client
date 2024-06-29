@@ -26,7 +26,7 @@ export default function Edit({ shop, users, category }) {
 
      // Transform category data into options format
      const categoryOptions = category.map(cat => ({
-        value: cat.id,
+        value: cat.category,
         label: cat.category
     }));
 
