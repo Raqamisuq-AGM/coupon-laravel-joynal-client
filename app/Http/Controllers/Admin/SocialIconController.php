@@ -37,11 +37,12 @@ class SocialIconController extends Controller
      */
     public function create()
     {
-        PageHeader::set()->title('Create Social Link')->buttons([
+        PageHeader::set()->title('Create Social Link')->buttons(
             [
-                'title'=> 'Back',
-                'url'=> route('admin.social.index'),
-                'icon'=> 'heroicons:chevron-left',
+                [
+                    'title' => 'Back',
+                    'url' => route('admin.social.index'),
+                    'icon' => 'heroicons:chevron-left',
                 ],
             ]
         );
@@ -57,11 +58,11 @@ class SocialIconController extends Controller
         $social = SocialIcon::create($request->validated());
 
         if ($request->icon) {
-           $social->icon = $this->upload($request->icon, 'social_icons');
-           $social->save();
+            $social->icon = $this->upload($request->icon, 'social_icons');
+            $social->save();
         }
 
-        return to_route('admin.social.index')->with('success','Social Link created successfully');
+        return to_route('admin.social.index')->with('success', 'Social Link created successfully');
     }
 
 
@@ -71,11 +72,12 @@ class SocialIconController extends Controller
      */
     public function edit(SocialIcon $social)
     {
-        PageHeader::set()->title('Edit Social Link')->buttons([
+        PageHeader::set()->title('Edit Social Link')->buttons(
             [
-                'title'=> 'Back',
-                'url'=> route('admin.social.index'),
-                'icon'=> 'heroicons:chevron-left',
+                [
+                    'title' => 'Back',
+                    'url' => route('admin.social.index'),
+                    'icon' => 'heroicons:chevron-left',
                 ],
             ]
         );
@@ -96,9 +98,9 @@ class SocialIconController extends Controller
             }
             $social->icon = $this->upload($request->icon, 'social_icons');
             $social->save();
-         }
+        }
 
-        return to_route('admin.social.index')->with('success','Social Link updated successfully');
+        return to_route('admin.social.index')->with('success', 'Social Link updated successfully');
     }
 
     /**
@@ -111,6 +113,6 @@ class SocialIconController extends Controller
         }
         $social->delete();
 
-        return to_route('admin.social.index')->with('success','Social Link deleted successfully');
+        return to_route('admin.social.index')->with('success', 'Social Link deleted successfully');
     }
 }

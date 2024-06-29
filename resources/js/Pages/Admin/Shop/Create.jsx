@@ -8,7 +8,7 @@ import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import React from "react";
 import { shopStatus, shopTypes } from "./constant";
-export default function Create({ users }) {
+export default function Create({ users, category }) {
     const { data, setData, post, processing, errors } = useForm({
         name: "",
         short_description: "",
@@ -21,6 +21,12 @@ export default function Create({ users }) {
         e.preventDefault();
         post(route("admin.shops.store"));
     };
+
+        // Transform category data into options format
+        const categoryOptions = category.map(cat => ({
+            value: cat.id,
+            label: cat.category
+        }));
 
     return (
         <AdminLayout>
@@ -41,7 +47,7 @@ export default function Create({ users }) {
                                 <SelectGroup
                                     label="Select Type"
                                     name="type"
-                                    options={shopTypes}
+                                    options={categoryOptions}
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}

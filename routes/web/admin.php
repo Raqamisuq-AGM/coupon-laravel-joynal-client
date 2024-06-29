@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin as Admin;
 use App\Http\Middleware\Dashboard\VerifyAdmin;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\Coupon\CouponClaimController;
+use App\Http\Controllers\Admin\Shop\ShopUserController;
 
 Route::group(['middleware' => ['auth', VerifyAdmin::class], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -25,4 +26,10 @@ Route::group(['middleware' => ['auth', VerifyAdmin::class], 'prefix' => 'admin',
     Route::get('change-credential', [ProfileController::class, 'changeCredentialView'])->name('change-credential.index');
     Route::post('change-password', [ProfileController::class, 'changePassword'])->name('change-password.store');
     Route::post('change-email', [ProfileController::class, 'changeEmail'])->name('change-email.store');
+    Route::get('shop-category', [ShopUserController::class, 'shopCategory'])->name('category.index');
+    Route::get('crete-shop-category', [ShopUserController::class, 'createShopCategory'])->name('category.create');
+    Route::get('edit-shop-category/{id}', [ShopUserController::class, 'editShopCategory'])->name('category.edit');
+    Route::post('store-shop-category', [ShopUserController::class, 'storeShopCategory'])->name('category.store');
+    Route::post('update-shop-category', [ShopUserController::class, 'updateShopCategory'])->name('category.update');
+    Route::delete('delete-shop-category/{id}', [ShopUserController::class, 'deleteShopCategory'])->name('category.destroy');
 });

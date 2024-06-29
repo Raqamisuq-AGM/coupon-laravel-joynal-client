@@ -8,7 +8,7 @@ import AdminLayout from "@/Layouts/admin/AdminLayout";
 import { useForm } from "@inertiajs/react";
 import React from "react";
 import { shopStatus, shopTypes } from "./constant";
-export default function Edit({ shop, users }) {
+export default function Edit({ shop, users, category }) {
     const { data, setData, post, processing, errors } = useForm({
         name: shop.name,
         short_description: shop.short_description,
@@ -23,6 +23,12 @@ export default function Edit({ shop, users }) {
         e.preventDefault();
         post(route("admin.shops.update", shop.id));
     };
+
+     // Transform category data into options format
+     const categoryOptions = category.map(cat => ({
+        value: cat.id,
+        label: cat.category
+    }));
 
     return (
         <AdminLayout>
@@ -43,7 +49,7 @@ export default function Edit({ shop, users }) {
                                 <SelectGroup
                                     label="Select Type"
                                     name="type"
-                                    options={shopTypes}
+                                    options={categoryOptions}
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}

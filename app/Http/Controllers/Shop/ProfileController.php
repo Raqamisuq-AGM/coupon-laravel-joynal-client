@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Shop\UpdateProfileRequest;
+use App\Models\ShopCategory;
 
 class ProfileController extends Controller
 {
@@ -37,7 +38,9 @@ class ProfileController extends Controller
             ],
         ]);
 
-        return Inertia::render('Shop/Profile/Update', compact('shop'));
+        $category = ShopCategory::all();
+
+        return Inertia::render('Shop/Profile/Update', compact('shop', 'category'));
     }
     public function changeCredentialView()
     {

@@ -26,6 +26,11 @@ export const __ADMIN_MENU_ITEMS = [
         url: route("admin.users.index"),
     },
     {
+        icon: "heroicons-outline:view-list",
+        title: "Mange Category",
+        url: route("admin.category.index"),
+    },
+    {
         icon: "heroicons:shopping-cart",
         title: "Shop",
         url: route("admin.shops.index"),

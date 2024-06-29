@@ -9,7 +9,7 @@ import { useForm } from "@inertiajs/react";
 import React, { useEffect, useRef } from "react";
 import { shopStatus, shopTypes } from "./constant";
 
-export default function Update({ shop }) {
+export default function Update({ shop, category }) {
     const { data, setData, post, processing, errors, transform } = useForm({
         name: shop.name,
         short_description: shop.short_description,
@@ -43,6 +43,12 @@ export default function Update({ shop }) {
         });
     };
 
+     // Transform category data into options format
+     const categoryOptions = category.map(cat => ({
+        value: cat.id,
+        label: cat.category
+    }));
+
     return (
         <ShopLayout>
             <Container>
@@ -62,7 +68,7 @@ export default function Update({ shop }) {
                                 <SelectGroup
                                     label="Select Type"
                                     name="type"
-                                    options={shopTypes}
+                                    options={categoryOptions}
                                     formObject={data}
                                     setFormObject={setData}
                                     validationError={errors}

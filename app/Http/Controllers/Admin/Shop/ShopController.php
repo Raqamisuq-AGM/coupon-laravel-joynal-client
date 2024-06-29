@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Shop\StoreShopRequest;
 use App\Http\Requests\Admin\Shop\UpdateShopRequest;
 use App\Models\Shop;
+use App\Models\ShopCategory;
 use App\Models\User;
 use App\Traits\Uploader;
 use Illuminate\Support\Facades\DB;
@@ -82,7 +83,9 @@ class ShopController extends Controller
             ->select('id as value', 'name as label')
             ->get();
 
-        return Inertia::render('Admin/Shop/Create', compact('users'));
+        $category = ShopCategory::all();
+
+        return Inertia::render('Admin/Shop/Create', compact('users', 'category'));
     }
 
     /**
@@ -140,7 +143,9 @@ class ShopController extends Controller
             ->select('id as value', 'name as label')
             ->get();
 
-        return Inertia::render('Admin/Shop/Edit', compact('shop', 'users'));
+        $category = ShopCategory::all();
+
+        return Inertia::render('Admin/Shop/Edit', compact('shop', 'users', 'category'));
     }
 
     /**
